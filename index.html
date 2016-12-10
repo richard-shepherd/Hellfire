@@ -12,7 +12,7 @@
         <!-- Javascript libraries loaded in head -->
         <script src="js/externals/jquery-2.1.4.min.js"></script>
 
-        <title>Camera 4 - camera.js</title>
+        <title>Hellfire</title>
     </head>
 
     <body>
@@ -23,7 +23,7 @@
             </div>
 
             <div>
-                <canvas id='canvas1'></canvas>
+                <canvas id='video-canvas'></canvas>
             </div>
 
         </div>
@@ -36,62 +36,17 @@
         <script src="js/Logger.js"></script>
         <script src="js/externals/adapter.js"></script>
         <script src="js/Camera.js"></script>
+        <script src="js/Game.js"></script>
         <script>
             Logger.log("TEST VERSION 5");
 
-            var cameraOptions = {
-                width: 50,
-                height: 50,
-                showCanvas: {
-                    canvasElementID: "canvas1",
-                    imageDataCallback: onImageDataUpdated
-                }
-            };
-            var camera1 = new Camera(cameraOptions);
+            var game = new Game();
 
-            function onImageDataUpdated(data, canvasContext) {
-                var width = canvasContext.canvas.width
-                var height = canvasContext.canvas.height;
 
-                var onTarget = false;
-
-                // We draw the crosshair...
-                var outerRadius = width / 8.0;
-                var innerRadius = width / 40.0;
-                var lineOffset = outerRadius * 1.5;
-
-                var centerX = width / 2.0;
-                var centerY = height / 2.0;
-                canvasContext.lineWidth = 2;
-                canvasContext.beginPath();
-                canvasContext.arc(centerX, centerY, outerRadius, 0, 2*Math.PI);
-                canvasContext.stroke();
-
-                canvasContext.beginPath();
-                canvasContext.arc(centerX, centerY, innerRadius, 0, 2*Math.PI);
-                if(onTarget) {
-                    canvasContext.fillStyle = 'red';
-                    canvasContext.fill();
-                } else {
-                    canvasContext.lineWidth = 1;
-                    canvasContext.stroke();
-                }
-
-                canvasContext.lineWidth = 1;
-                canvasContext.moveTo(centerX - lineOffset,centerY);
-                canvasContext.lineTo(centerX + lineOffset,centerY);
-                canvasContext.stroke();
-
-                canvasContext.lineWidth = 1;
-                canvasContext.moveTo(centerX, centerY - lineOffset);
-                canvasContext.lineTo(centerX, centerY + lineOffset);
-                canvasContext.stroke();
-            }
-
-            $("#switch-camera").click(function() {
-                camera1.toggleCamera();
-
-            });
+//            $("#switch-camera").click(function() {
+//                camera1.toggleCamera();
+//
+//            });
 
         </script>
 
