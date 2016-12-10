@@ -1,0 +1,29 @@
+#left-panel {
+    float: left;
+    width: 45vw;
+}
+
+#right-panel {
+    float: right;
+    width: 45vw;
+}
+
+video {
+    width: 15vw;
+    height: 15vw;
+}
+
+#switch-camera {
+    width: 5vw;
+    height: 5vw;
+}
+
+#canvas1 {
+    width: 40vw;
+    /*height: 30vw;*/
+}
+
+#log {
+    font-family: courier, monospace;
+    font-size: 1vw;
+}
