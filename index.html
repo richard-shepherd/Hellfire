@@ -38,9 +38,19 @@
         <script src="js/Camera.js"></script>
         <script src="js/Game.js"></script>
         <script>
-            Logger.log("TEST VERSION 5");
 
-            var game = new Game();
+            try {
+                Logger.log("TEST VERSION 5");
+
+                // We create the Game object, which runs the game...
+                var gameOptions = {
+                    videoCanvasID: "video-canvas"
+                };
+                var game = new Game(gameOptions);
+
+            } catch(ex) {
+                Logger.log(ex.message);
+            }
 
 
 //            $("#switch-camera").click(function() {

@@ -3,8 +3,12 @@
  *
  * @constructor
  */
-function Game() {
-    // We set up the camera...
+function Game(options) {
+    // We parse the options...
+    this.videoCanvasID = options.videoCanvasID;
+
+    // We set up the camera. This sets up the image-updated callback
+    // which is the main "message loop" of the game...
     this._setupCamera();
 }
 
@@ -19,7 +23,7 @@ Game.prototype._setupCamera = function() {
     var that = this;
     var cameraOptions = {
         showCanvas: {
-            canvasElementID: "video-canvas",
+            canvasElementID: this.videoCanvasID,
             imageDataCallback: function(data, canvasContext) { that._onVideoDataUpdated(data, canvasContext); },
             sampleIntervalMilliseconds: 33
         }
@@ -31,7 +35,6 @@ Game.prototype._setupCamera = function() {
  *_onVideoDataUpdated
  * ------------------
  * Called when we get a new frame from the camera.
- *
  * Note: This is the main "message loop" callback for the game.
  */
 Game.prototype._onVideoDataUpdated =  function (data, canvasContext) {
