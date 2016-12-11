@@ -40,18 +40,17 @@ body {
 
 #video-canvas {
     width: 90%;
+    margin: 0 auto;
 }
 
 #gunsight-canvas-panel {
     width: 90%;
     float: left;
-    background: green;
 }
 
 #gunsight-controls {
     width: 10%;
     float: right;
-    background: yellow;
 }
 
 #log {
