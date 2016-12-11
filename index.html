@@ -25,7 +25,7 @@
 
                 <!-- The main game slide -->
                 <div class="swiper-slide">
-                    <div class="header">Gunsight</div>
+                    <div class="header">Lock and Load</div>
                     <div class="slide-content">
 
                         <!--
@@ -33,11 +33,19 @@
                         other shows some controls.
                         -->
                         <div id="gunsight-canvas-panel">
+
+                            <!-- The canvas which show the video and gunsight -->
                             <canvas id='video-canvas'></canvas>
+
+                            <!-- Fire button -->
+                            <div id="fire-button-wrapper">
+                                <a href="#" id="fire-button">Fire</a>
+                            </div>
                         </div>
 
-                        <div id="gunsight-controls">
-                            <input id="switch-camera" type="image" src="images/switch-camera.png"/>
+                        <div id="gunsight-controls-panel">
+                            <input id="rotate-camera" class="gunsight-control" type="image" src="images/rorate-camera.ico"/>
+                            <input id="add-user" class="gunsight-control" type="image" src="images/add_user.ico"/>
                         </div>
 
                     </div>
@@ -85,7 +93,7 @@
             }
 
 
-//            $("#switch-camera").click(function() {
+//            $("#rotate-camera").click(function() {
 //                camera1.toggleCamera();
 //
 //            });
