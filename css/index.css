@@ -55,7 +55,7 @@ body {
 
 #log {
     font-family: courier, monospace;
-    font-size: 1.5vw;
+    font-size: 2vw;
     overflow-y: scroll;
     max-height: 80vh;
 }
