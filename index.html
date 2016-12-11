@@ -5,42 +5,74 @@
         <meta charset="UTF-8">
 
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
 
         <!-- Stylesheets -->
+        <link rel="stylesheet" href="externals/swiper/css/swiper.css">
         <link rel="stylesheet" href="css/index.css">
 
         <!-- Javascript libraries loaded in head -->
-        <script src="js/externals/jquery-2.1.4.min.js"></script>
+        <script src="externals/jquery-2.1.4.min.js"></script>
 
         <title>Hellfire</title>
     </head>
 
     <body>
-        <div id="left-panel">
+        <!-- The pages in the app are 'slides' from the idangero.us swiper control -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
 
-            <div>
-                <input id="switch-camera" type="image" src="images/switch-camera.png"/>
+                <!-- The main game slide -->
+                <div class="swiper-slide">
+                    <div class="header">Gunsight</div>
+                    <div class="slide-content">
+
+                        <!--
+                        This slide is split into two panels. One shows the camera video, the
+                        other shows some controls.
+                        -->
+                        <div id="gunsight-canvas-panel">
+                            <canvas id='video-canvas'></canvas>
+                        </div>
+
+                        <div id="gunsight-controls">
+                            <input id="switch-camera" type="image" src="images/switch-camera.png"/>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Slide showing log info -->
+                <div class="swiper-slide">
+                    <div class="header">Logs</div>
+                    <div class="slide-content">
+
+                        <div id="log"></div>
+
+                    </div>
+                </div>
+
             </div>
 
-            <div>
-                <canvas id='video-canvas'></canvas>
-            </div>
-
+            <!-- This shows the dots at the bottom of the page, showing the number of slides -->
+            <div class="swiper-pagination"></div>
         </div>
 
-        <div id="right-panel">
-            <div id="log">
-            </div>
-        </div>
 
+        <!-- Game code...  -->
+        <script src="externals/adapter.js"></script>
+        <script src="externals/swiper/js/swiper.min.js"></script>
         <script src="js/Logger.js"></script>
-        <script src="js/externals/adapter.js"></script>
         <script src="js/Camera.js"></script>
+        <script src="js/VideoCanvas.js"></script>
         <script src="js/Game.js"></script>
         <script>
 
             try {
-                Logger.log("TEST VERSION 5");
+                Logger.log("Starting Hellfire app - Version 0.001");
 
                 // We create the Game object, which runs the game...
                 var gameOptions = {

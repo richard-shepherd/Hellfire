@@ -1,24 +1,49 @@
-#left-panel {
-    float: left;
-    width: 45vw;
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: black;
+    color: white;
 }
 
-#right-panel {
-    float: right;
-    width: 45vw;
+.swiper-container {
+    min-height: 100vh;
+}
+
+.slide-content {
+    margin: 1vh;
+    margin-left: 1vw;
+    margin-right: 4vw;
+    overflow: hidden;
+}
+
+.swiper-pagination-bullet {
+    background: white;
+}
+
+.header {
+    background-color: #202020;
+    font-size: 2.5vw;
+    width: 100%;
+    line-height: 5vw;
+    height: 5vw;
+    text-transform: uppercase;
+    text-align: center;
+    vertical-align: middle;
 }
 
 #switch-camera {
     width: 5vw;
     height: 5vw;
+    background: white;
 }
 
 #video-canvas {
-    width: 40vw;
-    /*height: 30vw;*/
+    width: 40%;
 }
 
 #log {
     font-family: courier, monospace;
-    font-size: 1vw;
+    font-size: 1.5vw;
+    overflow-y: scroll;
+    max-height: 80vh;
 }
