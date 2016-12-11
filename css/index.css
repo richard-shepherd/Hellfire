@@ -32,13 +32,24 @@ body {
 }
 
 #switch-camera {
-    width: 5vw;
-    height: 5vw;
+    width: 80%;
     background: white;
+    display: block;
+    margin: 0 auto;
 }
 
 #video-canvas {
-    width: 40%;
+    width: 90%;
+}
+
+#gunsight-canvas-panel {
+    width: 80%;
+    float: left;
+}
+
+#gunsight-controls {
+    width: 20%;
+    float: right;
 }
 
 #log {
