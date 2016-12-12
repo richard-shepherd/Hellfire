@@ -65,12 +65,12 @@ Game.prototype._setupCamera = function() {
  * Note: This is the main "message loop" callback for the game.
  */
 Game.prototype._onVideoDataUpdated =  function (imageData, canvasContext) {
-    VideoCanvas.drawCrosshairs(canvasContext);
-
     var width = canvasContext.canvas.width;
     var centerColor = VideoCanvas.getAverageCenterColor(imageData, width);
     var centerColorHex = Utils.rgbToString(centerColor.r, centerColor.g, centerColor.b);
     var addUserElement = document.getElementById("add-user");
     addUserElement.style.background = centerColorHex;
+
+    VideoCanvas.drawCrosshairs(canvasContext);
 };
 

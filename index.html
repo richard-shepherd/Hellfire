@@ -82,7 +82,7 @@
         <script>
 
             try {
-                Logger.log("Starting Hellfire app - Version 0.002");
+                Logger.log("Starting Hellfire app - Version 0.003");
 
                 // We create the Game object, which runs the game...
                 var gameOptions = {
@@ -90,12 +90,22 @@
                 };
                 var game = new Game(gameOptions);
 
-                $("#fire-button").mousedown(function() {
+                var touchStartEventType = (document.ontouchstart !== null) ? 'touchstart': 'mousedown';
+                var touchEndEventType = (document.ontouchend !== null) ? 'touchend' : 'mouseup';
+
+                $('#fire-button').bind(touchStartEventType, function(e){
                     $("#firing").text("firing");
                 });
-                $("#fire-button").mouseup(function() {
+                $('#fire-button').bind(touchEndEventType, function(e){
                     $("#firing").text("");
                 });
+
+//                $("#fire-button").mousedown(function() {
+//                    $("#firing").text("firing");
+//                });
+//                $("#fire-button").mouseup(function() {
+//                    $("#firing").text("");
+//                });
 
             } catch(ex) {
                 Logger.log(ex.message);
