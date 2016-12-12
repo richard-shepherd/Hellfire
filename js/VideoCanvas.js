@@ -104,15 +104,15 @@ VideoCanvas.getAverageCenterColor = function(imageData, imageWidth) {
 
     for(var i=0; i<numColors; ++i) {
         var color = colors[i];
-        totalR += color.r;
-        totalG += color.g;
-        totalB += color.b;
+        totalR += (color.r * color.r);
+        totalG += (color.g * color.g);
+        totalB += (color.b * color.b);
     }
 
     return {
-        r: totalR / numColors,
-        g: totalG / numColors,
-        b: totalB / numColors,
+        r: Math.sqrt(totalR / numColors),
+        g: Math.sqrt(totalG / numColors),
+        b: Math.sqrt(totalB / numColors)
     };
 };
 
