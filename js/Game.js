@@ -64,7 +64,13 @@ Game.prototype._setupCamera = function() {
  * Called when we get a new frame from the camera.
  * Note: This is the main "message loop" callback for the game.
  */
-Game.prototype._onVideoDataUpdated =  function (data, canvasContext) {
+Game.prototype._onVideoDataUpdated =  function (imageData, canvasContext) {
     VideoCanvas.drawCrosshairs(canvasContext);
-}
+
+    var width = canvasContext.canvas.width;
+    var centerColor = VideoCanvas.getAverageCenterColor(imageData, width);
+    var centerColorHex = Utils.rgbToString(centerColor.r, centerColor.g, centerColor.b);
+    var addUserElement = document.getElementById("add-user");
+    addUserElement.style.background = centerColorHex;
+};
 

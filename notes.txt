@@ -17,6 +17,8 @@
 - Holds a collection of weapons which yo can cycle through
   - Each has a fire() method
 
+- Make fire button full width
+  - So: Split vertically, then horiontally for top section.
 
 - Game names
   - ShootEmUp

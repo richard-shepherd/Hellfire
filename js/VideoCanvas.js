@@ -54,3 +54,80 @@ VideoCanvas.drawCrosshairs = function(context) {
     context.stroke();
 };
 
+/**
+ * getCenterColors
+ * ---------------
+ * Returns an array containing the colors of a number of points around
+ * the center of the image. Each point is an object with r, g, b fields.
+ */
+VideoCanvas.getCenterColors = function(imageData, imageWidth) {
+    var colors = [];
+
+    // We get the center value...
+    var center = imageData.length / 2;
+    colors.push(VideoCanvas.getColor(imageData, center));
+
+    // We get the color two pixels up...
+    var index = center - imageWidth * 8;
+    colors.push(VideoCanvas.getColor(imageData, index));
+
+    // Two pixels down...
+    index = center + imageWidth * 8;
+    colors.push(VideoCanvas.getColor(imageData, index));
+
+    // Two pixels to the left...
+    index = center - 8;
+    colors.push(VideoCanvas.getColor(imageData, index));
+
+    // Two pixels to the right...
+    index = center + 8;
+    colors.push(VideoCanvas.getColor(imageData, index));
+
+    return colors;
+};
+
+/**
+ * getAverageCenterColor
+ * ---------------------
+ * Returns the color of the center of the image, from the average of a
+ * sample of points.
+ */
+VideoCanvas.getAverageCenterColor = function(imageData, imageWidth) {
+    // We get a sample of colors...
+    var colors = VideoCanvas.getCenterColors(imageData, imageWidth);
+
+    // We average them...
+    var totalR = 0;
+    var totalG = 0;
+    var totalB = 0;
+    var numColors = colors.length;
+
+    for(var i=0; i<numColors; ++i) {
+        var color = colors[i];
+        totalR += color.r;
+        totalG += color.g;
+        totalB += color.b;
+    }
+
+    return {
+        r: totalR / numColors,
+        g: totalG / numColors,
+        b: totalB / numColors,
+    };
+};
+
+/**
+ * getColor
+ * --------
+ * Returns an object holding r, g, b values from the image-data array
+ * at the position requested.
+ */
+VideoCanvas.getColor = function(imageData, index) {
+    return {
+        r: imageData[index],
+        g: imageData[index+1],
+        b: imageData[index+2]
+    };
+};
+
+
