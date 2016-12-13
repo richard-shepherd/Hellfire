@@ -8,6 +8,15 @@ function Utils() {
 }
 
 /**
+ * colorToString
+ * -------------
+ * Converts a color to a hex string.
+ */
+Utils.colorToString = function(color) {
+    return Utils.rgbToString(color.r, color.g, color.b);
+};
+
+/**
  * rgbToString
  * -----------
  * Converts RGB values to a color string.

@@ -44,7 +44,7 @@
                         </div>
 
                         <div id="gunsight-controls-panel">
-                            <input id="rotate-camera" class="gunsight-control" type="image" src="images/rorate-camera.ico"/>
+                            <input id="toggle-camera" class="gunsight-control" type="image" src="images/rorate-camera.ico"/>
                             <input id="add-user" class="gunsight-control" type="image" src="images/add_user.ico"/>
                             <div id="firing" style="color: white"></div>
                         </div>
@@ -74,6 +74,7 @@
         <!-- Game code...  -->
         <script src="externals/adapter.js"></script>
         <script src="externals/swiper/js/swiper.min.js"></script>
+        <script src="js/Color.js"></script>
         <script src="js/Utils.js"></script>
         <script src="js/Logger.js"></script>
         <script src="js/Camera.js"></script>
@@ -86,6 +87,7 @@
 
                 // We create the Game object, which runs the game...
                 var gameOptions = {
+                    toggleCameraButtonID: "toggle-camera",
                     videoCanvasID: "video-canvas"
                 };
                 var game = new Game(gameOptions);

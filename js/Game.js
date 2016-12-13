@@ -6,8 +6,8 @@
  * @constructor
  */
 function Game(options) {
-    // We parse the options...
-    this.videoCanvasID = options.videoCanvasID;
+    // We store the options...
+    this.options = options;
 
     // We create the "swiper" which shows the slides...
     this.swiper = null;
@@ -49,13 +49,21 @@ Game.prototype._setupCamera = function() {
     var that = this;
     var cameraOptions = {
         facingDirection: Camera.FacingDirection.BACK_FACING,
+        reverseImage: true,
         showCanvas: {
-            canvasElementID: this.videoCanvasID,
+            canvasElementID: this.options.videoCanvasID,
             imageDataCallback: function(data, canvasContext) { that._onVideoDataUpdated(data, canvasContext); },
             sampleIntervalMilliseconds: 33
         }
     };
     this.camera = new Camera(cameraOptions);
+
+    // We toggle the camera when the button is pressed...
+    if(this.options.toggleCameraButtonID) {
+        document.getElementById(this.options.toggleCameraButtonID).onclick = function() {
+            that.camera.toggleCamera();
+        };
+    }
 };
 
 /**
@@ -67,7 +75,7 @@ Game.prototype._setupCamera = function() {
 Game.prototype._onVideoDataUpdated =  function (imageData, canvasContext) {
     var width = canvasContext.canvas.width;
     var centerColor = VideoCanvas.getAverageCenterColor(imageData, width);
-    var centerColorHex = Utils.rgbToString(centerColor.r, centerColor.g, centerColor.b);
+    var centerColorHex = Utils.colorToString(centerColor);
     var addUserElement = document.getElementById("add-user");
     addUserElement.style.background = centerColorHex;
 

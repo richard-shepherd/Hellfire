@@ -8,6 +8,7 @@
  *         width: (default=640),
  *         height: (default=480),
  *         facingDirection: Camera.FacingDirection enum (default=DEFAULT),
+ *         reverseImage: bool (default=false),
  *         videoElementID: videoElementID (default=hidden video element),
  *         showCanvas: {
  *             canvasElementID: canvasElementID (default=no canvas element),
@@ -112,6 +113,7 @@ Camera.prototype._parseOptions_Options = function(options) {
     this.width = options.width || 640;
     this.height = options.height || 480;
     this.facingDirection = options.facingDirection || Camera.FacingDirection.DEFAULT;
+    this.reverseImage = options.reverseImage || false;
 
     // If there is no video element specified, we create a hidden one...
     if(options.videoElementID) {
@@ -145,6 +147,7 @@ Camera.prototype._parseOptions_AllDefaults = function() {
     this.width = 640;
     this.height = 480;
     this.facingDirection = Camera.FacingDirection.DEFAULT;
+    this.reverseImage = false;
     this.videoElement = this._createVideoElement();
     this.canvas = null;
 };
@@ -160,6 +163,14 @@ Camera.prototype._onCanvasSampleTimer = function() {
         var canvasWidth = this.canvas.width;
         var canvasHeight = this.videoElement.videoHeight / (this.videoElement.videoWidth / canvasWidth);
         this.canvas.setAttribute('height', canvasHeight);
+
+        // We may be reversing the image...
+        if(this.reverseImage) {
+            this.canvasContext.translate(canvasWidth, 0);
+            this.canvasContext.scale(-1, 1);
+        }
+
+        // We draw the image to the canvas...
         this.canvasContext.drawImage(this.videoElement, 0, 0, canvasWidth, canvasHeight);
 
         if(this.imageDataCallback) {

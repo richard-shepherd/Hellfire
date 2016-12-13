@@ -63,24 +63,33 @@ VideoCanvas.drawCrosshairs = function(context) {
 VideoCanvas.getCenterColors = function(imageData, imageWidth) {
     var colors = [];
 
+    var numPixels = imageData.length / 4;
+    var imageHeight = numPixels / imageWidth;
+    if(imageHeight % 2 === 0) {
+        // There are an even number of rows in the image...
+        var centerIndex = (imageData.length/2) + (imageWidth*2);
+    } else {
+        // There are an odd number of rows in the image...
+        var centerIndex = (imageData.length/2);
+    }
+
     // We get the center value...
-    var center = imageData.length / 2;
-    colors.push(VideoCanvas.getColor(imageData, center));
+    colors.push(VideoCanvas.getColor(imageData, centerIndex));
 
     // We get the color two pixels up...
-    var index = center - imageWidth * 8;
+    var index = centerIndex - imageWidth * 8;
     colors.push(VideoCanvas.getColor(imageData, index));
 
     // Two pixels down...
-    index = center + imageWidth * 8;
+    index = centerIndex + imageWidth * 8;
     colors.push(VideoCanvas.getColor(imageData, index));
 
     // Two pixels to the left...
-    index = center - 8;
+    index = centerIndex - 8;
     colors.push(VideoCanvas.getColor(imageData, index));
 
     // Two pixels to the right...
-    index = center + 8;
+    index = centerIndex + 8;
     colors.push(VideoCanvas.getColor(imageData, index));
 
     return colors;
@@ -119,15 +128,11 @@ VideoCanvas.getAverageCenterColor = function(imageData, imageWidth) {
 /**
  * getColor
  * --------
- * Returns an object holding r, g, b values from the image-data array
+ * Returns a Color object holding r, g, b values from the image-data array
  * at the position requested.
  */
 VideoCanvas.getColor = function(imageData, index) {
-    return {
-        r: imageData[index],
-        g: imageData[index+1],
-        b: imageData[index+2]
-    };
+    return new Color(imageData[index], imageData[index+1], imageData[index+2]);
 };
 
 
