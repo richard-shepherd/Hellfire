@@ -60,11 +60,12 @@ VideoCanvas.drawCrosshairs = function(context) {
  * Returns an array containing the colors of a number of points around
  * the center of the image. Each point is an object with r, g, b fields.
  */
-VideoCanvas.getCenterColors = function(imageData, imageWidth) {
+VideoCanvas.getCenterColors = function(imageData, context) {
     var colors = [];
 
-    var numPixels = imageData.length / 4;
-    var imageHeight = numPixels / imageWidth;
+    // We find the index of the center pixel...
+    var imageWidth = context.canvas.width;
+    var imageHeight = context.canvas.height;
     if(imageHeight % 2 === 0) {
         // There are an even number of rows in the image...
         var centerIndex = (imageData.length/2) + (imageWidth*2);
@@ -101,9 +102,10 @@ VideoCanvas.getCenterColors = function(imageData, imageWidth) {
  * Returns the color of the center of the image, from the average of a
  * sample of points.
  */
-VideoCanvas.getAverageCenterColor = function(imageData, imageWidth) {
+VideoCanvas.getAverageCenterColor = function(imageData, context) {
+
     // We get a sample of colors...
-    var colors = VideoCanvas.getCenterColors(imageData, imageWidth);
+    var colors = VideoCanvas.getCenterColors(imageData, context);
 
     // We average them...
     var totalR = 0;

@@ -32,3 +32,11 @@ Utils.rgbToString = function(r, g, b) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 };
 
+/**
+ * Returns the percentage difference between a and b (as a percentage
+ * of a) as a number like 0.1 for 10% difference.
+ */
+Utils.percentageDifference = function(a, b) {
+    return Math.abs(a - b) / Math.abs(a);
+};
+

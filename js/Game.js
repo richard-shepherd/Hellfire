@@ -6,6 +6,8 @@
  * @constructor
  */
 function Game(options) {
+    var that = this;
+
     // We store the options...
     this.options = options;
 
@@ -13,15 +15,40 @@ function Game(options) {
     this.swiper = null;
     this._createSwiper();
 
+    // The most recent data from the camera...
+    this.imageData = null;
+    this.canvasContext = null;
+
+    // The collection of players...
+    this.players = [];
+    this.nextPlayerNumber = 1;
+
     // We set up the camera. This sets up the image-updated callback
     // which is the main "message loop" of the game...
     this._setupCamera();
+
+    // We handle the add-player button...
+    document.getElementById(options.addPlayerButtonID).onclick = function() {
+        that._onAddPlayerClicked();
+    };
 }
 
 // An enum for the slides we show...
 Game.Slide = {
     GUNSIGHT: 0,
     LOGS: 1
+};
+
+/**
+ * _onAddPlayerClicked
+ * -------------------
+ * Called when the add user button is clicked.
+ */
+Game.prototype._onAddPlayerClicked = function() {
+    // We find the color for the player...
+    var color = VideoCanvas.getAverageCenterColor(this.imageData, this.canvasContext);
+    var player = new Player(this.nextPlayerNumber++, color);
+    this.players.push(player);
 };
 
 /**
@@ -73,12 +100,18 @@ Game.prototype._setupCamera = function() {
  * Note: This is the main "message loop" callback for the game.
  */
 Game.prototype._onVideoDataUpdated =  function (imageData, canvasContext) {
-    var width = canvasContext.canvas.width;
-    var centerColor = VideoCanvas.getAverageCenterColor(imageData, width);
+    // We hold the data as we may need it in other functions...
+    this.imageData = imageData;
+    this.canvasContext = canvasContext;
+
+    // We draw the crosshairs...
+    VideoCanvas.drawCrosshairs(canvasContext);
+
+
+    var centerColor = VideoCanvas.getAverageCenterColor(imageData, canvasContext);
     var centerColorHex = Utils.colorToString(centerColor);
-    var addUserElement = document.getElementById("add-user");
+    var addUserElement = document.getElementById("add-player");
     addUserElement.style.background = centerColorHex;
 
-    VideoCanvas.drawCrosshairs(canvasContext);
 };
 
