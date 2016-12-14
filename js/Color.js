@@ -10,13 +10,16 @@ function Color(r, g, b) {
     this.b = b;
 
     // Ratios of parts of the color. Used when testing whether colors match.)
-    this.r2g = (g !== 0) ? r/g : r;
-    this.r2b = (b !== 0) ? r/b : r;
-    this.g2r = (r !== 0) ? g/r : g;
-    this.g2b = (b !== 0) ? g/b : g;
-    this.b2r = (r !== 0) ? b/r : b;
-    this.b2g = (g !== 0) ? b/g : b;
+    this.r2g = (g !== 0.0) ? r/g : r;
+    this.r2b = (b !== 0.0) ? r/b : r;
+    this.g2r = (r !== 0.0) ? g/r : g;
+    this.g2b = (b !== 0.0) ? g/b : g;
+    this.b2r = (r !== 0.0) ? b/r : b;
+    this.b2g = (g !== 0.0) ? b/g : b;
 }
+
+// Some color constants...
+Color.black = new Color(0, 0, 0);
 
 /**
  * isMatch

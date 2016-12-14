@@ -15,39 +15,40 @@ function VideoCanvas() {
  * Draws targetting crosshairs on the canvas.
  * @static
  */
-VideoCanvas.drawCrosshairs = function(context) {
+VideoCanvas.drawCrosshairs = function(centerRingColor, context) {
     var width = context.canvas.width
     var height = context.canvas.height;
 
-    var onTarget = false;
-
-    // We draw the crosshair...
     var outerRadius = width / 8.0;
     var innerRadius = width / 40.0;
     var lineOffset = outerRadius * 1.5;
 
     var centerX = width / 2.0;
     var centerY = height / 2.0;
-    context.lineWidth = 2;
+
+    // The outer ring...
     context.beginPath();
+    context.lineWidth = 2;
+    context.strokeStyle = 'black';
     context.arc(centerX, centerY, outerRadius, 0, 2*Math.PI);
     context.stroke();
 
+    // The center ring...
     context.beginPath();
+    context.strokeStyle = Utils.colorToString(centerRingColor);
+    context.lineWidth = 1;
     context.arc(centerX, centerY, innerRadius, 0, 2*Math.PI);
-    if(onTarget) {
-        context.fillStyle = 'red';
-        context.fill();
-    } else {
-        context.lineWidth = 1;
-        context.stroke();
-    }
+    context.stroke();
 
+    context.beginPath();
+    context.strokeStyle = 'black';
     context.lineWidth = 1;
     context.moveTo(centerX - lineOffset,centerY);
     context.lineTo(centerX + lineOffset,centerY);
     context.stroke();
 
+    context.beginPath();
+    context.strokeStyle = 'black';
     context.lineWidth = 1;
     context.moveTo(centerX, centerY - lineOffset);
     context.lineTo(centerX, centerY + lineOffset);
@@ -120,11 +121,10 @@ VideoCanvas.getAverageCenterColor = function(imageData, context) {
         totalB += (color.b * color.b);
     }
 
-    return {
-        r: Math.sqrt(totalR / numColors),
-        g: Math.sqrt(totalG / numColors),
-        b: Math.sqrt(totalB / numColors)
-    };
+    var r = Math.sqrt(totalR / numColors);
+    var g = Math.sqrt(totalG / numColors);
+    var b = Math.sqrt(totalB / numColors);
+    return new Color(r, g, b);
 };
 
 /**

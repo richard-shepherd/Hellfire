@@ -91,7 +91,7 @@ Game.prototype._setupCamera = function() {
     var that = this;
     var cameraOptions = {
         facingDirection: Camera.FacingDirection.BACK_FACING,
-        reverseImage: true,
+        reverseImage: false,
         showCanvas: {
             canvasElementID: this.options.videoCanvasID,
             imageDataCallback: function(data, canvasContext) { that._onVideoDataUpdated(data, canvasContext); },
@@ -119,11 +119,15 @@ Game.prototype._onVideoDataUpdated =  function (imageData, canvasContext) {
     this.imageData = imageData;
     this.canvasContext = canvasContext;
 
-    // We check if the
+    // We check if we are currently targetted on one of the players...
+    var centerColors = VideoCanvas.getCenterColors(imageData, canvasContext);
+    var matchingPlayer = this.playerManager.getMatchingPlayer(centerColors);
 
-    // We draw the crosshairs...
-    VideoCanvas.drawCrosshairs(canvasContext);
-
+    // We draw the crosshairs.
+    // If we have a matching player, we show the center ring in the
+    // player's color...
+    var centerRingColor = matchingPlayer ? matchingPlayer.color : Color.black;
+    VideoCanvas.drawCrosshairs(centerRingColor, canvasContext);
 
     // If we are in adding-player mode, we show the camera color on the
     // add-player button...

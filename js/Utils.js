@@ -37,6 +37,11 @@ Utils.rgbToString = function(r, g, b) {
  * of a) as a number like 0.1 for 10% difference.
  */
 Utils.percentageDifference = function(a, b) {
-    return Math.abs(a - b) / Math.abs(a);
+    var percentageDifference = 1.0;
+    if(a !== 0.0) {
+        percentageDifference =  Math.abs(a - b) / Math.abs(a);
+    }
+    Logger.log("a=" + a + ", b=" + b + ", %=" + percentageDifference);
+    return percentageDifference;
 };
 
