@@ -126,8 +126,8 @@ Game.prototype._onVideoDataUpdated =  function (imageData, canvasContext) {
     // We draw the crosshairs.
     // If we have a matching player, we show the center ring in the
     // player's color...
-    var centerRingColor = matchingPlayer ? matchingPlayer.color : Color.black;
-    VideoCanvas.drawCrosshairs(centerRingColor, canvasContext);
+    var ringColor = matchingPlayer ? matchingPlayer.color : Color.black;
+    VideoCanvas.drawCrosshairs(ringColor, canvasContext);
 
     // If we are in adding-player mode, we show the camera color on the
     // add-player button...

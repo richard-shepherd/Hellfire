@@ -15,7 +15,7 @@ function VideoCanvas() {
  * Draws targetting crosshairs on the canvas.
  * @static
  */
-VideoCanvas.drawCrosshairs = function(centerRingColor, context) {
+VideoCanvas.drawCrosshairs = function(ringColor, context) {
     var width = context.canvas.width
     var height = context.canvas.height;
 
@@ -26,16 +26,19 @@ VideoCanvas.drawCrosshairs = function(centerRingColor, context) {
     var centerX = width / 2.0;
     var centerY = height / 2.0;
 
+    // We convert the ring color to a string...
+    var ringColorString = Utils.colorToString(ringColor);
+
     // The outer ring...
     context.beginPath();
     context.lineWidth = 2;
-    context.strokeStyle = 'black';
+    context.strokeStyle = ringColorString;
     context.arc(centerX, centerY, outerRadius, 0, 2*Math.PI);
     context.stroke();
 
     // The center ring...
     context.beginPath();
-    context.strokeStyle = Utils.colorToString(centerRingColor);
+    context.strokeStyle = ringColorString;
     context.lineWidth = 1;
     context.arc(centerX, centerY, innerRadius, 0, 2*Math.PI);
     context.stroke();

@@ -41,7 +41,6 @@ Utils.percentageDifference = function(a, b) {
     if(a !== 0.0) {
         percentageDifference =  Math.abs(a - b) / Math.abs(a);
     }
-    Logger.log("a=" + a + ", b=" + b + ", %=" + percentageDifference);
     return percentageDifference;
 };
 
