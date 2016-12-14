@@ -19,16 +19,22 @@ function Game(options) {
     this.imageData = null;
     this.canvasContext = null;
 
-    // The collection of players...
-    this.players = [];
-    this.nextPlayerNumber = 1;
+    // Manages the collection of players...
+    this.playerManager = new PlayerManager();
 
     // We set up the camera. This sets up the image-updated callback
     // which is the main "message loop" of the game...
     this._setupCamera();
 
+    // We store the original background color of the add-player button...
+    this.addPlayerButton = document.getElementById(options.addPlayerButtonID);
+    this.addPlayerButtonBackground = this.addPlayerButton.style.background;
+
+    // True if we are adding a player...
+    this.addingPlayer = false;
+
     // We handle the add-player button...
-    document.getElementById(options.addPlayerButtonID).onclick = function() {
+    this.addPlayerButton.onclick = function() {
         that._onAddPlayerClicked();
     };
 }
@@ -45,10 +51,19 @@ Game.Slide = {
  * Called when the add user button is clicked.
  */
 Game.prototype._onAddPlayerClicked = function() {
-    // We find the color for the player...
-    var color = VideoCanvas.getAverageCenterColor(this.imageData, this.canvasContext);
-    var player = new Player(this.nextPlayerNumber++, color);
-    this.players.push(player);
+    if(this.addingPlayer) {
+        // We find the color for the player, and add the player...
+        var color = VideoCanvas.getAverageCenterColor(this.imageData, this.canvasContext);
+        this.playerManager.addPlayer(color);
+
+        // We revert the button background color...
+        this.addPlayerButton.style.background = this.addPlayerButtonBackground;
+    }
+
+    // We toggle the adding-player state.
+    // This means that you press the button once to go into adding-player
+    // mode, and then again to actually add the player...
+    this.addingPlayer = !this.addingPlayer;
 };
 
 /**
@@ -104,14 +119,19 @@ Game.prototype._onVideoDataUpdated =  function (imageData, canvasContext) {
     this.imageData = imageData;
     this.canvasContext = canvasContext;
 
+    // We check if the
+
     // We draw the crosshairs...
     VideoCanvas.drawCrosshairs(canvasContext);
 
 
-    var centerColor = VideoCanvas.getAverageCenterColor(imageData, canvasContext);
-    var centerColorHex = Utils.colorToString(centerColor);
-    var addUserElement = document.getElementById("add-player");
-    addUserElement.style.background = centerColorHex;
-
+    // If we are in adding-player mode, we show the camera color on the
+    // add-player button...
+    if(this.addingPlayer) {
+        var centerColor = VideoCanvas.getAverageCenterColor(imageData, canvasContext);
+        var centerColorHex = Utils.colorToString(centerColor);
+        var addUserElement = document.getElementById("add-player");
+        addUserElement.style.background = centerColorHex;
+    }
 };
 

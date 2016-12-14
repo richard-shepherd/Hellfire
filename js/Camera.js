@@ -132,7 +132,7 @@ Camera.prototype._parseOptions_Options = function(options) {
         // We get the context for the canvas...
         this.canvasContext = this.canvas.getContext('2d');
 
-        // We create a time to sample the video...
+        // We create a timer to sample the video...
         var that = this;
         this.canvasSampleTimer = setInterval(function() { that._onCanvasSampleTimer(); }, sampleIntervalMS);
     }
@@ -159,9 +159,15 @@ Camera.prototype._parseOptions_AllDefaults = function() {
  */
 Camera.prototype._onCanvasSampleTimer = function() {
     try {
-        // We copy the video to the canvas...
+        // We copy the video to the canvas.
+
+        // First we size the canvas to the same proportions as the video...
         var canvasWidth = this.canvas.width;
-        var canvasHeight = this.videoElement.videoHeight / (this.videoElement.videoWidth / canvasWidth);
+        var videoWidth = this.videoElement.videoWidth;
+        if(videoWidth === 0) {
+            return;
+        }
+        var canvasHeight = this.videoElement.videoHeight / (videoWidth / canvasWidth);
         this.canvas.setAttribute('height', canvasHeight);
 
         // We may be reversing the image...
@@ -179,7 +185,7 @@ Camera.prototype._onCanvasSampleTimer = function() {
             this.imageDataCallback(data, this.canvasContext);
         }
     } catch(ex) {
-        Logger.log(ex.message);
+        Logger.log(ex.message + ": " + canvasWidth + ": " + canvasHeight + ": " + this.videoElement.videoWidth);
     }
 
 };
