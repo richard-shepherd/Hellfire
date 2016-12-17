@@ -39,14 +39,13 @@
 
                             <!-- Fire button -->
                             <div id="fire-button-wrapper">
-                                <div id="fire-button">Fire</div>
+                                <button type="button" id="fire-button">Fire</button>
                             </div>
                         </div>
 
                         <div id="gunsight-controls-panel">
                             <input id="toggle-camera" class="gunsight-control" type="image" src="images/rorate-camera.ico"/>
                             <input id="add-player" class="gunsight-control" type="image" src="images/add_user.ico"/>
-                            <div id="firing" style="color: white"></div>
                         </div>
 
                     </div>
@@ -75,6 +74,7 @@
         <script src="externals/adapter/adapter.js"></script>
         <script src="externals/swiper/js/swiper.min.js"></script>
         <script src="externals/deltae/deltae.global.min.js"></script>
+        <script src="externals/howler/howler.min.js"></script>
         <script src="js/Utils.js"></script>
         <script src="js/Color.js"></script>
         <script src="js/Logger.js"></script>
@@ -90,21 +90,12 @@
 
                 // We create the Game object, which runs the game...
                 var gameOptions = {
+                    videoCanvasID: "video-canvas",
                     toggleCameraButtonID: "toggle-camera",
                     addPlayerButtonID: "add-player",
-                    videoCanvasID: "video-canvas"
+                    fireButtonID: "fire-button"
                 };
                 var game = new Game(gameOptions);
-
-                var touchStartEventType = (document.ontouchstart !== null) ? 'touchstart': 'mousedown';
-                var touchEndEventType = (document.ontouchend !== null) ? 'touchend' : 'mouseup';
-
-                $('#fire-button').bind(touchStartEventType, function(e){
-                    $("#firing").text("firing");
-                });
-                $('#fire-button').bind(touchEndEventType, function(e){
-                    $("#firing").text("");
-                });
 
             } catch(ex) {
                 Logger.log(ex.message);

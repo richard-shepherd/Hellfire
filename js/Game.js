@@ -26,23 +26,60 @@ function Game(options) {
     // which is the main "message loop" of the game...
     this._setupCamera();
 
-    // We store the original background color of the add-player button...
-    this.addPlayerButton = document.getElementById(options.addPlayerButtonID);
-    this.addPlayerButtonBackground = this.addPlayerButton.style.background;
-
     // True if we are adding a player...
     this.addingPlayer = false;
 
     // We handle the add-player button...
-    this.addPlayerButton.onclick = function() {
-        that._onAddPlayerClicked();
-    };
+    this._setupAddPlayerButton();
+
+    // We handle the fire button...
+    this._setupFireButton();
 }
 
 // An enum for the slides we show...
 Game.Slide = {
     GUNSIGHT: 0,
     LOGS: 1
+};
+
+/**
+ * _setupAddPlayerButton
+ * ---------------------
+ * Sets up handling of the add-player button.
+ */
+Game.prototype._setupAddPlayerButton = function() {
+    var that = this;
+    this.addPlayerButton = document.getElementById(this.options.addPlayerButtonID);
+    this.addPlayerButtonBackground = this.addPlayerButton.style.background;
+    this.addPlayerButton.onclick = function() {
+        that._onAddPlayerClicked();
+    };
+};
+
+/**
+ * _setupFireButton
+ * ----------------
+ * Sets up handling of the fire button.
+ */
+Game.prototype._setupFireButton = function() {
+    var that = this;
+    this.fireButton = document.getElementById(this.options.addPlayerButtonID);
+    this.fireButton.onclick = function() {
+        that._onFireClicked();
+    };
+};
+
+/**
+ * _onFireClicked
+ * --------------
+ * Called when the fire button is clicked.
+ */
+Game.prototype._onFireClicked = function() {
+    try {
+
+    } catch(ex) {
+        Logger.log(ex.message);
+    }
 };
 
 /**
