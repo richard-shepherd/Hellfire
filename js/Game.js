@@ -36,14 +36,31 @@ function Game(options) {
     this._setupFireButton();
 
     // We set up the audio-manager and play the background music...
-    this._audioManager = new AudioManager();
-    this._audioManager.playBackgroundMusic(AudioManager.Sounds.DOOM_MUSIC, 0.5);
+    this._setupAudioManager();
 }
 
 // An enum for the slides we show...
 Game.Slide = {
     GUNSIGHT: 0,
     LOGS: 1
+};
+
+/**
+ * _setupAudioManager
+ * ------------------
+ * Sets up the audio manager.
+ */
+Game.prototype._setupAudioManager = function() {
+    // We show that we are loading sounds...
+    $("#"+this.options.fireButtonID).text = "Loading audio";
+
+    // We set up the audio manager...
+    var that = this;
+    this._audioManager = new AudioManager(function() {
+        // Called when all audio has been loaded...
+        that._audioManager.playBackgroundMusic(AudioManager.Sounds.DOOM_MUSIC, 0.5);
+        $("#"+that.options.fireButtonID).text = "Fire";
+    });
 };
 
 /**
