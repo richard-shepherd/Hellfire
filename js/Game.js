@@ -34,6 +34,10 @@ function Game(options) {
 
     // We handle the fire button...
     this._setupFireButton();
+
+    // We set up the audio-manager and play the background music...
+    this._audioManager = new AudioManager();
+    this._audioManager.playBackgroundMusic(AudioManager.Sounds.DOOM_MUSIC, 0.5);
 }
 
 // An enum for the slides we show...
@@ -63,7 +67,7 @@ Game.prototype._setupAddPlayerButton = function() {
  */
 Game.prototype._setupFireButton = function() {
     var that = this;
-    this.fireButton = document.getElementById(this.options.addPlayerButtonID);
+    this.fireButton = document.getElementById(this.options.fireButtonID);
     this.fireButton.onclick = function() {
         that._onFireClicked();
     };
@@ -76,7 +80,7 @@ Game.prototype._setupFireButton = function() {
  */
 Game.prototype._onFireClicked = function() {
     try {
-
+        this._audioManager.playSound(AudioManager.Sounds.SHOTGUN, 10.0);
     } catch(ex) {
         Logger.log(ex.message);
     }
