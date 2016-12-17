@@ -13,7 +13,7 @@ function AudioManager() {
     this._backgroundMusic = null;
 
     // We load the sounds...
-    this._loadSound(AudioManager.Sounds.DOOM_MUSIC, "audio/doom.ogg");
+    this._loadSound(AudioManager.Sounds.DOOM_MUSIC, "audio/doom.mp3");
     this._loadSound(AudioManager.Sounds.SHOTGUN, "audio/shotgun.mp3");
 }
 
