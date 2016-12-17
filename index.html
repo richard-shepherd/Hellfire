@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="css/index.css">
 
         <!-- Javascript libraries loaded in head -->
-        <script src="externals/jquery-2.1.4.min.js"></script>
+        <script src="externals/jquery/jquery-2.1.4.min.js"></script>
 
         <title>Hellfire</title>
     </head>
@@ -72,8 +72,9 @@
 
 
         <!-- Game code...  -->
-        <script src="externals/adapter.js"></script>
+        <script src="externals/adapter/adapter.js"></script>
         <script src="externals/swiper/js/swiper.min.js"></script>
+        <script src="externals/deltae/deltae.global.min.js"></script>
         <script src="js/Utils.js"></script>
         <script src="js/Color.js"></script>
         <script src="js/Logger.js"></script>
@@ -85,7 +86,7 @@
         <script>
 
             try {
-                Logger.log("Starting Hellfire app - Version 0.003");
+                Logger.log("Starting Hellfire app - Version 0.004");
 
                 // We create the Game object, which runs the game...
                 var gameOptions = {

@@ -11,9 +11,9 @@ function PlayerManager() {
     // The number for the next player to be added...
     this.nextPlayerNumber = 1;
 
-    // The percentage tolerance for color matches.
-    // (For example, 0.1 = 10% tolerance allowed.)
-    this.colorMatchTolerance = 0.5;
+    // The tolerance for color matches.
+    // (0-100, where 0 requires a perfect match.)
+    this.colorMatchTolerance = 20.0;
 }
 
 /**
