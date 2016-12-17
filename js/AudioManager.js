@@ -120,8 +120,12 @@ AudioManager.prototype._loadSound = function(sound, path) {
     // When the sound has loaded, we note it...
     var that = this;
     howl.once("load", function() {
-        that._numSoundsLoaded++;
-        that._checkIsReady();
+        try {
+            that._numSoundsLoaded++;
+            that._checkIsReady();
+        } catch(ex) {
+            Logger.log(ex.message);
+        }
     });
 };
 

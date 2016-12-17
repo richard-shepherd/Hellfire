@@ -58,8 +58,12 @@ Game.prototype._setupAudioManager = function() {
     var that = this;
     this._audioManager = new AudioManager(function() {
         // Called when all audio has been loaded...
-        that._audioManager.playBackgroundMusic(AudioManager.Sounds.DOOM_MUSIC, 0.5);
-        that.fireButton.innerHTML = "Fire";
+        try {
+            that._audioManager.playBackgroundMusic(AudioManager.Sounds.DOOM_MUSIC, 0.5);
+            that.fireButton.innerHTML = "Fire";
+        } catch(ex) {
+            Logger.log(ex.message);
+        }
     });
 };
 
