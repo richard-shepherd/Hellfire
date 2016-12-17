@@ -81,6 +81,7 @@ AudioManager.prototype._loadSound = function(sound, path) {
     // We load the sound...
     var howl = new Howl({
         src: [path],
+        preload:true,
         buffer: true
     });
     this.sounds[sound] = howl;
