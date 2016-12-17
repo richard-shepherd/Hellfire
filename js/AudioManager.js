@@ -79,7 +79,10 @@ AudioManager.prototype.stopBackgroundMusic = function() {
 
 AudioManager.prototype._loadSound = function(sound, path) {
     // We load the sound...
-    var howl = new Howl({ src: [path] });
+    var howl = new Howl({
+        src: [path],
+        buffer: true
+    });
     this.sounds[sound] = howl;
 };
 
