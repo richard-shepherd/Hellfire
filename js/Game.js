@@ -52,14 +52,14 @@ Game.Slide = {
  */
 Game.prototype._setupAudioManager = function() {
     // We show that we are loading sounds...
-    $("#"+this.options.fireButtonID).text = "Loading audio";
+    this.fireButton.innerHTML = "Loading audio";
 
     // We set up the audio manager...
     var that = this;
     this._audioManager = new AudioManager(function() {
         // Called when all audio has been loaded...
         that._audioManager.playBackgroundMusic(AudioManager.Sounds.DOOM_MUSIC, 0.5);
-        $("#"+that.options.fireButtonID).text = "Fire";
+        that.fireButton.innerHTML = "Fire";
     });
 };
 
