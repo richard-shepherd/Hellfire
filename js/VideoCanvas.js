@@ -19,9 +19,9 @@ VideoCanvas.drawCrosshairs = function(ringColor, context) {
     var width = context.canvas.width
     var height = context.canvas.height;
 
-    var outerRadius = width / 8.0;
+    var outerRadius = width / 3.5;
     var innerRadius = width / 40.0;
-    var lineOffset = outerRadius * 1.5;
+    var lineOffset = outerRadius  + width / 20.0;
 
     var centerX = width / 2.0;
     var centerY = height / 2.0;
@@ -43,6 +43,7 @@ VideoCanvas.drawCrosshairs = function(ringColor, context) {
     context.arc(centerX, centerY, innerRadius, 0, 2*Math.PI);
     context.stroke();
 
+    // The crosshair lines...
     context.beginPath();
     context.strokeStyle = 'black';
     context.lineWidth = 1;
@@ -55,6 +56,56 @@ VideoCanvas.drawCrosshairs = function(ringColor, context) {
     context.lineWidth = 1;
     context.moveTo(centerX, centerY - lineOffset);
     context.lineTo(centerX, centerY + lineOffset);
+    context.stroke();
+
+    // The red markers...
+    var numMarkers = 5;
+    var markerColor = "#a00000";
+    var distanceBetweenMarkers = outerRadius / (numMarkers+1);
+    var markerOffset = width / 60.0;
+    var markerX_Left = centerX - outerRadius + distanceBetweenMarkers;
+    var markerX_Right = centerX + outerRadius - distanceBetweenMarkers;
+    var markerY_Top = centerY - outerRadius + distanceBetweenMarkers;
+    var markerY_Bottom = centerY + outerRadius - distanceBetweenMarkers;
+    for(var i=0; i<numMarkers; ++i) {
+        // We draw a left marker...
+        VideoCanvas.drawLine(context, markerColor,
+            markerX_Left, centerY - markerOffset,
+            markerX_Left, centerY + markerOffset);
+
+        // We draw a right marker...
+        VideoCanvas.drawLine(context, markerColor,
+            markerX_Right, centerY - markerOffset,
+            markerX_Right, centerY + markerOffset);
+
+        // We draw a top marker...
+        VideoCanvas.drawLine(context, markerColor,
+            centerX - markerOffset, markerY_Top,
+            centerX + markerOffset, markerY_Top);
+
+        // We draw a bottom marker...
+        VideoCanvas.drawLine(context, markerColor,
+            centerX - markerOffset, markerY_Bottom,
+            centerX + markerOffset, markerY_Bottom);
+
+        // And change the positions for the next ones...
+        markerX_Left += distanceBetweenMarkers;
+        markerX_Right -= distanceBetweenMarkers;
+        markerY_Top += distanceBetweenMarkers;
+        markerY_Bottom -= distanceBetweenMarkers;
+    }
+};
+
+/**
+ * drawLine
+ * --------
+ */
+VideoCanvas.drawLine = function(context, color, x1, y1, x2, y2) {
+    context.beginPath();
+    context.strokeStyle = color;
+    context.lineWidth = 1;
+    context.moveTo(x1, y1);
+    context.lineTo(x2, y2);
     context.stroke();
 };
 
