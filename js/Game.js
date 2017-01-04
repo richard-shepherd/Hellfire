@@ -158,6 +158,8 @@ Game.prototype._setupCamera = function() {
     // access the data and draw on it ourselves).
     var that = this;
     var cameraOptions = {
+        width: 500,
+        height: 500,
         facingDirection: Camera.FacingDirection.BACK_FACING,
         reverseImage: false,
         showCanvas: {
@@ -214,6 +216,46 @@ Game.prototype._onVideoDataUpdated =  function (imageData, canvasContext) {
  * @private
  */
 Game.prototype._getGameItems = function() {
-    return [];
+    if(this._gameItems) {
+        return this._gameItems;
+    }
+
+    // We create some game items...
+    gameItems = [];
+
+    // Some ammo...
+    var item1 = new GameItem_Ammo();
+    item1.distanceMeters = 100.0;
+    item1.angleRadians = 2.0;
+    gameItems.push(item1);
+
+    // A weapon...
+    var item2 = new GameItem_Weapon();
+    item2.distanceMeters = 150.0;
+    item2.angleRadians = 0.0;
+    gameItems.push(item2);
+
+    // More ammo...
+    var item3 = new GameItem_Ammo();
+    item3.distanceMeters = 50.0;
+    item3.angleRadians = 5.0;
+    gameItems.push(item3);
+
+    // A player...
+    var item4 = new GameItem_Player(1, new Color(230, 45, 76));
+    item4.radarInfo.label = "Druss";
+    item4.distanceMeters = 88.0;
+    item4.angleRadians = 1.0;
+    gameItems.push(item4);
+
+    // Another player...
+    var item5 = new GameItem_Player(1, new Color(23, 45, 226));
+    item5.radarInfo.label = "Danger Mouse";
+    item5.distanceMeters = 128.0;
+    item5.angleRadians = 4.0;
+    gameItems.push(item5);
+
+    this._gameItems = gameItems;
+    return gameItems;
 };
 
