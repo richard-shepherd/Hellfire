@@ -8,6 +8,25 @@ function Utils() {
 }
 
 /**
+ * extend
+ * ------
+ * Derives one 'class' from another.
+ * From: http://stackoverflow.com/questions/4152931/javascript-inheritance-call-super-constructor-or-use-prototype-chain
+ */
+Utils.extend = function(base, sub) {
+    var origProto = sub.prototype;
+    sub.prototype = Object.create(base.prototype);
+    for (var key in origProto)  {
+        sub.prototype[key] = origProto[key];
+    }
+    sub.prototype.constructor = sub;
+    Object.defineProperty(sub.prototype, 'constructor', {
+        enumerable: false,
+        value: sub
+    });
+};
+
+/**
  * colorToString
  * -------------
  * Converts a color to a hex string.
@@ -30,6 +49,18 @@ Utils.rgbToString = function(r, g, b) {
     g = Math.round(g);
     b = Math.round(b);
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+};
+
+/**
+ * rgbaToString
+ * ------------
+ * Converts RGBA values to a color string.
+ */
+Utils.rgbaToString = function(r, g, b, a) {
+    r = Math.round(r);
+    g = Math.round(g);
+    b = Math.round(b);
+    return "rgba(" + r + "," + g + "," + b + "," + a + ")";
 };
 
 /**

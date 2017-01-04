@@ -22,7 +22,7 @@ function PlayerManager() {
  * Adds a player with the color specified.
  */
 PlayerManager.prototype.addPlayer = function(color) {
-    this.players.push(new Player(this.nextPlayerNumber++, color));
+    this.players.push(new GameItem_Player(this.nextPlayerNumber++, color));
 };
 
 /**

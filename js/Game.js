@@ -37,6 +37,12 @@ function Game(options) {
 
     // We set up the audio-manager and play the background music...
     this._setupAudioManager();
+
+    // We subscribe to our location and compass heading...
+    this._locationProvider = new LocationProvider();
+
+    // We set up the radar...
+    this._radarCanvas = new RadarCanvas(this.options.videoCanvasID);
 }
 
 // An enum for the slides we show...
@@ -188,8 +194,10 @@ Game.prototype._onVideoDataUpdated =  function (imageData, canvasContext) {
     // We draw the crosshairs.
     // If we have a matching player, we show the center ring in the
     // player's color...
-    var ringColor = matchingPlayer ? matchingPlayer.color : Color.black;
-    VideoCanvas.drawCrosshairs(ringColor, canvasContext);
+    var compassHeadingRadians = this._locationProvider.compassHeadingRadians;
+    var ringColor = matchingPlayer ? matchingPlayer.color : null;
+    var gameItems = this._getGameItems();
+    this._radarCanvas.showRadar(compassHeadingRadians, gameItems, ringColor);
 
     // If we are in adding-player mode, we show the camera color on the
     // add-player button...
@@ -199,5 +207,13 @@ Game.prototype._onVideoDataUpdated =  function (imageData, canvasContext) {
         var addUserElement = document.getElementById("add-player");
         addUserElement.style.background = centerColorHex;
     }
+};
+
+/**
+ *
+ * @private
+ */
+Game.prototype._getGameItems = function() {
+    return [];
 };
 

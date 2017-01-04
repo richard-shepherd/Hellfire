@@ -5,13 +5,13 @@
  * Also calls back with the compass heading.
  *
  * locationCallback(position-object)
- * compassCallback(headingDegrees)
+ * compassCallback(headingRadians)
  *
  * @constructor
  */
-function LocationProvider(locationCallback, compassCallback) {
-    this._locationCallback = locationCallback;
-    this._compassCallback = compassCallback;
+function LocationProvider() {
+    this.position = null;
+    this.compassHeadingRadians = 0.0;
 
     this._subscribeLocation();
     this._subscribeCompass();
@@ -30,7 +30,8 @@ LocationProvider.prototype._subscribeLocation =function() {
     var that = this;
     navigator.geolocation.getCurrentPosition(function(position) {
         try {
-            that._locationCallback(position);
+            // We hold the latest position...
+            that.position = position;
         } catch(ex) {
             Logger.log(ex.message);
         }
@@ -46,8 +47,8 @@ LocationProvider.prototype._subscribeCompass = function() {
     var that = this;
     window.addEventListener('deviceorientationabsolute', function(orientationInfo) {
         try {
-            var compassHeading = LocationProvider.compassHeading(orientationInfo.alpha, orientationInfo.beta, orientationInfo.gamma);
-            that._compassCallback(compassHeading);
+            // We store the latest compass heading...
+            that.compassHeadingRadians = LocationProvider.compassHeading(orientationInfo.alpha, orientationInfo.beta, orientationInfo.gamma);
         } catch(ex) {
             Logger.log(ex.message);
         }
@@ -57,8 +58,8 @@ LocationProvider.prototype._subscribeCompass = function() {
 /**
  * compassHeading
  * --------------
- * Static method to convert phone orientation into a compass heading.
- * (When the phone is held upright.)
+ * Static method to convert phone orientation into a compass heading
+ * in radians. (When the phone is held upright.)
  */
 LocationProvider.compassHeading = function(alpha, beta, gamma) {
 
@@ -81,7 +82,10 @@ LocationProvider.compassHeading = function(alpha, beta, gamma) {
     var rC = - cB * cG;
 
     // Calculate compass heading
-    var compassHeading = Math.atan(rA / rB);
+    var compassHeading = 0.0;
+    if(rB !== 0.0) {
+        compassHeading = Math.atan(rA / rB);
+    }
 
     // Convert from half unit circle to whole unit circle
     if(rB < 0) {
@@ -89,9 +93,6 @@ LocationProvider.compassHeading = function(alpha, beta, gamma) {
     }else if(rA < 0) {
         compassHeading += 2 * Math.PI;
     }
-
-    // Convert radians to degrees
-    compassHeading *= 180 / Math.PI;
 
     return compassHeading;
 };
