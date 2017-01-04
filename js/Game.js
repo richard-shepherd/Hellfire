@@ -158,8 +158,6 @@ Game.prototype._setupCamera = function() {
     // access the data and draw on it ourselves).
     var that = this;
     var cameraOptions = {
-        width: 500,
-        height: 500,
         facingDirection: Camera.FacingDirection.BACK_FACING,
         reverseImage: false,
         showCanvas: {

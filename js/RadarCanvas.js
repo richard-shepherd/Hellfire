@@ -480,9 +480,10 @@ RadarCanvas.prototype._drawGameItem = function(ctx, gameItem, compassHeadingRadi
 
     // Text color...
     var textFillColor = Utils.rgbaToString(0, 255, 0, gameItem.radarInfo.alpha);
-    var textStrokeColor = Utils.rgbaToString(64, 64, 64, gameItem.radarInfo.alpha);
+    var textStrokeColor = Utils.rgbaToString(0, 0, 0, gameItem.radarInfo.alpha);
 
     // We show the item...
+    ctx.lineWidth = 1;
     if(gameItem.radarInfo.showAsCircle) {
         // We show a colored circle for the item (which is most likely a player)...
         var circleRadius = this._canvasWidth / 60.0;
@@ -504,15 +505,15 @@ RadarCanvas.prototype._drawGameItem = function(ctx, gameItem, compassHeadingRadi
         ctx.strokeStyle = textStrokeColor;
         var xOffset = circleRadius * 1.3;
         var yOffset = circleRadius * 0.7;
-        ctx.strokeText(text, x + xOffset, y + yOffset);
         ctx.fillText(text, x + xOffset, y + yOffset);
+        ctx.strokeText(text, x + xOffset, y + yOffset);
     } else {
         // We show a text label for the item...
         var text = "+" + gameItem.radarInfo.label;
         ctx.fillStyle = textFillColor;
         ctx.strokeStyle = textStrokeColor;
-        ctx.strokeText(text, x, y);
         ctx.fillText(text, x, y);
+        ctx.strokeText(text, x, y);
     }
 };
 
