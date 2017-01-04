@@ -71,13 +71,10 @@ RadarCanvas.prototype.showRadar = function(compassHeadingRadians, gameItems, rin
         this._canvasHeight = ctx.canvas.height;
         this._radarRadius = Math.min(this._canvasWidth, this._canvasHeight);
         this._radarRadius /= 2.0;
-        this._radarRadius *= 0.85;
+        this._radarRadius *= 0.95;
 
         // We make sure the pre-rendered canvases are up to date...
         this._preRenderCanvases();
-
-        // We clear the canvas, before redrawing...
-        //ctx.clearRect(0, 0, this._canvasWidth, this._canvasHeight);
 
         // We show the sweeping, green radar line...
         this._drawRadarLine(deltaMilliseconds);
@@ -140,7 +137,7 @@ RadarCanvas.prototype._preRenderCanvas_RadarSweep = function() {
         // We set the origin to the center of the canvas, and with
         // rotation...
         ctx.save();
-        ctx.translate(this._canvasWidth/2, this._canvasWidth/2);
+        ctx.translate(this._canvasWidth/2, this._canvasHeight/2);
 
         // We show the radar as a number of bands fading from
         // green to black...
@@ -183,7 +180,7 @@ RadarCanvas.prototype._preRenderCanvas_Compass = function() {
         // We set the origin to the center of the canvas, and with
         // rotation...
         ctx.save();
-        ctx.translate(this._canvasWidth/2, this._canvasWidth/2);
+        ctx.translate(this._canvasWidth/2, this._canvasHeight/2);
         ctx.rotate(-1.0 * this._compassHeadingRadians);
 
         var numLines = 72;
@@ -211,18 +208,18 @@ RadarCanvas.prototype._preRenderCanvas_Compass = function() {
         ctx.strokeStyle = "#404040";
 
         ctx.fillStyle = "red";
-        ctx.strokeText("N", 0, -1.0 * this._radarRadius);
-        ctx.fillText("N", 0, -1.0 * this._radarRadius);
+        ctx.strokeText("N", 0, -1.0 * this._radarRadius + fontOffset*1.0);
+        ctx.fillText("N", 0, -1.0 * this._radarRadius + fontOffset*1.0);
 
         ctx.font =  fontSize/1.3 +  "px Arial";
         ctx.textAlign = "center";
         ctx.fillStyle = "white";
-        ctx.strokeText("S", 0, this._radarRadius + fontOffset*2);
-        ctx.fillText("S", 0, this._radarRadius + fontOffset*2);
-        ctx.strokeText("W", -1.0 * this._radarRadius - fontOffset, fontOffset);
-        ctx.fillText("W", -1.0 * this._radarRadius - fontOffset, fontOffset);
-        ctx.strokeText("E", this._radarRadius + fontOffset, fontOffset);
-        ctx.fillText("E", this._radarRadius + fontOffset, fontOffset);
+        ctx.strokeText("S", 0, this._radarRadius + fontOffset*1.0);
+        ctx.fillText("S", 0, this._radarRadius + fontOffset*1.0);
+        ctx.strokeText("W", -1.0 * this._radarRadius - fontOffset*0.0, fontOffset*0.8);
+        ctx.fillText("W", -1.0 * this._radarRadius - fontOffset*0.0, fontOffset*0.8);
+        ctx.strokeText("E", this._radarRadius + fontOffset*0.1, fontOffset*0.8);
+        ctx.fillText("E", this._radarRadius + fontOffset*0.1, fontOffset*0.8);
     } finally {
         ctx.restore();
     }
@@ -234,116 +231,110 @@ RadarCanvas.prototype._preRenderCanvas_Compass = function() {
  * Pre-renders the grid and crosshairs.
  */
 RadarCanvas.prototype._preRenderCanvas_Grid = function() {
-    var canvas = this._grid.canvas;
-    var ctx = this._grid.ctx;
+    try {
+        var canvas = this._grid.canvas;
+        var ctx = this._grid.ctx;
 
-    // We set the canvas to the desired size, and clear it...
-    canvas.width = this._canvasWidth;
-    canvas.height = this._canvasHeight;
-    ctx.clearRect(0, 0, this._canvasWidth, this._canvasHeight);
+        // We set the canvas to the desired size, and clear it...
+        canvas.width = this._canvasWidth;
+        canvas.height = this._canvasHeight;
+        ctx.clearRect(0, 0, this._canvasWidth, this._canvasHeight);
 
-    // We set the origin to the center of the canvas (with no rotation)...
-    ctx.save();
-    ctx.translate(this._canvasWidth/2, this._canvasWidth/2);
+        // We set the origin to the center of the canvas (with no rotation)...
+        ctx.save();
+        ctx.translate(this._canvasWidth/2, this._canvasHeight/2);
 
-    // We draw crosshair lines...
-    var lineColor = "#008000"
-    var textColor = "#408000"
-    var circleColor = "#408000"
+        // We draw crosshair lines...
+        var lineColor = "#008000"
+        var textColor = "#408000"
+        var circleColor = "#408000"
 
-    // Draws a line...
-    function drawLine(color, width, x1, y1, x2, y2) {
-        ctx.beginPath();
-        ctx.strokeStyle = color;
-        ctx.lineWidth = width;
-        ctx.moveTo(x1, y1);
-        ctx.lineTo(x2, y2);
-        ctx.stroke();
-    };
+        // Draws a line...
+        function drawLine(color, width, x1, y1, x2, y2) {
+            ctx.beginPath();
+            ctx.strokeStyle = color;
+            ctx.lineWidth = width;
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+        };
 
-    // Vertical and horizontal lines...
-    drawLine(lineColor, 2, 0, -1.0 * this._radarRadius, 0, this._radarRadius);
-    drawLine(lineColor, 2, -1.0 * this._radarRadius, 0, this._radarRadius, 0);
+        // Circles with labels at set distances...
+        var fontSize = Math.floor(this._canvasWidth / 40.0);
+        var fontOffset = this._canvasWidth / 150.0;
+        ctx.font =  fontSize +  "px Arial";
+        ctx.fillStyle = textColor;
+        ctx.textAlign = "left";
 
-    // Circles with labels at set distances...
-    var fontSize = Math.floor(this._canvasWidth / 40.0);
-    var fontOffset = this._canvasWidth / 150.0;
-    ctx.font =  fontSize +  "px Arial";
-    ctx.fillStyle = textColor;
-    ctx.textAlign = "left";
+        // Circle color and style...
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = circleColor;
+        ctx.setLineDash([2, 3]);
 
-    // Circle color and style...
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = circleColor;
-    ctx.setLineDash([2, 3]);
+        // A function to draw a circle at a distance-fraction from the center...
+        var that = this;
+        function drawDistanceCircle(distance) {
+            ctx.beginPath();
+            ctx.arc(0, 0, distance * that._radarRadius, 0, 2.0 * Math.PI);
+            ctx.stroke();
+            var text = distance * that.radarDistanceMeters + "m";
+            ctx.fillText(text, fontOffset, -1.0 * distance * that._radarRadius - fontOffset);
+        }
+        drawDistanceCircle(0.25);
+        drawDistanceCircle(0.5);
+        drawDistanceCircle(0.75);
+        drawDistanceCircle(1.0);
 
-    // A function to draw a circle at a distance-fraction from the center...
-    var that = this;
-    function drawDistanceCircle(distance) {
-        ctx.beginPath();
-        ctx.arc(0, 0, distance * that._radarRadius, 0, 2.0 * Math.PI);
-        ctx.stroke();
-        var text = distance * that.radarDistanceMeters + "m";
-        ctx.fillText(text, fontOffset, -1.0 * distance * that._radarRadius - fontOffset);
+        // We draw the crosshairs...
+        ctx.setLineDash([]);
+        var outerRadius = this._radarRadius / 1.5;
+
+        // The crosshair lines...
+        var lineFraction = 0.92;
+        drawLine("black", 2, -1.0 * lineFraction * this._radarRadius, 0, lineFraction * this._radarRadius, 0);
+        drawLine("black", 2, 0, -1.0 * lineFraction * this._radarRadius, 0, lineFraction * this._radarRadius);
+
+        // The red markers...
+        var numMarkers = 5;
+        var markerColor = "#a00000";
+        var distanceBetweenMarkers = outerRadius / (numMarkers+1);
+        var markerOffset = this._radarRadius / 25.0;
+        var markerX_Left = -1.0 * outerRadius + distanceBetweenMarkers;
+        var markerX_Right = outerRadius - distanceBetweenMarkers;
+        var markerY_Top = -1.0 * outerRadius + distanceBetweenMarkers;
+        var markerY_Bottom = outerRadius - distanceBetweenMarkers;
+        for(var i=0; i<numMarkers; ++i) {
+            // We draw a left marker...
+            drawLine(markerColor, 2,
+                markerX_Left, -1.0 * markerOffset,
+                markerX_Left, markerOffset);
+
+            // We draw a right marker...
+            drawLine(markerColor, 2,
+                markerX_Right, -1.0 * markerOffset,
+                markerX_Right, markerOffset);
+
+            // We draw a top marker...
+            drawLine(markerColor, 2,
+                -1.0 * markerOffset, markerY_Top,
+                markerOffset, markerY_Top);
+
+            // We draw a bottom marker...
+            drawLine(markerColor, 2,
+                -1.0 * markerOffset, markerY_Bottom,
+                markerOffset, markerY_Bottom);
+
+            // And change the positions for the next ones...
+            markerX_Left += distanceBetweenMarkers;
+            markerX_Right -= distanceBetweenMarkers;
+            markerY_Top += distanceBetweenMarkers;
+            markerY_Bottom -= distanceBetweenMarkers;
+        }
+    } catch(ex) {
+        Logger.log("Pre-rendering grid: " + ex.message);
     }
-    drawDistanceCircle(0.25);
-    drawDistanceCircle(0.5);
-    drawDistanceCircle(0.75);
-    drawDistanceCircle(1.0);
-
-    // We draw the crosshairs...
-    ctx.restore();
-    var width = ctx.canvas.width;
-    var height = ctx.canvas.height;
-    var outerRadius = width / 3.5;
-    var innerRadius = width / 40.0;
-    var lineOffset = outerRadius  + width / 40.0;
-
-    var centerX = width / 2.0;
-    var centerY = height / 2.0;
-
-    // The rings...
-    this._drawCrosshairRings(ctx, Color.black);
-
-    // The crosshair lines...
-    drawLine("black", 2, centerX - lineOffset,centerY, centerX + lineOffset,centerY);
-    drawLine("black", 2, centerX, centerY - lineOffset, centerX, centerY + lineOffset);
-
-    // The red markers...
-    var numMarkers = 5;
-    var markerColor = "#a00000";
-    var distanceBetweenMarkers = outerRadius / (numMarkers+1);
-    var markerOffset = width / 60.0;
-    var markerX_Left = centerX - outerRadius + distanceBetweenMarkers;
-    var markerX_Right = centerX + outerRadius - distanceBetweenMarkers;
-    var markerY_Top = centerY - outerRadius + distanceBetweenMarkers;
-    var markerY_Bottom = centerY + outerRadius - distanceBetweenMarkers;
-    for(var i=0; i<numMarkers; ++i) {
-        // We draw a left marker...
-        drawLine(markerColor, 2,
-            markerX_Left, centerY - markerOffset,
-            markerX_Left, centerY + markerOffset);
-
-        // We draw a right marker...
-        drawLine(markerColor, 2,
-            markerX_Right, centerY - markerOffset,
-            markerX_Right, centerY + markerOffset);
-
-        // We draw a top marker...
-        drawLine(markerColor, 2,
-            centerX - markerOffset, markerY_Top,
-            centerX + markerOffset, markerY_Top);
-
-        // We draw a bottom marker...
-        drawLine(markerColor, 2,
-            centerX - markerOffset, markerY_Bottom,
-            centerX + markerOffset, markerY_Bottom);
-
-        // And change the positions for the next ones...
-        markerX_Left += distanceBetweenMarkers;
-        markerX_Right -= distanceBetweenMarkers;
-        markerY_Top += distanceBetweenMarkers;
-        markerY_Bottom -= distanceBetweenMarkers;
+    finally {
+        ctx.restore();
     }
 };
 
@@ -353,12 +344,10 @@ RadarCanvas.prototype._preRenderCanvas_Grid = function() {
  * Draws the rings of the crosshair.
  */
 RadarCanvas.prototype._drawCrosshairRings = function(ctx, color) {
-    var width = ctx.canvas.width;
-    var height = ctx.canvas.height;
-    var outerRadius = width / 3.5;
-    var innerRadius = width / 40.0;
-    var centerX = width / 2.0;
-    var centerY = height / 2.0;
+    var outerRadius = this._radarRadius / 1.6;
+    var innerRadius = this._radarRadius / 17.0;
+    var centerX = ctx.canvas.width / 2.0;
+    var centerY = ctx.canvas.height / 2.0;
 
     // We convert the ring color to a string...
     var ringColorString = Utils.colorToString(color);
@@ -435,7 +424,7 @@ RadarCanvas.prototype._drawGameItems = function(gameItems, compassHeadingRadians
     try {
         // We set the origin to the center of the canvas (with no rotation)...
         ctx.save();
-        ctx.translate(this._canvasWidth/2, this._canvasWidth/2);
+        ctx.translate(this._canvasWidth/2, this._canvasHeight/2);
 
         // We set the text size for items...
         var fontSize = Math.floor(this._canvasWidth / 30.0);
@@ -529,6 +518,8 @@ RadarCanvas.prototype._drawGrid = function(ringColor) {
     // We show the targetting ring color...
     if(ringColor) {
         this._drawCrosshairRings(destCtx, ringColor);
+    } else {
+        this._drawCrosshairRings(destCtx, Color.black);
     }
 };
 
