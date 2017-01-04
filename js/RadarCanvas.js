@@ -32,6 +32,7 @@ function RadarCanvas(canvasElementID) {
     this._lastUpdateTime = Date.now();
 
     // We pre-render some of the items for efficiency...
+    this._radarCanvas = this._createCanvas();
     this._radarSweep = this._createCanvas();
     this._compass = this._createCanvas();
     this._grid = this._createCanvas();
@@ -69,12 +70,15 @@ RadarCanvas.prototype.showRadar = function(compassHeadingRadians, gameItems, rin
         // We find the current size of the canvas...
         this._canvasWidth = ctx.canvas.width;
         this._canvasHeight = ctx.canvas.height;
-        this._radarRadius = Math.min(this._canvasWidth, this._canvasHeight);
-        this._radarRadius /= 2.0;
+        this._radarSide = Math.min(this._canvasWidth, this._canvasHeight);
+        this._radarRadius = this._radarSide / 2.0;
         this._radarRadius *= 0.95;
 
         // We make sure the pre-rendered canvases are up to date...
         this._preRenderCanvases();
+
+        // We draw the radar to its own (square) canvas...
+        this._radarCanvas.ctx.clearRect(0, 0, this._radarSide, this._radarSide);
 
         // We show the sweeping, green radar line...
         this._drawRadarLine(deltaMilliseconds);
@@ -90,6 +94,11 @@ RadarCanvas.prototype.showRadar = function(compassHeadingRadians, gameItems, rin
         this._updateGameItemAlpha(gameItems);
         this._drawGameItems(gameItems, compassHeadingRadians);
 
+        // And we show the radar canvas over the video canvas...
+        var xOffset = (this._canvasWidth - this._radarSide) / 2.0;
+        var yOffset = (this._canvasHeight - this._radarSide) / 2.0;
+        this._canvasContext.drawImage(this._radarCanvas.canvas, xOffset, yOffset);
+
         // We note the radar-line angle for next time...
         this._previousRadarLineAngleRadians = this._radarLineAngleRadians;
     } catch(ex) {
@@ -103,17 +112,18 @@ RadarCanvas.prototype.showRadar = function(compassHeadingRadians, gameItems, rin
  * Pre-renders the static canvases if the size of the main canvas has changed.
  */
 RadarCanvas.prototype._preRenderCanvases = function() {
-    if(this._canvasWidth === this._radarSweep.canvas.width
-        &&
-        this._canvasHeight === this._radarSweep.canvas.height) {
+    if(this._radarSide === this._radarSweep.canvas.width) {
         // The pre-rendered canvases are already the right size...
         return;
     }
 
     Logger.log("Pre-rendering canvases");
 
-    // The main canvas size has changed, so we pre-render canvases
-    // for the static elements...
+    // We make sure the main radar canvas is the right size...
+    this._radarCanvas.canvas.width = this._radarSide;
+    this._radarCanvas.canvas.height = this._radarSide;
+
+    // We pre-render canvases for the static elements...
     this._preRenderCanvas_RadarSweep();
     this._preRenderCanvas_Compass();
     this._preRenderCanvas_Grid();
@@ -130,14 +140,14 @@ RadarCanvas.prototype._preRenderCanvas_RadarSweep = function() {
         var ctx = this._radarSweep.ctx;
 
         // We set the canvas to the desired size, and clear it...
-        canvas.width = this._canvasWidth;
-        canvas.height = this._canvasHeight;
-        ctx.clearRect(0, 0, this._canvasWidth, this._canvasHeight);
+        canvas.width = this._radarSide;
+        canvas.height = this._radarSide;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         // We set the origin to the center of the canvas, and with
         // rotation...
         ctx.save();
-        ctx.translate(this._canvasWidth/2, this._canvasHeight/2);
+        ctx.translate(canvas.width / 2.0, canvas.height / 2.0);
 
         // We show the radar as a number of bands fading from
         // green to black...
@@ -173,15 +183,13 @@ RadarCanvas.prototype._preRenderCanvas_Compass = function() {
         var ctx = this._compass.ctx;
 
         // We set the canvas to the desired size, and clear it...
-        canvas.width = this._canvasWidth;
-        canvas.height = this._canvasHeight;
-        ctx.clearRect(0, 0, this._canvasWidth, this._canvasHeight);
+        canvas.width = this._radarSide;
+        canvas.height = this._radarSide;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // We set the origin to the center of the canvas, and with
-        // rotation...
+        // We set the origin to the center of the canvas...
         ctx.save();
-        ctx.translate(this._canvasWidth/2, this._canvasHeight/2);
-        ctx.rotate(-1.0 * this._compassHeadingRadians);
+        ctx.translate(canvas.width / 2.0, canvas.height / 2.0);
 
         var numLines = 72;
         var angleBetweenLines = 2.0 * Math.PI / numLines;
@@ -236,13 +244,13 @@ RadarCanvas.prototype._preRenderCanvas_Grid = function() {
         var ctx = this._grid.ctx;
 
         // We set the canvas to the desired size, and clear it...
-        canvas.width = this._canvasWidth;
-        canvas.height = this._canvasHeight;
-        ctx.clearRect(0, 0, this._canvasWidth, this._canvasHeight);
+        canvas.width = this._radarSide;
+        canvas.height = this._radarSide;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         // We set the origin to the center of the canvas (with no rotation)...
         ctx.save();
-        ctx.translate(this._canvasWidth/2, this._canvasHeight/2);
+        ctx.translate(canvas.width / 2.0, canvas.height / 2.0);
 
         // We draw crosshair lines...
         var lineColor = "#008000"
@@ -260,8 +268,8 @@ RadarCanvas.prototype._preRenderCanvas_Grid = function() {
         };
 
         // Circles with labels at set distances...
-        var fontSize = Math.floor(this._canvasWidth / 40.0);
-        var fontOffset = this._canvasWidth / 150.0;
+        var fontSize = Math.floor(canvas.width / 40.0);
+        var fontOffset = canvas.width / 150.0;
         ctx.font =  fontSize +  "px Arial";
         ctx.fillStyle = textColor;
         ctx.textAlign = "left";
@@ -420,14 +428,17 @@ RadarCanvas.prototype._updateGameItemAlpha = function(gameItems) {
  * Shows the game items on the radar.
  */
 RadarCanvas.prototype._drawGameItems = function(gameItems, compassHeadingRadians) {
-    var ctx = this._canvasContext;
     try {
+        var ctx = this._radarCanvas.ctx;
+        var size = ctx.canvas.width;
+        var halfSize = size / 2.0;
+
         // We set the origin to the center of the canvas (with no rotation)...
         ctx.save();
-        ctx.translate(this._canvasWidth/2, this._canvasHeight/2);
+        ctx.translate(halfSize, halfSize);
 
         // We set the text size for items...
-        var fontSize = Math.floor(this._canvasWidth / 30.0);
+        var fontSize = Math.floor(size / 30.0);
         ctx.font =  fontSize +  "px Arial";
         ctx.textAlign = "left";
 
@@ -475,7 +486,7 @@ RadarCanvas.prototype._drawGameItem = function(ctx, gameItem, compassHeadingRadi
     ctx.lineWidth = 1;
     if(gameItem.radarInfo.showAsCircle) {
         // We show a colored circle for the item (which is most likely a player)...
-        var circleRadius = this._canvasWidth / 60.0;
+        var circleRadius = this._radarSide / 60.0;
         var itemColor = gameItem.radarInfo.circleColor;
         var color = Utils.rgbaToString(itemColor.r, itemColor.g, itemColor.b, gameItem.radarInfo.alpha);
         var outlineColor = Utils.rgbaToString(0, 0, 0, gameItem.radarInfo.alpha);
@@ -512,7 +523,7 @@ RadarCanvas.prototype._drawGameItem = function(ctx, gameItem, compassHeadingRadi
  * Draws the radar grid.
  */
 RadarCanvas.prototype._drawGrid = function(ringColor) {
-    var destCtx = this._canvasContext;
+    var destCtx = this._radarCanvas.ctx;
     destCtx.drawImage(this._grid.canvas, 0, 0);
 
     // We show the targetting ring color...
@@ -531,12 +542,13 @@ RadarCanvas.prototype._drawGrid = function(ringColor) {
 RadarCanvas.prototype._drawRadarLine = function(deltaMilliseconds) {
     try {
         var sourceCanvas = this._radarSweep.canvas;
-        var destCtx = this._canvasContext;
+        var destCtx = this._radarCanvas.ctx;
+        var halfSize = destCtx.canvas.width / 2.0;
 
         // We set the origin to the center of the canvas, and with
         // rotation...
         destCtx.save();
-        destCtx.translate(this._canvasWidth/2, this._canvasWidth/2);
+        destCtx.translate(halfSize, halfSize);
         destCtx.rotate(-1.0 * this._compassHeadingRadians);
 
         // We update the angle...
@@ -548,7 +560,7 @@ RadarCanvas.prototype._drawRadarLine = function(deltaMilliseconds) {
         destCtx.rotate(this._radarLineAngleRadians);
 
         // We show the pre-rendered radar sweep...
-        destCtx.translate(-1.0*this._canvasWidth/2, -1.0*this._canvasWidth/2);
+        destCtx.translate(-1.0 * halfSize, -1.0 * halfSize);
         destCtx.drawImage(sourceCanvas, 0, 0);
     } finally {
         destCtx.restore();
@@ -563,16 +575,17 @@ RadarCanvas.prototype._drawRadarLine = function(deltaMilliseconds) {
 RadarCanvas.prototype._drawCompass = function() {
     try {
         var sourceCanvas = this._compass.canvas;
-        var destCtx = this._canvasContext;
+        var destCtx = this._radarCanvas.ctx;
+        var halfSize = destCtx.canvas.width / 2.0;
 
         // We set the origin to the center of the canvas, and with
         // rotation...
         destCtx.save();
-        destCtx.translate(this._canvasWidth/2, this._canvasWidth/2);
+        destCtx.translate(halfSize, halfSize);
         destCtx.rotate(-1.0 * this._compassHeadingRadians);
 
         // We show the pre-rendered compass...
-        destCtx.translate(-1.0*this._canvasWidth/2, -1.0*this._canvasWidth/2);
+        destCtx.translate(-1.0 * halfSize, -1.0 * halfSize);
         destCtx.drawImage(sourceCanvas, 0, 0);
     } finally {
         destCtx.restore();
