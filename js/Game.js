@@ -221,7 +221,7 @@ Game.prototype._getGameItems = function() {
     }
 
     // We create some game items...
-    gameItems = [];
+    var gameItems = [];
 
     // Some ammo...
     var item1 = new GameItem_Ammo();

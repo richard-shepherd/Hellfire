@@ -28,7 +28,7 @@ function RadarCanvas(canvasElementID) {
 
     // The number of seconds it takes to sweep the entire circle
     // with the radar...
-    this._radarSweepTimeMilliseconds = 4500.0;
+    this._radarSweepTimeMilliseconds = 4000.0;
     this._lastUpdateTime = Date.now();
 
     // We pre-render some of the items for efficiency...
@@ -457,8 +457,9 @@ RadarCanvas.prototype._drawGameItems = function(gameItems, compassHeadingRadians
  * Shows one game item on the radar.
  */
 RadarCanvas.prototype._drawGameItem = function(ctx, gameItem, compassHeadingRadians) {
+
     // If the object is too far away, we do not show it...
-    if(gameItem.distanceMeters > this._radarRadius) {
+    if(gameItem.distanceMeters > this.radarDistanceMeters) {
         return;
     }
 
