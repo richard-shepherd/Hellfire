@@ -43,13 +43,11 @@ body {
 }
 
 #gunsight-canvas-panel {
-    width: 85%;
-    float: left;
+    width: 100%;
 }
 
 #gunsight-controls-panel {
     width: 15%;
-    float: right;
 }
 
 #fire-button-wrapper {
