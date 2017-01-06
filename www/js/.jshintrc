@@ -1,0 +1,17 @@
+{
+    "globals" : {
+        "AudioManager":false,
+        "Camera":false,
+        "Color": false,
+        "GameItem":false,
+        "GameItem_Ammo":false,
+        "GameItem_Player":false,
+        "GameItem_Weapon":false,
+        "ImageManager": false,
+        "LocationProvider": false,
+        "Logger": false,
+        "PlayerManager" : false,
+        "RadarCanvas": false,
+        "Utils": false,
+    }
+}

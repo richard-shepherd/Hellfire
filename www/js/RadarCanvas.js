@@ -117,7 +117,7 @@ RadarCanvas.prototype._preRenderCanvases = function() {
         return;
     }
 
-    Logger.log("Pre-rendering canvases");
+    Logger.log("Pre-rendering canvases. Size=" + this._radarSide);
 
     // We make sure the main radar canvas is the right size...
     this._radarCanvas.canvas.width = this._radarSide;
