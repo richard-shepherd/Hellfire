@@ -78,6 +78,9 @@ RadarCanvas.prototype.showRadar = function(compassHeadingRadians, gameItems, rin
         this._preRenderCanvases();
 
         // We draw the radar to its own (square) canvas...
+        this._radarCanvas.canvas.width = this._radarSide;
+        this._radarCanvas.canvas.height = this._radarSide;
+
         this._radarCanvas.ctx.clearRect(0, 0, this._radarSide, this._radarSide);
 
         // We show the sweeping, green radar line...
@@ -118,10 +121,6 @@ RadarCanvas.prototype._preRenderCanvases = function() {
     }
 
     Logger.log("Pre-rendering canvases. Size=" + this._radarSide);
-
-    // We make sure the main radar canvas is the right size...
-    this._radarCanvas.canvas.width = this._radarSide;
-    this._radarCanvas.canvas.height = this._radarSide;
 
     // We pre-render canvases for the static elements...
     this._preRenderCanvas_RadarSweep();
@@ -209,7 +208,7 @@ RadarCanvas.prototype._preRenderCanvas_Compass = function() {
         }
 
         // We show the N, E, W, S labels...
-        var fontSize = Math.floor(this._canvasWidth / 22.0);
+        var fontSize = Math.floor(this._radarSide / 22.0);
         var fontOffset = fontSize / 2.0 * 0.8;
         ctx.font =  fontSize +  "px Arial";
         ctx.textAlign = "center";
@@ -505,15 +504,15 @@ RadarCanvas.prototype._drawGameItem = function(ctx, gameItem, compassHeadingRadi
         ctx.strokeStyle = textStrokeColor;
         var xOffset = circleRadius * 1.3;
         var yOffset = circleRadius * 0.7;
-        ctx.fillText(text, x + xOffset, y + yOffset);
         ctx.strokeText(text, x + xOffset, y + yOffset);
+        ctx.fillText(text, x + xOffset, y + yOffset);
     } else {
         // We show a text label for the item...
         var text = "+" + gameItem.radarInfo.label;
         ctx.fillStyle = textFillColor;
         ctx.strokeStyle = textStrokeColor;
-        ctx.fillText(text, x, y);
         ctx.strokeText(text, x, y);
+        ctx.fillText(text, x, y);
     }
 };
 

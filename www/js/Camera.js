@@ -162,11 +162,11 @@ Camera.prototype._onCanvasSampleTimer = function() {
         // We copy the video to the canvas.
 
         // First we size the canvas to the same proportions as the video...
-        var canvasWidth = this.canvas.clientWidth;
         var videoWidth = this.videoElement.videoWidth;
         if(videoWidth === 0) {
             return;
         }
+        var canvasWidth = videoWidth;
         var canvasHeight = this.videoElement.videoHeight / (videoWidth / canvasWidth);
         this.canvas.width = canvasWidth;
         this.canvas.height = canvasHeight;
