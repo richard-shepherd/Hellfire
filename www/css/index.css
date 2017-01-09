@@ -42,12 +42,22 @@ body {
     margin: 0 auto;
 }
 
+#gunsight-top-panel {
+    height: 45vh;
+}
+
+#gunsight-bottom-panel {
+    height: 45vh;
+}
+
 #gunsight-canvas-panel {
-    width: 100%;
+    width: 85%;
+    float: left;
 }
 
 #gunsight-controls-panel {
     width: 15%;
+    float: right;
 }
 
 #fire-button-wrapper {
@@ -64,7 +74,7 @@ body {
     font-family: Arial;
     font-size: 6vh;
     font-weight: bold;
-    padding: 20vh 0px;
+    padding: 18vh 0px;
     text-decoration: none;
     min-width: 100%;
     /*min-height: 40vw;*/

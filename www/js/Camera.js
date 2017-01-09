@@ -168,8 +168,11 @@ Camera.prototype._onCanvasSampleTimer = function() {
         }
         var canvasWidth = videoWidth;
         var canvasHeight = this.videoElement.videoHeight / (videoWidth / canvasWidth);
-        this.canvas.width = canvasWidth;
-        this.canvas.height = canvasHeight;
+        if(this.canvas.width !== canvasWidth || this.canvas.height !== canvasHeight) {
+            this.canvas.width = canvasWidth;
+            this.canvas.height = canvasHeight;
+            Logger.log("Setting video canvas size: width=" + canvasWidth + ", height=" + canvasHeight);
+        }
 
         // We may be reversing the image...
         if(this.reverseImage) {

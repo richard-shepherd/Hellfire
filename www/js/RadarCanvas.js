@@ -437,7 +437,7 @@ RadarCanvas.prototype._drawGameItems = function(gameItems, compassHeadingRadians
         ctx.translate(halfSize, halfSize);
 
         // We set the text size for items...
-        var fontSize = Math.floor(size / 30.0);
+        var fontSize = Math.floor(size / 20.0);
         ctx.font =  fontSize +  "px Arial";
         ctx.textAlign = "left";
 

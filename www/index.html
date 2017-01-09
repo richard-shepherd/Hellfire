@@ -29,23 +29,29 @@
                     <div class="slide-content">
 
                         <!--
-                        This slide is split into two panels. One shows the camera video, the
-                        other shows some controls.
+                        This slide is split into a number of panels.
                         -->
-                        <div id="gunsight-canvas-panel">
+                        <div id="gunsight-top-panel">
 
-                            <!-- The canvas which show the video and gunsight -->
-                            <canvas id='video-canvas'></canvas>
+                            <div id="gunsight-canvas-panel">
+                                <!-- The canvas which show the video and gunsight -->
+                                <canvas id='video-canvas'></canvas>
+                            </div>
 
                             <div id="gunsight-controls-panel">
                                 <span><input id="toggle-camera" class="gunsight-control" type="image" src="images/rorate-camera.ico"/></span>
                                 <span><input id="add-player" class="gunsight-control" type="image" src="images/add_user.ico"/></span>
                             </div>
 
+                        </div>
+
+                        <div id="gunsight-bottom-panel">
+
                             <!-- Fire button -->
                             <div id="fire-button-wrapper">
                                 <button type="button" id="fire-button">Starting</button>
                             </div>
+
                         </div>
 
                     </div>
