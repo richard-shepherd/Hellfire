@@ -48,7 +48,8 @@ function Game(options) {
 // An enum for the slides we show...
 Game.Slide = {
     GUNSIGHT: 0,
-    LOGS: 1
+    GPS: 1,
+    LOGS: 2
 };
 
 /**
@@ -201,6 +202,9 @@ Game.prototype._onVideoDataUpdated =  function (imageData, canvasContext) {
     var gameItems = this._getGameItems();
     this._radarCanvas.showRadar(compassHeadingRadians, gameItems, ringColor);
 
+    // We show the position info (lat, long, accuracy)...
+    this._showPositionInfo();
+
     // If we are in adding-player mode, we show the camera color on the
     // add-player button...
     if(this.addingPlayer) {
@@ -209,6 +213,24 @@ Game.prototype._onVideoDataUpdated =  function (imageData, canvasContext) {
         var addUserElement = document.getElementById("add-player");
         addUserElement.style.background = centerColorHex;
     }
+};
+
+/**
+ * _showPositionInfo
+ * -----------------
+ * Shows position info in one of the game slides.
+ */
+Game.prototype._showPositionInfo = function() {
+    var position = this._locationProvider.position;
+    if(position === null) {
+        return;
+    }
+
+    var coords = position.coords;
+    $("#position-lat").text(coords.latitude);
+    $("#position-long").text(coords.longitude);
+    $("#position-accuracy").text(coords.accuracy);
+    $("#position-num-updates").text(this._locationProvider.numPositionUpdates);
 };
 
 /**

@@ -12,6 +12,7 @@
 function LocationProvider() {
     this.position = null;
     this.compassHeadingRadians = 0.0;
+    this.numPositionUpdates = 0;
 
     this._subscribeLocation();
     this._subscribeCompass();
@@ -27,15 +28,32 @@ LocationProvider.prototype._subscribeLocation =function() {
         Logger.log("GPS not available");
     }
 
+    var options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+    };
+
     var that = this;
-    navigator.geolocation.getCurrentPosition(function(position) {
+
+    // Called when we get an update to the current position...
+    function success(position) {
         try {
             // We hold the latest position...
             that.position = position;
+            that.numPositionUpdates += 1;
         } catch(ex) {
             Logger.log(ex.message);
         }
-    });
+    }
+
+    // Called when we get an error from the position API...
+    function error(err) {
+        var message = "Location error: " + err.code + ", message: " + err.message;
+        Logger.log(message);
+    }
+
+    navigator.geolocation.watchPosition(success, error, options);
 };
 
 /**

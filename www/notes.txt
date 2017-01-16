@@ -1,30 +1,48 @@
-- We have a Game class
-  - This is the master controller
-  - Creates the camera and gets the callback
-  - The callback is the main "message loop"
-
-- Opponent  / color detection
-  - We have an Player class
-  - Holds a bunch of info about the opponent (=> "player" as players may be in teams)
-  - (Could hold GPS position, p2p contact info etc)
-  - Holds color info
-
-- PlayerMananger
-  - Holds the collection of players
-  - Calls into them to detect colors
+TO-DOs in order
+---------------
+- Remember how to show a map and zoom it.
 
 
-- Holds a collection of weapons which yo can cycle through
-  - Each has a fire() method
 
-- Make fire button full width
-  - So: Split vertically, then horiontally for top section.
 
-- Game names
-  - ShootEmUp
-  - PhoneShooter
-  - KillEmAll
-  - Kill-M-All
-  - Hellfire
-  - BlackOps
-  -
+- Store coordinates of all objects as (x, y) meters from an origin
+  - x: west-east (-ve=west, +ve=east)
+  - y: north-south (-ve=south, +ve=north)
+
+- The origin is the first reported position from the GPS
+  - When we get this we also work out the m/deg-lat and m/deg-long
+
+- We need a startup class and splash-screen
+  - We pre-load a bunch of things, such as images, textures, sounds
+  - The splash screen should show this.
+  - Only when everything is loaded do we move to the main game screen.
+
+- In the game loop, the first thing we do is to convert the current
+  position to an (x, y) in meters.
+
+- We convert all game-item positions to polar coordinates to show on the radar
+
+- We convert all game-item positoins to lat/long to show on the map
+
+- We have a tab which shows a map
+  - It shows your current position - as a pentagram?
+  - It shows the position of the next waypoint as a map marker
+  - It shows monsters, players, weapons, armour and ammo
+  - You can shrink or zoom the map.
+  - You can set the waypoints
+    - Initial game is: get to waypoint and back again. Fighting monsters.
+
+- Ammo, weapons, armour could have a limited life
+  - So you have to run to them
+  - The time could be configurable
+  - The time would be shown on the map and on the radar.
+
+- Do you need the video in the single-player game?
+  - A: No. But it might be good anyway!
+
+
+
+
+
+
+
