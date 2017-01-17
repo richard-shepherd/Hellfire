@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="externals/swiper/css/swiper.css">
+        <link rel="stylesheet" href="css/game.css">
+
+        <!-- Javascript libraries loaded in head -->
+        <script src="externals/jquery/jquery-2.1.4.min.js"></script>
+
+        <title>Hellfire</title>
+    </head>
+
+    <body>
+        <!-- The pages in the app are 'slides' from the idangero.us swiper control -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+
+                <!-- The main game slide -->
+                <div class="swiper-slide">
+                    <div class="header">Lock and Load</div>
+                    <div class="slide-content">
+
+                        <!--
+                        This slide is split into a number of panels.
+                        -->
+                        <div id="gunsight-top-panel">
+
+                            <div id="gunsight-canvas-panel">
+                                <!-- The canvas which show the video and gunsight -->
+                                <canvas id='video-canvas'></canvas>
+                            </div>
+
+                            <div id="gunsight-controls-panel">
+                                <span><input id="toggle-camera" class="gunsight-control" type="image" src="images/rorate-camera.ico"/></span>
+                                <span><input id="add-player" class="gunsight-control" type="image" src="images/add_user.ico"/></span>
+                            </div>
+
+                        </div>
+
+                        <div id="gunsight-bottom-panel">
+
+                            <!-- Fire button -->
+                            <div id="fire-button-wrapper">
+                                <button type="button" id="fire-button">Starting</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Slide showing GPS info -->
+                <div class="swiper-slide">
+                    <div class="header">GPS</div>
+                    <div class="slide-content">
+
+                        <div class="position-info">Latitude:  <span id="position-lat"></span></div>
+                        <div class="position-info">Longitude: <span id="position-long"></span></div>
+                        <div class="position-info">Accuracy:  <span id="position-accuracy"></span></div>
+                        <div class="position-info">Num updates:  <span id="position-num-updates"></span></div>
+
+                    </div>
+                </div>
+
+
+                <!-- Slide showing log info -->
+                <div class="swiper-slide">
+                    <div class="header">Logs</div>
+                    <div class="slide-content">
+
+                        <div id="log"></div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- This shows the dots at the bottom of the page, showing the number of slides -->
+            <div class="swiper-pagination"></div>
+        </div>
+
+
+        <!-- Game code...  -->
+        <script src="externals/adapter/adapter.js"></script>
+        <script src="externals/swiper/js/swiper.min.js"></script>
+        <script src="externals/deltae/deltae.global.min.js"></script>
+        <script src="externals/howler/howler.js"></script>
+        <script src="js/Utils.js"></script>
+        <script src="js/Color.js"></script>
+        <script src="js/Logger.js"></script>
+        <script src="js/LocationProvider.js"></script>
+        <script src="js/Camera.js"></script>
+        <script src="js/VideoCanvas.js"></script>
+        <script src="js/RadarCanvas.js"></script>
+        <script src="js/GameItem.js"></script>
+        <script src="js/GameItem_Ammo.js"></script>
+        <script src="js/GameItem_Player.js"></script>
+        <script src="js/GameItem_Weapon.js"></script>
+        <script src="js/PlayerManager.js"></script>
+        <script src="js/AudioManager.js"></script>
+        <script src="js/ImageManager.js"></script>
+        <script src="js/Game.js"></script>
+        <script>
+
+            try {
+                Logger.log("Starting Hellfire app - Version 0.014");
+
+                // We create the Game object, which runs the game...
+                var gameOptions = {
+                    videoCanvasID: "video-canvas",
+                    toggleCameraButtonID: "toggle-camera",
+                    addPlayerButtonID: "add-player",
+                    fireButtonID: "fire-button"
+                };
+                var game = new Game(gameOptions);
+
+            } catch(ex) {
+                Logger.log(ex.message);
+            }
+
+        </script>
+
+
+    </body>
+
+</html>
