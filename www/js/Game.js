@@ -169,6 +169,10 @@ Game.prototype._createSwiper = function() {
  */
 Game.prototype._onSlideChanged = function(swiper) {
     try {
+        // We enable swiping (some slides may disable it)..
+        this.swiper.unlockSwipes();
+
+        // There may be custom code to run as we enter some slides...
         switch(swiper.activeIndex) {
             case Game.Slide.WAYPOINTS:
                 this._onWaypointsSlideShown();
@@ -189,9 +193,15 @@ Game.prototype._onWaypointsSlideShown = function() {
             // Waypoints for this game have already been set up...
             return;
         }
+        this._waypointsSetUp = true;
+
+        // We disable swiping, as it interferes with moving around
+        // the map...
+        this.swiper.lockSwipes();
 
         // This is the first time we are showing the waypoints screen.
         // We show a map, and let the user select waypoints.
+        var that = this;
 
         var coords = this._locationProvider.position.coords;
         var map = new GMaps({
@@ -220,6 +230,12 @@ Game.prototype._onWaypointsSlideShown = function() {
                 horizontalAlign: 'center'
             });
             waypointNumber++;
+
+            if(waypointNumber == 4) {
+                that.swiper.unlockSwipes();
+                that.swiper.slideTo(Game.Slide.GUNSIGHT);
+            }
+
         }
 
     } catch(ex) {
