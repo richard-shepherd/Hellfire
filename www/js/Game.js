@@ -44,18 +44,22 @@ function Game(options) {
     // We set up the radar...
     this._radarCanvas = new RadarCanvas(this.options.videoCanvasID);
 
+    // True if waypoints have been set up...
+    this._waypointsSetUp = false;
+
     // We navigate away from the splash screen...
     setTimeout(function() {
-        that.swiper.slideTo(Game.Slide.GUNSIGHT);
+        that.swiper.slideTo(Game.Slide.WAYPOINTS);
     }, 2000);
 }
 
 // An enum for the slides we show...
 Game.Slide = {
     SPLASH_SCREEN: 0,
-    GUNSIGHT: 1,
-    GPS: 2,
-    LOGS: 3
+    WAYPOINTS: 1,
+    GUNSIGHT: 2,
+    GPS: 3,
+    LOGS: 4
 };
 
 /**
@@ -148,11 +152,80 @@ Game.prototype._onAddPlayerClicked = function() {
  */
 Game.prototype._createSwiper = function() {
     Logger.log("Creating swiper layout.");
+
+    var that = this;
     this.swiper = new Swiper('.swiper-container', {
         initialSlide: Game.Slide.SPLASH_SCREEN,
         pagination: '.swiper-pagination',
-        paginationClickable: true
+        paginationClickable: true,
+        onSlideChangeEnd: function(swiper) { that._onSlideChanged(swiper); }
     });
+};
+
+/**
+ * _onSlideChanged
+ * ---------------
+ * Called when the swiper slide has changed.
+ */
+Game.prototype._onSlideChanged = function(swiper) {
+    try {
+        switch(swiper.activeIndex) {
+            case Game.Slide.WAYPOINTS:
+                this._onWaypointsSlideShown();
+                break;
+        }
+    } catch(ex) {
+        Logger.log(ex.message);
+    }
+};
+
+/**
+ * _onWaypointsSlideShown
+ * ----------------------
+ */
+Game.prototype._onWaypointsSlideShown = function() {
+    try {
+        if(this._waypointsSetUp) {
+            // Waypoints for this game have already been set up...
+            return;
+        }
+
+        // This is the first time we are showing the waypoints screen.
+        // We show a map, and let the user select waypoints.
+
+        var coords = this._locationProvider.position.coords;
+        var map = new GMaps({
+            div: "#waypoints-map",
+            lat: coords.latitude,
+            lng: coords.longitude,
+            zoom: 18,
+            mapType: "satellite",
+            scaleControl: false,
+            zoomControl: false,
+            streetViewControl: false,
+            panControl: false,
+            click: onClick
+        });
+
+        var waypointNumber = 1;
+
+        function onClick(eventData) {
+            var lat = eventData.latLng.lat();
+            var long = eventData.latLng.lng();
+            map.drawOverlay({
+                lat: lat,
+                lng: long,
+                content: '<div class="waypoint-overlay">' + waypointNumber + '</div>',
+                verticalAlign: 'top',
+                horizontalAlign: 'center'
+            });
+            waypointNumber++;
+        }
+
+    } catch(ex) {
+        Logger.log(ex.message);
+    }
+
 };
 
 /**

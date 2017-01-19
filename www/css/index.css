@@ -85,6 +85,27 @@ body {
     /*min-height: 40vw;*/
 }
 
+#waypoints-map {
+    width:100vw;
+    height:90vh;
+}
+
+.waypoint-overlay{
+    display:block;
+    text-align:center;
+    color:#fff;
+    font-size:5vw;
+    line-height:5vw;
+    opacity:0.8;
+    background:#4477aa;
+    border:solid 3px #336699;
+    border-radius:4px;
+    box-shadow:2px 2px 10px #333;
+    text-shadow:1px 1px 1px #666;
+    padding:0 4px;
+}
+
+
 #log {
     font-family: courier, monospace;
     font-size: 2vw;
