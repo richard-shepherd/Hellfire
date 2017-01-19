@@ -43,13 +43,19 @@ function Game(options) {
 
     // We set up the radar...
     this._radarCanvas = new RadarCanvas(this.options.videoCanvasID);
+
+    // We navigate away from the splash screen...
+    setTimeout(function() {
+        that.swiper.slideTo(Game.Slide.GUNSIGHT);
+    }, 2000);
 }
 
 // An enum for the slides we show...
 Game.Slide = {
-    GUNSIGHT: 0,
-    GPS: 1,
-    LOGS: 2
+    SPLASH_SCREEN: 0,
+    GUNSIGHT: 1,
+    GPS: 2,
+    LOGS: 3
 };
 
 /**
@@ -143,7 +149,7 @@ Game.prototype._onAddPlayerClicked = function() {
 Game.prototype._createSwiper = function() {
     Logger.log("Creating swiper layout.");
     this.swiper = new Swiper('.swiper-container', {
-        initialSlide: Game.Slide.GUNSIGHT,
+        initialSlide: Game.Slide.SPLASH_SCREEN,
         pagination: '.swiper-pagination',
         paginationClickable: true
     });
