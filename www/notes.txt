@@ -1,8 +1,14 @@
 TO-DOs in order
 ---------------
-- Remember how to show a map and zoom it.
 
 
+
+
+
+
+- Waypoint manager
+  - This knows if waypoints have been selected.
+  - It shows the map and stores the waypoints.
 
 
 - Store coordinates of all objects as (x, y) meters from an origin

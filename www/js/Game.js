@@ -39,13 +39,13 @@ function Game(options) {
     this._setupAudioManager();
 
     // We subscribe to our location and compass heading...
-    this._locationProvider = new LocationProvider();
+    this._locationProvider = LocationProvider.getInstance();
 
     // We set up the radar...
     this._radarCanvas = new RadarCanvas(this.options.videoCanvasID);
 
-    // True if waypoints have been set up...
-    this._waypointsSetUp = false;
+    // Waypoints (you run between them)...
+    this.waypointManager = new WaypointManager();
 
     // We navigate away from the splash screen...
     setTimeout(function() {
@@ -189,55 +189,7 @@ Game.prototype._onSlideChanged = function(swiper) {
  */
 Game.prototype._onWaypointsSlideShown = function() {
     try {
-        if(this._waypointsSetUp) {
-            // Waypoints for this game have already been set up...
-            return;
-        }
-        this._waypointsSetUp = true;
-
-        // We disable swiping, as it interferes with moving around
-        // the map...
-        this.swiper.lockSwipes();
-
-        // This is the first time we are showing the waypoints screen.
-        // We show a map, and let the user select waypoints.
-        var that = this;
-
-        var coords = this._locationProvider.position.coords;
-        var map = new GMaps({
-            div: "#waypoints-map",
-            lat: coords.latitude,
-            lng: coords.longitude,
-            zoom: 18,
-            mapType: "satellite",
-            scaleControl: false,
-            zoomControl: false,
-            streetViewControl: false,
-            panControl: false,
-            click: onClick
-        });
-
-        var waypointNumber = 1;
-
-        function onClick(eventData) {
-            var lat = eventData.latLng.lat();
-            var long = eventData.latLng.lng();
-            map.drawOverlay({
-                lat: lat,
-                lng: long,
-                content: '<div class="waypoint-overlay">' + waypointNumber + '</div>',
-                verticalAlign: 'top',
-                horizontalAlign: 'center'
-            });
-            waypointNumber++;
-
-            if(waypointNumber == 4) {
-                that.swiper.unlockSwipes();
-                that.swiper.slideTo(Game.Slide.GUNSIGHT);
-            }
-
-        }
-
+        this.waypointManager.setupWaypoints(this.swiper);
     } catch(ex) {
         Logger.log(ex.message);
     }
