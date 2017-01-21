@@ -40,10 +40,20 @@ Position.fromLatLong = function(latitude, longitude) {
  * Returns the distance in meters between this position and the
  * other position passed in.
  */
-Position.prototype.distanceMeters = function(other) {
+Position.prototype.distanceFrom = function(other) {
     var dx = other.x - this.x;
     var dy = other.y - this.y;
     var distanceSquared = dx*dx + dy*dy;
     var distance = Math.sqrt(distanceSquared);
     return distance;
+};
+
+/**
+ * angleFrom
+ * ---------
+ * Returns the angle of this position from the other passed in,
+ * as radians clockwise from north (y-axis).
+ */
+Position.prototype.angleFrom = function(other) {
+
 };

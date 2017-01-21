@@ -7,20 +7,113 @@
  * Lets you pick waypoints, stores them and helps manage them.
  * @constructor
  */
-function WaypointManager() {
+function WaypointManager(swiper) {
     // The collection of waypoints (Position objects)...
     this.waypoints = [];
+    this.nextWaypointNumber = 1;
 
     // True when waypoints have been set up...
     this.waypointsSetUp = false;
+
+    // The swiper...
+    this.swiper = swiper;
+
+    // The map...
+    this.map = null;
+
+    // Button handlers...
+    var that = this;
+    $("#waypoints-reset-button").click(function() { that.onResetButtonClicked(); });
+    $("#waypoints-play-button").click(function() { that.onPlayButtonClicked(); });
 }
+
+/**
+ * onResetButtonClicked
+ * --------------------
+ */
+WaypointManager.prototype.onResetButtonClicked = function() {
+    try {
+        // We remove old waypoints...
+        this.map.removeOverlays();
+        this.waypoints.length = 0;
+        this.nextWaypointNumber = 1;
+
+        // We center the map on the current position...
+        var coords = LocationProvider.getInstance().position.coords;
+        this.map.setCenter(coords.latitude, coords.longitude);
+
+        // We add a new Start waypoint at the current location...
+        this.addStartWaypoint();
+    } catch(ex) {
+        Logger.log(ex.message);
+    }
+
+};
+
+/**
+ * onPlayButtonClicked
+ * -------------------
+ */
+WaypointManager.prototype.onPlayButtonClicked = function() {
+    try {
+        this.swiper.unlockSwipes();
+        this.swiper.slideTo(Game.Slide.GUNSIGHT);
+    } catch(ex) {
+        Logger.log(ex.message);
+    }
+
+};
+
+/**
+ * addStartWaypoint
+ * ----------------
+ * Adds the Start waypoint in the current position.
+ */
+WaypointManager.prototype.addStartWaypoint = function() {
+    var coords = LocationProvider.getInstance().position.coords;
+    this.addWaypoint(coords.latitude, coords.longitude, "Start");
+};
+
+/**
+ * addWaypoint
+ * -----------
+ * Adds a waypoint for the position specified.
+ */
+WaypointManager.prototype.addWaypoint = function(latitude, longitude, name) {
+    // We get a position and add a waypoint for it...
+    var position = Position.fromLatLong(latitude, longitude);
+    this.waypoints.push(position);
+
+    // We show it on the map...
+    this.map.drawOverlay({
+        lat: latitude,
+        lng: longitude,
+        content: '<div class="waypoint-overlay">' + name + '</div>',
+        verticalAlign: 'top',
+        horizontalAlign: 'center'
+    });
+};
+
+/**
+ * onMapClicked
+ * ------------
+ * Called when the map is clicked.
+ */
+WaypointManager.prototype.onMapClicked = function(eventData) {
+    try {
+        this.addWaypoint(eventData.latLng.lat(), eventData.latLng.lng(), this.nextWaypointNumber);
+        this.nextWaypointNumber++;
+    } catch(ex) {
+        Logger.log(ex.message);
+    }
+};
 
 /**
  * setupWaypoints
  * --------------
  * Lets you choose waypoints on a map.
  */
-WaypointManager.prototype.setupWaypoints = function(swiper) {
+WaypointManager.prototype.setupWaypoints = function() {
     if(this.waypointsSetUp) {
         // Waypoints for this game have already been set up...
         return;
@@ -33,13 +126,12 @@ WaypointManager.prototype.setupWaypoints = function(swiper) {
 
     // We disable swiping, as it interferes with moving around
     // the map...
-    swiper.lockSwipes();
+    this.swiper.lockSwipes();
 
     // We show the map...
-    // We add a starting waypoint at our current position...
     var waypointNumber = 1;
     var coords = LocationProvider.getInstance().position.coords;
-    var map = new GMaps({
+    this.map = new GMaps({
         div: "#waypoints-map",
         lat: coords.latitude,
         lng: coords.longitude,
@@ -49,71 +141,11 @@ WaypointManager.prototype.setupWaypoints = function(swiper) {
         zoomControl: false,
         streetViewControl: false,
         panControl: false,
-        click: onClick
+        click: function(eventData) { that.onMapClicked(eventData); }
     });
 
-    // We update the start position until a waypoint is added.
-    // (We do this as the initial GPS readings may not be good.)
-    var startPosition = Position.currentPosition();
-    var latitude = LocationProvider.getInstance().position.coords.latitude;
-    var longitude = LocationProvider.getInstance().position.coords.longitude;
-    setInterval(function() {
-        // We get the current position...
-        var coords = LocationProvider.getInstance().position.coords;
-        //var latitude = coords.latitude;
-        //var longitude = coords.longitude;
-        var currentPosition = Position.fromLatLong(latitude, longitude);
-
-        // If the current location has moved significantly, we re-center the map...
-        // TODO: If Start marker is off the screen???
-        var mapCenter = map.getCenter();
-        var mapCenterPosition = Position.fromLatLong(mapCenter.lat(), mapCenter.lng());
-        if(currentPosition.distanceMeters(mapCenterPosition) > 5.0) {
-            map.setCenter(latitude, longitude);
-        }
-
-        // If the start position has moved significantly, we reset the
-        // Start waypoint...
-        if(currentPosition.distanceMeters(startPosition) > 2.0) {
-            this.waypoints = [];
-            map.removeOverlays();
-            addWaypoint(latitude, longitude, "Start");
-            startPosition = currentPosition;
-        }
-
-        latitude += 0.000005;
-        longitude += 0.000005;
-    }, 500);
-
-    // We add a starting waypoint at our current position...
-    addWaypoint(coords.latitude, coords.longitude, "Start");
-
-    // Called when the map is clicked...
-    function onClick(eventData) {
-        addWaypoint(eventData.latLng.lat(), eventData.latLng.lng(), waypointNumber);
-        waypointNumber++;
-
-        if(waypointNumber == 4) {
-            swiper.unlockSwipes();
-            swiper.slideTo(Game.Slide.GUNSIGHT);
-        }
-    }
-
-    // Adds a waypoint...
-    function addWaypoint(latitude, longitude, name) {
-        // We get a position and add a waypoint for it...
-        var position = Position.fromLatLong(latitude, longitude);
-        that.waypoints.push(position);
-
-        // We show it on the map...
-        map.drawOverlay({
-            lat: latitude,
-            lng: longitude,
-            content: '<div class="waypoint-overlay">' + name + '</div>',
-            verticalAlign: 'top',
-            horizontalAlign: 'center'
-        });
-    }
+    // We add the Start waypoint...
+    this.addStartWaypoint();
 };
 
 

@@ -45,7 +45,7 @@ function Game(options) {
     this._radarCanvas = new RadarCanvas(this.options.videoCanvasID);
 
     // Waypoints (you run between them)...
-    this.waypointManager = new WaypointManager();
+    this.waypointManager = new WaypointManager(this.swiper);
 
     // We navigate away from the splash screen...
     setTimeout(function() {
@@ -189,7 +189,7 @@ Game.prototype._onSlideChanged = function(swiper) {
  */
 Game.prototype._onWaypointsSlideShown = function() {
     try {
-        this.waypointManager.setupWaypoints(this.swiper);
+        this.waypointManager.setupWaypoints();
     } catch(ex) {
         Logger.log(ex.message);
     }
