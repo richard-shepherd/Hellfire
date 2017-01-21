@@ -50,7 +50,7 @@ function Game(options) {
     // We navigate away from the splash screen...
     setTimeout(function() {
         that.swiper.slideTo(Game.Slide.WAYPOINTS);
-    }, 2000);
+    }, 500);
 }
 
 // An enum for the slides we show...

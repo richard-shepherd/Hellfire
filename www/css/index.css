@@ -87,7 +87,7 @@ body {
 
 #waypoints-map {
     width:100vw;
-    height:90vh;
+    height:80vh;
 }
 
 .waypoint-overlay{
@@ -105,6 +105,50 @@ body {
     padding:0 4px;
 }
 
+#waypoints-reset-button-wrapper {
+    text-align: center;
+    float: left;
+    width: 45vw;
+    height: 10vh;
+}
+#waypoints-reset-button {
+    margin-top: 2%;
+    background-color: #b00000;
+    -webkit-border-radius: 0.8vw;
+    border-radius: 0.8vw;
+    display: inline-block;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 3vh;
+    font-weight: bold;
+    padding: 2vh 0px;
+    text-decoration: none;
+    width: 100%;
+    height: 90%;
+}
+
+#waypoints-play-button-wrapper {
+    text-align: center;
+    float: right;
+    width: 45vw;
+    height: 10vh;
+}
+
+#waypoints-play-button {
+    margin-top: 2%;
+    background-color: #0000b0;
+    -webkit-border-radius: 0.8vw;
+    border-radius: 0.8vw;
+    display: inline-block;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 3vh;
+    font-weight: bold;
+    padding: 2vh 0px;
+    text-decoration: none;
+    width: 100%;
+    height: 90%;
+}
 
 #log {
     font-family: courier, monospace;
