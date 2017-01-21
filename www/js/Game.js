@@ -308,31 +308,31 @@ Game.prototype._getGameItems = function() {
     item1.position.y = currentPosition.y + 50.0;
     gameItems.push(item1);
 
-    // // A weapon...
-    // var item2 = new GameItem_Weapon();
-    // item2.distanceMeters = 150.0;
-    // item2.angleRadians = 0.0;
-    // gameItems.push(item2);
-    //
-    // // More ammo...
-    // var item3 = new GameItem_Ammo();
-    // item3.distanceMeters = 50.0;
-    // item3.angleRadians = 5.0;
-    // gameItems.push(item3);
-    //
-    // // A player...
-    // var item4 = new GameItem_Player(1, new Color(230, 45, 76));
-    // item4.radarInfo.label = "Druss";
-    // item4.distanceMeters = 88.0;
-    // item4.angleRadians = 1.0;
-    // gameItems.push(item4);
-    //
-    // // Another player...
-    // var item5 = new GameItem_Player(1, new Color(23, 45, 226));
-    // item5.radarInfo.label = "Danger Mouse";
-    // item5.distanceMeters = 128.0;
-    // item5.angleRadians = 4.0;
-    // gameItems.push(item5);
+    // A weapon...
+    var item2 = new GameItem_Weapon();
+    item2.position.x = currentPosition.x + 100.0;
+    item2.position.y = currentPosition.y - 100.0;
+    gameItems.push(item2);
+
+    // More ammo...
+    var item3 = new GameItem_Ammo();
+    item3.position.x = currentPosition.x - 150.0;
+    item3.position.y = currentPosition.y - 50.0;
+    gameItems.push(item3);
+
+    // A player...
+    var item4 = new GameItem_Player(1, new Color(230, 45, 76));
+    item4.radarInfo.label = "Druss";
+    item4.position.x = currentPosition.x - 100.0;
+    item4.position.y = currentPosition.y + 80.0;
+    gameItems.push(item4);
+
+    // Another player...
+    var item5 = new GameItem_Player(1, new Color(23, 45, 226));
+    item5.radarInfo.label = "Danger Mouse";
+    item5.position.x = currentPosition.x - 75.0;
+    item5.position.y = currentPosition.y + 0.0;
+    gameItems.push(item5);
 
     this._gameItems = gameItems;
     return gameItems;

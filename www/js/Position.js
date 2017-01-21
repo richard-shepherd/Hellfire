@@ -44,8 +44,7 @@ Position.prototype.distanceFrom = function(other) {
     var dx = this.x - other.x;
     var dy = this.y - other.y;
     var distanceSquared = dx*dx + dy*dy;
-    var distance = Math.sqrt(distanceSquared);
-    return distance;
+    return Math.sqrt(distanceSquared);
 };
 
 /**
@@ -57,5 +56,34 @@ Position.prototype.distanceFrom = function(other) {
 Position.prototype.angleFrom = function(other) {
     var dx = this.x - other.x;
     var dy = this.y - other.y;
-    return Math.atan(dx / dy);
+
+    // Are we on one of the axes?
+    if(dx === 0.0) {
+        return (dy > 0.0) ? 0.0 : Math.PI;
+    }
+    if(dy === 0.0) {
+        return (dx > 0.0) ? Math.PI * 0.5 : Math.PI * 1.5;
+    }
+
+    // We work out which quadrant we're in...
+    var absdx = Math.abs(dx);
+    var absdy = Math.abs(dy);
+    if(dx > 0.0 && dy > 0.0) {
+        // Top-right quadrant...
+        return Math.atan(absdx / absdy);
+    }
+    if(dx > 0.0 && dy < 0.0) {
+        // Bottom-right quadrant...
+        return Math.PI * 0.5 + Math.atan(absdy / absdx);
+    }
+    if(dx < 0.0 && dy < 0.0) {
+        // Bottom-left quadrant...
+        return Math.PI + Math.atan(absdx / absdy);
+    }
+    if(dx < 0.0 && dy > 0.0) {
+        // Top-left quadrant...
+        return Math.PI * 1.5 + Math.atan(absdy / absdx);
+    }
+
+    return 0.0;
 };

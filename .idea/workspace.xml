@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa79a416-bb47-4522-a29f-2ecd1d216e7c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/index.html" afterPath="$PROJECT_DIR$/www/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/Game.js" afterPath="$PROJECT_DIR$/www/js/Game.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/GameItem.js" afterPath="$PROJECT_DIR$/www/js/GameItem.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/Position.js" afterPath="$PROJECT_DIR$/www/js/Position.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/RadarCanvas.js" afterPath="$PROJECT_DIR$/www/js/RadarCanvas.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -58,20 +54,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Game.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Game.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/js/Game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-706">
-              <caret line="251" column="0" lean-forward="true" selection-start-line="251" selection-start-column="0" selection-end-line="251" selection-end-column="0" />
+            <state relative-caret-position="457">
+              <caret line="334" column="0" lean-forward="false" selection-start-line="334" selection-start-column="0" selection-end-line="334" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RadarCanvas.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RadarCanvas.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/RadarCanvas.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
+            <state relative-caret-position="1368">
               <caret line="461" column="19" lean-forward="false" selection-start-line="461" selection-start-column="19" selection-end-line="461" selection-end-column="19" />
               <folding />
             </state>
@@ -81,8 +77,8 @@
       <file leaf-file-name="GameItem.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/GameItem.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="30" column="30" lean-forward="false" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
+            <state relative-caret-position="385">
+              <caret line="30" column="31" lean-forward="false" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -91,8 +87,8 @@
       <file leaf-file-name="PolarPosition.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/PolarPosition.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="20" column="31" lean-forward="false" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
+            <state relative-caret-position="396">
+              <caret line="22" column="39" lean-forward="false" selection-start-line="22" selection-start-column="39" selection-end-line="22" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -101,8 +97,8 @@
       <file leaf-file-name="Position.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/Position.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="367">
-              <caret line="49" column="0" lean-forward="true" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+            <state relative-caret-position="313">
+              <caret line="79" column="34" lean-forward="true" selection-start-line="79" selection-start-column="34" selection-end-line="79" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -146,12 +142,12 @@
         <option value="$PROJECT_DIR$/www/js/LocationProvider.js" />
         <option value="$PROJECT_DIR$/www/css/index.css" />
         <option value="$PROJECT_DIR$/www/js/WaypointManager.js" />
-        <option value="$PROJECT_DIR$/www/js/Position.js" />
         <option value="$PROJECT_DIR$/www/js/GameItem.js" />
         <option value="$PROJECT_DIR$/www/js/PolarPosition.js" />
-        <option value="$PROJECT_DIR$/www/js/Game.js" />
         <option value="$PROJECT_DIR$/www/index.html" />
         <option value="$PROJECT_DIR$/www/js/RadarCanvas.js" />
+        <option value="$PROJECT_DIR$/www/js/Position.js" />
+        <option value="$PROJECT_DIR$/www/js/Game.js" />
       </list>
     </option>
   </component>
@@ -357,12 +353,12 @@
       <workItem from="1484688651889" duration="1770000" />
       <workItem from="1484861354630" duration="14421000" />
       <workItem from="1484987525747" duration="5503000" />
-      <workItem from="1485034057085" duration="1618000" />
+      <workItem from="1485034057085" duration="4213000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36678000" />
+    <option name="totallyTimeSpent" value="39273000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -401,7 +397,7 @@
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="10" />
+      <option name="time" value="12" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -642,30 +638,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/Position.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="49" column="0" lean-forward="true" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/GameItem.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="30" column="30" lean-forward="false" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/PolarPosition.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="20" column="31" lean-forward="false" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
@@ -674,18 +646,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/Game.js">
+    <entry file="file://$PROJECT_DIR$/www/js/GameItem.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-706">
-          <caret line="251" column="0" lean-forward="true" selection-start-line="251" selection-start-column="0" selection-end-line="251" selection-end-column="0" />
+        <state relative-caret-position="385">
+          <caret line="30" column="31" lean-forward="false" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/PolarPosition.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="22" column="39" lean-forward="false" selection-start-line="22" selection-start-column="39" selection-end-line="22" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/RadarCanvas.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
+        <state relative-caret-position="1368">
           <caret line="461" column="19" lean-forward="false" selection-start-line="461" selection-start-column="19" selection-end-line="461" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/Position.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="79" column="34" lean-forward="true" selection-start-line="79" selection-start-column="34" selection-end-line="79" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/Game.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="457">
+          <caret line="334" column="0" lean-forward="false" selection-start-line="334" selection-start-column="0" selection-end-line="334" selection-end-column="0" />
           <folding />
         </state>
       </provider>
