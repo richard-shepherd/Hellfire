@@ -41,8 +41,8 @@ Position.fromLatLong = function(latitude, longitude) {
  * other position passed in.
  */
 Position.prototype.distanceFrom = function(other) {
-    var dx = other.x - this.x;
-    var dy = other.y - this.y;
+    var dx = this.x - other.x;
+    var dy = this.y - other.y;
     var distanceSquared = dx*dx + dy*dy;
     var distance = Math.sqrt(distanceSquared);
     return distance;
@@ -55,5 +55,7 @@ Position.prototype.distanceFrom = function(other) {
  * as radians clockwise from north (y-axis).
  */
 Position.prototype.angleFrom = function(other) {
-
+    var dx = this.x - other.x;
+    var dy = this.y - other.y;
+    return Math.atan(dx / dy);
 };

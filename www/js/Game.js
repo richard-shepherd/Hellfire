@@ -241,12 +241,20 @@ Game.prototype._onVideoDataUpdated =  function (imageData, canvasContext) {
     var centerColors = VideoCanvas.getCenterColors(imageData, canvasContext);
     var matchingPlayer = this.playerManager.getMatchingPlayer(centerColors);
 
+    // We update the position of the game items, and convert them
+    // to polar coordinates relative to our current position...
+    var gameItems = this._getGameItems();
+    var currentPosition = Position.currentPosition();
+    for(var i=0; i<gameItems.length; ++i) {
+        var gameItem = gameItems[i];
+        gameItem.updatePolarPosition(currentPosition);
+    }
+
     // We draw the crosshairs.
     // If we have a matching player, we show the center ring in the
     // player's color...
     var compassHeadingRadians = this._locationProvider.compassHeadingRadians;
     var ringColor = matchingPlayer ? matchingPlayer.color : null;
-    var gameItems = this._getGameItems();
     this._radarCanvas.showRadar(compassHeadingRadians, gameItems, ringColor);
 
     // We show the position info (lat, long, accuracy)...
@@ -289,40 +297,42 @@ Game.prototype._getGameItems = function() {
         return this._gameItems;
     }
 
-    // We create some game items...
+    // We create some game items, in a position relative to the current position...
     var gameItems = [];
+
+    var currentPosition = Position.currentPosition();
 
     // Some ammo...
     var item1 = new GameItem_Ammo();
-    item1.distanceMeters = 100.0;
-    item1.angleRadians = 2.0;
+    item1.position.x = currentPosition.x + 0.0;
+    item1.position.y = currentPosition.y + 50.0;
     gameItems.push(item1);
 
-    // A weapon...
-    var item2 = new GameItem_Weapon();
-    item2.distanceMeters = 150.0;
-    item2.angleRadians = 0.0;
-    gameItems.push(item2);
-
-    // More ammo...
-    var item3 = new GameItem_Ammo();
-    item3.distanceMeters = 50.0;
-    item3.angleRadians = 5.0;
-    gameItems.push(item3);
-
-    // A player...
-    var item4 = new GameItem_Player(1, new Color(230, 45, 76));
-    item4.radarInfo.label = "Druss";
-    item4.distanceMeters = 88.0;
-    item4.angleRadians = 1.0;
-    gameItems.push(item4);
-
-    // Another player...
-    var item5 = new GameItem_Player(1, new Color(23, 45, 226));
-    item5.radarInfo.label = "Danger Mouse";
-    item5.distanceMeters = 128.0;
-    item5.angleRadians = 4.0;
-    gameItems.push(item5);
+    // // A weapon...
+    // var item2 = new GameItem_Weapon();
+    // item2.distanceMeters = 150.0;
+    // item2.angleRadians = 0.0;
+    // gameItems.push(item2);
+    //
+    // // More ammo...
+    // var item3 = new GameItem_Ammo();
+    // item3.distanceMeters = 50.0;
+    // item3.angleRadians = 5.0;
+    // gameItems.push(item3);
+    //
+    // // A player...
+    // var item4 = new GameItem_Player(1, new Color(230, 45, 76));
+    // item4.radarInfo.label = "Druss";
+    // item4.distanceMeters = 88.0;
+    // item4.angleRadians = 1.0;
+    // gameItems.push(item4);
+    //
+    // // Another player...
+    // var item5 = new GameItem_Player(1, new Color(23, 45, 226));
+    // item5.radarInfo.label = "Danger Mouse";
+    // item5.distanceMeters = 128.0;
+    // item5.angleRadians = 4.0;
+    // gameItems.push(item5);
 
     this._gameItems = gameItems;
     return gameItems;

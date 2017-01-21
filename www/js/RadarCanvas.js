@@ -389,7 +389,7 @@ RadarCanvas.prototype._updateGameItemAlpha = function(gameItems) {
     for(var i=0; i<gameItems.length; ++i) {
         var gameItem = gameItems[i];
 
-        if(gameItem.distanceMeters > this.radarDistanceMeters) {
+        if(gameItem.polarPosition.distanceMeters > this.radarDistanceMeters) {
             // The item is out of range...
             gameItem.radarInfo.timeShown = null;
             gameItem.radarInfo.alpha = 0.0;
@@ -399,8 +399,8 @@ RadarCanvas.prototype._updateGameItemAlpha = function(gameItems) {
         // The item is in range...
 
         // We check if the radar has swept past it since we last checked...
-        if(this._radarLineAngleRadians >= gameItem.angleRadians &&
-            (this._previousRadarLineAngleRadians < gameItem.angleRadians ||
+        if(this._radarLineAngleRadians >= gameItem.polarPosition.angleRadians &&
+            (this._previousRadarLineAngleRadians < gameItem.polarPosition.angleRadians ||
             this._radarLineAngleRadians < this._previousRadarLineAngleRadians)) {
             // The radar line has gone past the item...
             gameItem.radarInfo.timeShown = now;
@@ -442,8 +442,9 @@ RadarCanvas.prototype._drawGameItems = function(gameItems, compassHeadingRadians
         ctx.textAlign = "left";
 
         // We show each item...
+        var currentPosition = Position.currentPosition();
         for(var i=0; i<gameItems.length; ++i) {
-            this._drawGameItem(ctx, gameItems[i], compassHeadingRadians);
+            this._drawGameItem(ctx, gameItems[i], compassHeadingRadians, currentPosition);
         }
     } finally {
         ctx.restore();
@@ -455,10 +456,11 @@ RadarCanvas.prototype._drawGameItems = function(gameItems, compassHeadingRadians
  * -------------
  * Shows one game item on the radar.
  */
-RadarCanvas.prototype._drawGameItem = function(ctx, gameItem, compassHeadingRadians) {
+RadarCanvas.prototype._drawGameItem = function(ctx, gameItem, compassHeadingRadians, currentPosition) {
 
     // If the object is too far away, we do not show it...
-    if(gameItem.distanceMeters > this.radarDistanceMeters) {
+    var distance = gameItem.polarPosition.distanceMeters;
+    if(distance > this.radarDistanceMeters) {
         return;
     }
 
@@ -467,11 +469,12 @@ RadarCanvas.prototype._drawGameItem = function(ctx, gameItem, compassHeadingRadi
     // - The angle in radians, clockwise from north.
 
     // We adjust the angle for the compass heading...
-    var angleRadians = gameItem.angleRadians - compassHeadingRadians;
+    var angle = gameItem.polarPosition.angleRadians;
+    angle -= compassHeadingRadians;
 
     // We convert the position to (x, y) coordinates in meters...
-    var xMeters = Math.sin(angleRadians) * gameItem.distanceMeters;
-    var yMeters = Math.cos(angleRadians) * gameItem.distanceMeters;
+    var xMeters = Math.sin(angle) * distance;
+    var yMeters = Math.cos(angle) * distance;
 
     // We convert the distances to pixels...
     var x = xMeters / this.radarDistanceMeters * this._radarRadius;

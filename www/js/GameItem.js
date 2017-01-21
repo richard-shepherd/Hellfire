@@ -6,14 +6,11 @@
  * @constructor
  */
 function GameItem() {
-    // The item's position...
-    this.latitude = 0.0;
-    this.longitude = 0.0;
+    // The item's (x, y) position...
+    this.position = new Position(0, 1000);
 
-    // The item's position relative to us as polar coordinates.
-    // The angle is radians clockwise from north.
-    this.distanceMeters = 1000.0;
-    this.angleRadians = Math.PI / 4.0;
+    // The item's position in polar coordinates...
+    this.polarPosition = new PolarPosition(1000, 0);
 
     // Radar info...
     this.radarInfo = {
@@ -24,6 +21,15 @@ function GameItem() {
         alpha: 0.0
     };
 }
+
+/**
+ * updatePolarPosition
+ * -------------------
+ * Updates the polar position from the (x, y) position and the origin passed in.
+ */
+GameItem.prototype.updatePolarPosition = function(origin) {
+    this.polarPosition.updateFromPosition(this.position, origin);
+};
 
 
 
