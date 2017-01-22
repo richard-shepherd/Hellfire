@@ -11,6 +11,9 @@ function Game(options) {
     // We store the options...
     this.options = options;
 
+    // True once the game is set up and running...
+    this._gameSetUp = false;
+
     // We create the "swiper" which shows the slides...
     this.swiper = null;
     this._createSwiper();
@@ -22,27 +25,11 @@ function Game(options) {
     // Manages the collection of players...
     this.playerManager = new PlayerManager();
 
-    // We set up the camera. This sets up the image-updated callback
-    // which is the main "message loop" of the game...
-    this._setupCamera();
-
     // True if we are adding a player...
     this.addingPlayer = false;
 
-    // We handle the add-player button...
-    this._setupAddPlayerButton();
-
-    // We handle the fire button...
-    this._setupFireButton();
-
-    // We set up the audio-manager and play the background music...
-    this._setupAudioManager();
-
     // We subscribe to our location and compass heading...
     this._locationProvider = LocationProvider.getInstance();
-
-    // We set up the radar...
-    this._radarCanvas = new RadarCanvas(this.options.videoCanvasID);
 
     // Waypoints (you run between them)...
     this.waypointManager = new WaypointManager(this.swiper);
@@ -50,7 +37,7 @@ function Game(options) {
     // We navigate away from the splash screen...
     setTimeout(function() {
         that.swiper.slideTo(Game.Slide.WAYPOINTS);
-    }, 500);
+    }, 2000);
 }
 
 // An enum for the slides we show...
@@ -169,13 +156,14 @@ Game.prototype._createSwiper = function() {
  */
 Game.prototype._onSlideChanged = function(swiper) {
     try {
-        // We enable swiping (some slides may disable it)..
-        this.swiper.unlockSwipes();
-
         // There may be custom code to run as we enter some slides...
         switch(swiper.activeIndex) {
             case Game.Slide.WAYPOINTS:
                 this._onWaypointsSlideShown();
+                break;
+
+            case Game.Slide.GUNSIGHT:
+                this._onGunsightSlideShown();
                 break;
         }
     } catch(ex) {
@@ -193,7 +181,39 @@ Game.prototype._onWaypointsSlideShown = function() {
     } catch(ex) {
         Logger.log(ex.message);
     }
+};
 
+/**
+ * _onGunsightSlideShown
+ * ---------------------
+ */
+Game.prototype._onGunsightSlideShown = function() {
+    try {
+        if(this._gameSetUp) {
+            return;
+        }
+        this._gameSetUp = true;
+
+        // The game has not been set up yet, so we set it up...
+
+        // We set up the camera. This sets up the image-updated callback
+        // which is the main "message loop" of the game...
+        this._setupCamera();
+
+        // We handle the add-player button...
+        this._setupAddPlayerButton();
+
+        // We handle the fire button...
+        this._setupFireButton();
+
+        // We set up the audio-manager and play the background music...
+        this._setupAudioManager();
+
+        // We set up the radar...
+        this._radarCanvas = new RadarCanvas(this.options.videoCanvasID);
+    } catch(ex) {
+        Logger.log(ex.message);
+    }
 };
 
 /**

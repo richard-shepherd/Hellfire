@@ -6,37 +6,52 @@ TO-DOs in order
 
 
 
-- Waypoint manager
-  - This knows if waypoints have been selected.
-  - It shows the map and stores the waypoints.
+
+Moving game items
+-----------------
+- Some items move by themselves
+  - Monsters
+  - Rockets
+  - Fireballs
+
+- updatePosition(timeDelta)
+  - Updates the position based on the time elapsed since the previous update
 
 
-- Store coordinates of all objects as (x, y) meters from an origin
-  - x: west-east (-ve=west, +ve=east)
-  - y: north-south (-ve=south, +ve=north)
 
-- The origin is the first reported position from the GPS
-  - When we get this we also work out the m/deg-lat and m/deg-long
+
+GameItem_Monster base class?
+----------------------------
+- Then GameItem_Monster_Imp etc.
+- Is there any need for the base class?
+- Maybe just make GameItem_Imp to begin with
+
+
+Game area
+---------
+- We need a concept of the game area
+- A rectangle bounded by the waypoints
+  - Plus a margin
+
+
+Adding items
+------------
+- Items randomly appear
+  - Monsters
+  - Ammo
+  - Armour
+
+- They appear at random intervals
+
+- At the start of the game, we create a number of items
+
+- Items should be created in the "game area"
+
 
 - We need a startup class and splash-screen
   - We pre-load a bunch of things, such as images, textures, sounds
   - The splash screen should show this.
   - Only when everything is loaded do we move to the main game screen.
-
-- In the game loop, the first thing we do is to convert the current
-  position to an (x, y) in meters.
-
-- We convert all game-item positions to polar coordinates to show on the radar
-
-- We convert all game-item positoins to lat/long to show on the map
-
-- We have a tab which shows a map
-  - It shows your current position - as a pentagram?
-  - It shows the position of the next waypoint as a map marker
-  - It shows monsters, players, weapons, armour and ammo
-  - You can shrink or zoom the map.
-  - You can set the waypoints
-    - Initial game is: get to waypoint and back again. Fighting monsters.
 
 - Ammo, weapons, armour could have a limited life
   - So you have to run to them

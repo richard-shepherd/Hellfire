@@ -11,7 +11,7 @@ function GameItem_Ammo() {
 
     // Radar info...
     this.radarInfo.showAsCircle = false;
-    this.radarInfo.label = "As";
+    this.radarInfo.label = "Ammo";
 }
 Utils.extend(GameItem, GameItem_Ammo); // Derived from GameItem
 
