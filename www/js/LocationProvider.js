@@ -38,7 +38,7 @@ function LocationProvider() {
 LocationProvider._instance = null;
 LocationProvider.getInstance = function() {
     if(LocationProvider._instance == null) {
-        LocationProvider._instance = new LocationProvider();
+        LocationProvider._instance = new LocationProvider_Keyboard();
     }
     return LocationProvider._instance;
 };
