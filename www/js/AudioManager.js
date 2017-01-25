@@ -21,6 +21,7 @@ function AudioManager(onReadyCallback) {
     // We load the sounds...
     this._loadSound(AudioManager.Sounds.DOOM_MUSIC, "audio/doom.ogg");
     this._loadSound(AudioManager.Sounds.SHOTGUN, "audio/shotgun.ogg");
+    this._loadSound(AudioManager.Sounds.AMMO_PICKUP, "audio/ammo-pickup.ogg");
 
     // We check whether everything has been loaded...
     this._checkIsReady();
@@ -33,7 +34,8 @@ function AudioManager(onReadyCallback) {
  */
 AudioManager.Sounds = {
     DOOM_MUSIC : 0,
-    SHOTGUN : 1
+    SHOTGUN : 1,
+    AMMO_PICKUP: 3
 };
 
 /**

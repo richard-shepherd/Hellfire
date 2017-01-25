@@ -36,8 +36,17 @@ function Game(options) {
     this.waypointManager = new WaypointManager(this.swiper);
     this.gameArea = null;
 
-    // The game items - ammo, weapons, monsters, other players...
-    this.gameItems = [];
+    // The game items - ammo-bags, weapons, monsters, other players.
+    // This is a map of game-item-number -> game-item.
+    // Each item is assigned a unique number.
+    this.gameItems = {};
+    this._nextGameItemNumber = 1;
+
+    // The amm held by the player...
+    this.ammoManager = null;
+
+    // The distance at which collisions are deemed to happen...
+    this.collisionDistanceMeters = 5.0;
 
     // We navigate away from the splash screen...
     setTimeout(function() {
@@ -65,10 +74,10 @@ Game.prototype._setupAudioManager = function() {
 
     // We set up the audio manager...
     var that = this;
-    this._audioManager = new AudioManager(function() {
+    this.audioManager = new AudioManager(function() {
         // Called when all audio has been loaded...
         try {
-            that._audioManager.playBackgroundMusic(AudioManager.Sounds.DOOM_MUSIC, 0.5);
+            that.audioManager.playBackgroundMusic(AudioManager.Sounds.DOOM_MUSIC, 0.5);
             that.fireButton.innerHTML = "Fire";
         } catch(ex) {
             Logger.log(ex.message);
@@ -110,7 +119,7 @@ Game.prototype._setupFireButton = function() {
  */
 Game.prototype._onFireClicked = function() {
     try {
-        this._audioManager.playSound(AudioManager.Sounds.SHOTGUN, 10.0);
+        this.audioManager.playSound(AudioManager.Sounds.SHOTGUN, 10.0);
     } catch(ex) {
         Logger.log(ex.message);
     }
@@ -207,6 +216,11 @@ Game.prototype._onGunsightSlideShown = function() {
         // We add items...
         this._setupGameItems();
 
+        // We give the player some ammo...
+        this.ammoManager = new AmmoManager();
+        this.ammoManager.addAmmo(AmmoManager.AmmoType.PISTOL_BULLET, 10);
+        this.ammoManager.addAmmo(AmmoManager.AmmoType.SHOTGUN_CARTRIDGE, 5);
+
         // We set up the camera. This sets up the image-updated callback
         // which is the main "message loop" of the game...
         this._setupCamera();
@@ -231,19 +245,28 @@ Game.prototype._onGunsightSlideShown = function() {
  * _setupGameItems
  * ---------------
  * Adds the initial collection of items to the game.
- * @private
  */
 Game.prototype._setupGameItems = function() {
     // We clear any existing game items...
-    this.gameItems.length = 0;
+    this.gameItems = {};
 
-    // We add a number of pieces of ammo...
-    var numAmmoItems = 20;
-    for(var i=0; i<numAmmoItems; ++i) {
-        var ammo = new GameItem_Ammo();
-        ammo.position = this.gameArea.getRandomPoint();
-        this.gameItems.push(ammo);
+    // We add a number of amm bags...
+    var numAmmoBags = 8;
+    for(var i=0; i<numAmmoBags; ++i) {
+        var ammoBag = new GameItem_AmmoBag();
+        ammoBag.position = this.gameArea.getRandomPoint();
+        this.addGameItem(ammoBag);
     }
+};
+
+/**
+ * addGameItem
+ * -----------
+ * Adds a game item to our collection, assigning it a unique number.
+ */
+Game.prototype.addGameItem = function(gameItem) {
+    this.gameItems[this._nextGameItemNumber] = gameItem;
+    this._nextGameItemNumber++;
 };
 
 /**
@@ -292,12 +315,25 @@ Game.prototype._onVideoDataUpdated =  function (imageData, canvasContext) {
     var matchingPlayer = this.playerManager.getMatchingPlayer(centerColors);
 
     // We update the position of the game items, and convert them
-    // to polar coordinates relative to our current position...
-    var gameItems = this.gameItems;
+    // to polar coordinates relative to our current position.
     var currentPosition = Position.currentPosition();
-    for(var i=0; i<gameItems.length; ++i) {
-        var gameItem = gameItems[i];
+    for(var key in this.gameItems) {
+        var gameItem = this.gameItems[key];
         gameItem.updatePolarPosition(currentPosition);
+    }
+
+    // We check each item for collisions, and then remove any that need removing...
+    var keysToRemove = [];
+    for(var key in this.gameItems) {
+        var gameItem = this.gameItems[key];
+        var removeItem = gameItem.checkCollision(this);
+        if(removeItem) {
+            keysToRemove.push(key);
+        }
+    }
+    for(var i=0; i<keysToRemove.length; ++i) {
+        var key = keysToRemove[i];
+        delete this.gameItems[key];
     }
 
     // We draw the crosshairs.
@@ -305,10 +341,13 @@ Game.prototype._onVideoDataUpdated =  function (imageData, canvasContext) {
     // player's color...
     var compassHeadingRadians = this._locationProvider.compassHeadingRadians;
     var ringColor = matchingPlayer ? matchingPlayer.color : null;
-    this._radarCanvas.showRadar(compassHeadingRadians, gameItems, ringColor);
+    this._radarCanvas.showRadar(compassHeadingRadians, this.gameItems, ringColor);
 
     // We show the position info (lat, long, accuracy)...
     this._showPositionInfo();
+
+    // Shows the amount of ammo for the current weapon...
+    this._showAmmo();
 
     // If we are in adding-player mode, we show the camera color on the
     // add-player button...
@@ -318,6 +357,16 @@ Game.prototype._onVideoDataUpdated =  function (imageData, canvasContext) {
         var addUserElement = document.getElementById("add-player");
         addUserElement.style.background = centerColorHex;
     }
+};
+
+/**
+ * _showAmmo
+ * ---------
+ * Shows the amount of ammo for the current weapon.
+ */
+Game.prototype._showAmmo = function() {
+    var ammoCount = this.ammoManager.getAmmoCount(AmmoManager.AmmoType.SHOTGUN_CARTRIDGE);
+    $("#ammo-count").text(ammoCount);
 };
 
 /**

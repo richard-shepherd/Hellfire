@@ -75,3 +75,14 @@ Utils.percentageDifference = function(a, b) {
     return percentageDifference;
 };
 
+/**
+ * randomIntBetween
+ * ----------------
+ * Returns a random integer between min and max psased in (inclusively).
+ */
+Utils.randomIntBetween = function(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+

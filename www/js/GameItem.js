@@ -31,5 +31,20 @@ GameItem.prototype.updatePolarPosition = function(origin) {
     this.polarPosition.updateFromPosition(this.position, origin);
 };
 
+/**
+ * checkCollision
+ * --------------
+ * This can be optionally overridden in derived classes.
+ *
+ * Checks if the item has collided with the player (or other items)
+ * and takes action if desired.
+ *
+ * Returns true if the item should be removed from the game, false
+ * otherwise.
+ */
+GameItem.prototype.checkCollision = function(game) {
+    return false;
+};
+
 
 

@@ -386,8 +386,8 @@ RadarCanvas.prototype._updateGameItemAlpha = function(gameItems) {
     var fadeTime = this._radarSweepTimeMilliseconds / 1.5;
 
     // We check each game item...
-    for(var i=0; i<gameItems.length; ++i) {
-        var gameItem = gameItems[i];
+    for(var key in gameItems) {
+        var gameItem = gameItems[key];
 
         if(gameItem.polarPosition.distanceMeters > this.radarDistanceMeters) {
             // The item is out of range...
@@ -443,8 +443,8 @@ RadarCanvas.prototype._drawGameItems = function(gameItems, compassHeadingRadians
 
         // We show each item...
         var currentPosition = Position.currentPosition();
-        for(var i=0; i<gameItems.length; ++i) {
-            this._drawGameItem(ctx, gameItems[i], compassHeadingRadians, currentPosition);
+        for(var key in gameItems) {
+            this._drawGameItem(ctx, gameItems[key], compassHeadingRadians, currentPosition);
         }
     } finally {
         ctx.restore();
