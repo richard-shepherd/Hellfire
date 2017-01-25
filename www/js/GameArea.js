@@ -45,3 +45,16 @@ GameArea.createFromWaypoints = function(waypointManager) {
 
     return gameArea;
 };
+
+/**
+ * getRandomPoint
+ * --------------
+ * Returns a Position object for a random point in the game area.
+ */
+GameArea.prototype.getRandomPoint = function() {
+    var width = this.topRight.x - this.bottomLeft.x;
+    var height = this.topRight.y - this.bottomLeft.y;
+    var x = this.bottomLeft.x + Math.random() * width;
+    var y = this.bottomLeft.y + Math.random() * height;
+    return new Position(x, y);
+};

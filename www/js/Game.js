@@ -36,6 +36,9 @@ function Game(options) {
     this.waypointManager = new WaypointManager(this.swiper);
     this.gameArea = null;
 
+    // The game items - ammo, weapons, monsters, other players...
+    this.gameItems = [];
+
     // We navigate away from the splash screen...
     setTimeout(function() {
         that.swiper.slideTo(Game.Slide.WAYPOINTS);
@@ -201,6 +204,9 @@ Game.prototype._onGunsightSlideShown = function() {
         // We set up the game area from the waypoints...
         this.gameArea = GameArea.createFromWaypoints(this.waypointManager);
 
+        // We add items...
+        this._setupGameItems();
+
         // We set up the camera. This sets up the image-updated callback
         // which is the main "message loop" of the game...
         this._setupCamera();
@@ -218,6 +224,25 @@ Game.prototype._onGunsightSlideShown = function() {
         this._radarCanvas = new RadarCanvas(this.options.videoCanvasID);
     } catch(ex) {
         Logger.log(ex.message);
+    }
+};
+
+/**
+ * _setupGameItems
+ * ---------------
+ * Adds the initial collection of items to the game.
+ * @private
+ */
+Game.prototype._setupGameItems = function() {
+    // We clear any existing game items...
+    this.gameItems.length = 0;
+
+    // We add a number of pieces of ammo...
+    var numAmmoItems = 20;
+    for(var i=0; i<numAmmoItems; ++i) {
+        var ammo = new GameItem_Ammo();
+        ammo.position = this.gameArea.getRandomPoint();
+        this.gameItems.push(ammo);
     }
 };
 
@@ -268,7 +293,7 @@ Game.prototype._onVideoDataUpdated =  function (imageData, canvasContext) {
 
     // We update the position of the game items, and convert them
     // to polar coordinates relative to our current position...
-    var gameItems = this._getGameItems();
+    var gameItems = this.gameItems;
     var currentPosition = Position.currentPosition();
     for(var i=0; i<gameItems.length; ++i) {
         var gameItem = gameItems[i];
@@ -311,55 +336,5 @@ Game.prototype._showPositionInfo = function() {
     $("#position-long").text(coords.longitude);
     $("#position-accuracy").text(coords.accuracy);
     $("#position-num-updates").text(this._locationProvider.numPositionUpdates);
-};
-
-/**
- *
- * @private
- */
-Game.prototype._getGameItems = function() {
-    if(this._gameItems) {
-        return this._gameItems;
-    }
-
-    // We create some game items, in a position relative to the current position...
-    var gameItems = [];
-
-    var currentPosition = Position.currentPosition();
-
-    // Some ammo...
-    var item1 = new GameItem_Ammo();
-    item1.position.x = currentPosition.x + 0.0;
-    item1.position.y = currentPosition.y + 50.0;
-    gameItems.push(item1);
-
-    // A weapon...
-    var item2 = new GameItem_Weapon();
-    item2.position.x = currentPosition.x + 100.0;
-    item2.position.y = currentPosition.y - 100.0;
-    gameItems.push(item2);
-
-    // More ammo...
-    var item3 = new GameItem_Ammo();
-    item3.position.x = currentPosition.x - 150.0;
-    item3.position.y = currentPosition.y - 50.0;
-    gameItems.push(item3);
-
-    // A player...
-    var item4 = new GameItem_Player(1, new Color(230, 45, 76));
-    item4.radarInfo.label = "Druss";
-    item4.position.x = currentPosition.x - 100.0;
-    item4.position.y = currentPosition.y + 80.0;
-    gameItems.push(item4);
-
-    // Another player...
-    var item5 = new GameItem_Player(1, new Color(23, 45, 226));
-    item5.radarInfo.label = "Danger Mouse";
-    item5.position.x = currentPosition.x - 75.0;
-    item5.position.y = currentPosition.y + 0.0;
-    gameItems.push(item5);
-
-    this._gameItems = gameItems;
-    return gameItems;
 };
 
