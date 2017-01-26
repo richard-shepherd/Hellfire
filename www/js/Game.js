@@ -83,31 +83,12 @@ Game.prototype._onVideoDataUpdated =  function (imageData, canvasContext) {
     this.imageData = imageData;
     this.canvasContext = canvasContext;
 
+    // Updates game items, including checking for collisions...
+    this._updateGameItems(deltaMilliseconds);
+
     // We check if we are currently targetted on one of the players...
     var centerColors = VideoCanvas.getCenterColors(imageData, canvasContext);
     var matchingPlayer = this.playerManager.getMatchingPlayer(centerColors);
-
-    // We update the position of the game items, and convert them
-    // to polar coordinates relative to our current position.
-    var currentPosition = Position.currentPosition();
-    for(var key in this.gameItems) {
-        var gameItem = this.gameItems[key];
-        gameItem.updatePolarPosition(currentPosition);
-    }
-
-    // We check each item for collisions, and then remove any that need removing...
-    var keysToRemove = [];
-    for(var key in this.gameItems) {
-        var gameItem = this.gameItems[key];
-        var removeItem = gameItem.checkCollision(this);
-        if(removeItem) {
-            keysToRemove.push(key);
-        }
-    }
-    for(var i=0; i<keysToRemove.length; ++i) {
-        var key = keysToRemove[i];
-        delete this.gameItems[key];
-    }
 
     // We draw the crosshairs.
     // If we have a matching player, we show the center ring in the
@@ -129,6 +110,39 @@ Game.prototype._onVideoDataUpdated =  function (imageData, canvasContext) {
         var centerColorHex = Utils.colorToString(centerColor);
         var addUserElement = document.getElementById("add-player");
         addUserElement.style.background = centerColorHex;
+    }
+};
+
+/**
+ * _updateGameItems
+ * ----------------
+ * Updates game item positions, including converting to polar coordinates
+ * for the radar. Checks for collisions and takes action if they are detected
+ * including removing items if necessary.
+ */
+Game.prototype._updateGameItems = function(deltaMilliseconds) {
+    var key, gameItem;
+
+    // We update the items' positions and convert them
+    // to polar coordinates...
+    var currentPosition = Position.currentPosition();
+    for(key in this.gameItems) {
+        gameItem = this.gameItems[key];
+        gameItem.updatePolarPosition(currentPosition);
+    }
+
+    // We check each item for collisions, and then remove any that need removing...
+    var keysToRemove = [];
+    for(key in this.gameItems) {
+        gameItem = this.gameItems[key];
+        var removeItem = gameItem.checkCollision(this);
+        if(removeItem) {
+            keysToRemove.push(key);
+        }
+    }
+    for(var i=0; i<keysToRemove.length; ++i) {
+        key = keysToRemove[i];
+        delete this.gameItems[key];
     }
 };
 
@@ -188,7 +202,15 @@ Game.prototype._setupFireButton = function() {
  */
 Game.prototype._onFireClicked = function() {
     try {
+        var ammoType = AmmoManager.AmmoType.SHOTGUN_CARTRIDGE;
+        if(this.ammoManager.getAmmoCount(ammoType) === 0) {
+            // There is no ammo left...
+            return;
+        }
+
+        // We fire the weapon...
         this.audioManager.playSound(AudioManager.Sounds.SHOTGUN, 10.0);
+        this.ammoManager.addAmmo(ammoType, -1);
     } catch(ex) {
         Logger.log(ex.message);
     }
