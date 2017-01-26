@@ -19,19 +19,36 @@ Moving game items
 
 
 
+Splash screen and loaders
+-------------------------
+- We need managers / loaders for:
+  - 3D textures
+  - Sounds
+  - Images
+
+- We want to show the progress of loading these items on the splash screen:
+  - Loading images: 2/3
+  - Loading textures: 5/7
+  - Loading audio: 2/8
+
+- They could all call back with the same callback:
+  - Text "Loading images"
+  - Total items
+  - Items loaded
+
+- They can all have a "ready" flag
+
+- They should all be singletons
+
+
+
+
 
 GameItem_Monster base class?
 ----------------------------
 - Then GameItem_Monster_Imp etc.
 - Is there any need for the base class?
 - Maybe just make GameItem_Imp to begin with
-
-
-Game area
----------
-- We need a concept of the game area
-- A rectangle bounded by the waypoints
-  - Plus a margin
 
 
 Adding items
