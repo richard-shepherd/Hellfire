@@ -29,7 +29,6 @@ function RadarCanvas(canvasElementID) {
     // The number of seconds it takes to sweep the entire circle
     // with the radar...
     this._radarSweepTimeMilliseconds = 4000.0;
-    this._lastUpdateTime = Date.now();
 
     // We pre-render some of the items for efficiency...
     this._radarCanvas = this._createCanvas();
@@ -58,14 +57,9 @@ RadarCanvas.prototype._createCanvas = function() {
  * ---------
  * Shows the radar.
  */
-RadarCanvas.prototype.showRadar = function(compassHeadingRadians, gameItems, ringColor) {
+RadarCanvas.prototype.showRadar = function(compassHeadingRadians, gameItems, deltaMilliseconds, ringColor) {
     try {
         var ctx = this._canvasContext;
-
-        // We find the time delta since the last time we drew...
-        var now = Date.now();
-        var deltaMilliseconds = now - this._lastUpdateTime;
-        this._lastUpdateTime = now;
 
         // We find the current size of the canvas...
         this._canvasWidth = ctx.canvas.width;

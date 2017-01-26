@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa79a416-bb47-4522-a29f-2ecd1d216e7c" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/www/js/GameItem_Ammo.js" afterPath="$PROJECT_DIR$/www/js/GameItem_AmmoBag.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/index.html" afterPath="$PROJECT_DIR$/www/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/AudioManager.js" afterPath="$PROJECT_DIR$/www/js/AudioManager.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/Game.js" afterPath="$PROJECT_DIR$/www/js/Game.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/GameItem.js" afterPath="$PROJECT_DIR$/www/js/GameItem.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/RadarCanvas.js" afterPath="$PROJECT_DIR$/www/js/RadarCanvas.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/Utils.js" afterPath="$PROJECT_DIR$/www/js/Utils.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -43,18 +37,18 @@
       <file leaf-file-name="Game.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/Game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="121" column="35" lean-forward="false" selection-start-line="121" selection-start-column="35" selection-end-line="121" selection-end-column="35" />
+            <state relative-caret-position="439">
+              <caret line="116" column="89" lean-forward="false" selection-start-line="116" selection-start-column="89" selection-end-line="116" selection-end-column="89" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RadarCanvas.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="RadarCanvas.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/js/RadarCanvas.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="446" column="0" lean-forward="false" selection-start-line="446" selection-start-column="0" selection-end-line="446" selection-end-column="0" />
+            <state relative-caret-position="432">
+              <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -90,10 +84,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameItem_AmmoBag.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GameItem_AmmoBag.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/GameItem_AmmoBag.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="385">
+            <state relative-caret-position="576">
               <caret line="32" column="66" lean-forward="false" selection-start-line="32" selection-start-column="66" selection-end-line="32" selection-end-column="66" />
               <folding />
             </state>
@@ -172,11 +166,11 @@
         <option value="$PROJECT_DIR$/www/js/GameItem.js" />
         <option value="$PROJECT_DIR$/www/index.html" />
         <option value="$PROJECT_DIR$/www/js/GameItem_Ammo.js" />
-        <option value="$PROJECT_DIR$/www/js/RadarCanvas.js" />
         <option value="$PROJECT_DIR$/www/js/AmmoManager.js" />
         <option value="$PROJECT_DIR$/www/js/AudioManager.js" />
-        <option value="$PROJECT_DIR$/www/js/Game.js" />
         <option value="$PROJECT_DIR$/www/js/GameItem_AmmoBag.js" />
+        <option value="$PROJECT_DIR$/www/js/Game.js" />
+        <option value="$PROJECT_DIR$/www/js/RadarCanvas.js" />
       </list>
     </option>
   </component>
@@ -400,12 +394,12 @@
       <workItem from="1484688651889" duration="1770000" />
       <workItem from="1484861354630" duration="14421000" />
       <workItem from="1484987525747" duration="5503000" />
-      <workItem from="1485034057085" duration="21222000" />
+      <workItem from="1485034057085" duration="22074000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56282000" />
+    <option name="totallyTimeSpent" value="57134000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -722,14 +716,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/RadarCanvas.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="446" column="0" lean-forward="false" selection-start-line="446" selection-start-column="0" selection-end-line="446" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/AmmoManager.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="151">
@@ -746,18 +732,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/Game.js">
+    <entry file="file://$PROJECT_DIR$/www/js/GameItem_AmmoBag.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="121" column="35" lean-forward="false" selection-start-line="121" selection-start-column="35" selection-end-line="121" selection-end-column="35" />
+        <state relative-caret-position="576">
+          <caret line="32" column="66" lean-forward="false" selection-start-line="32" selection-start-column="66" selection-end-line="32" selection-end-column="66" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/GameItem_AmmoBag.js">
+    <entry file="file://$PROJECT_DIR$/www/js/Game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="32" column="66" lean-forward="false" selection-start-line="32" selection-start-column="66" selection-end-line="32" selection-end-column="66" />
+        <state relative-caret-position="439">
+          <caret line="116" column="89" lean-forward="false" selection-start-line="116" selection-start-column="89" selection-end-line="116" selection-end-column="89" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/RadarCanvas.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding />
         </state>
       </provider>

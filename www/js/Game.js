@@ -48,6 +48,9 @@ function Game(options) {
     // The distance at which collisions are deemed to happen...
     this.collisionDistanceMeters = 5.0;
 
+    // Timing for the main loop...
+    this._previousUpdateTime = Date.now();
+
     // We navigate away from the splash screen...
     setTimeout(function() {
         that.swiper.slideTo(Game.Slide.WAYPOINTS);
@@ -61,6 +64,72 @@ Game.Slide = {
     GUNSIGHT: 2,
     GPS: 3,
     LOGS: 4
+};
+
+/**
+ *_onVideoDataUpdated
+ * ------------------
+ * Called when we get a new frame from the camera.
+ * Note: This is the main "message loop" callback for the game.
+ */
+Game.prototype._onVideoDataUpdated =  function (imageData, canvasContext) {
+    // We find the time elapsed since the last iteration.
+    // The timing and movement of various aspects of the game use this.
+    var now = Date.now();
+    var deltaMilliseconds = now - this._previousUpdateTime;
+    this._previousUpdateTime = now;
+
+    // We hold the data as we may need it in other functions...
+    this.imageData = imageData;
+    this.canvasContext = canvasContext;
+
+    // We check if we are currently targetted on one of the players...
+    var centerColors = VideoCanvas.getCenterColors(imageData, canvasContext);
+    var matchingPlayer = this.playerManager.getMatchingPlayer(centerColors);
+
+    // We update the position of the game items, and convert them
+    // to polar coordinates relative to our current position.
+    var currentPosition = Position.currentPosition();
+    for(var key in this.gameItems) {
+        var gameItem = this.gameItems[key];
+        gameItem.updatePolarPosition(currentPosition);
+    }
+
+    // We check each item for collisions, and then remove any that need removing...
+    var keysToRemove = [];
+    for(var key in this.gameItems) {
+        var gameItem = this.gameItems[key];
+        var removeItem = gameItem.checkCollision(this);
+        if(removeItem) {
+            keysToRemove.push(key);
+        }
+    }
+    for(var i=0; i<keysToRemove.length; ++i) {
+        var key = keysToRemove[i];
+        delete this.gameItems[key];
+    }
+
+    // We draw the crosshairs.
+    // If we have a matching player, we show the center ring in the
+    // player's color...
+    var compassHeadingRadians = this._locationProvider.compassHeadingRadians;
+    var ringColor = matchingPlayer ? matchingPlayer.color : null;
+    this._radarCanvas.showRadar(compassHeadingRadians, this.gameItems, deltaMilliseconds, ringColor);
+
+    // We show the position info (lat, long, accuracy)...
+    this._showPositionInfo();
+
+    // Shows the amount of ammo for the current weapon...
+    this._showAmmo();
+
+    // If we are in adding-player mode, we show the camera color on the
+    // add-player button...
+    if(this.addingPlayer) {
+        var centerColor = VideoCanvas.getAverageCenterColor(imageData, canvasContext);
+        var centerColorHex = Utils.colorToString(centerColor);
+        var addUserElement = document.getElementById("add-player");
+        addUserElement.style.background = centerColorHex;
+    }
 };
 
 /**
@@ -296,66 +365,6 @@ Game.prototype._setupCamera = function() {
         document.getElementById(this.options.toggleCameraButtonID).onclick = function() {
             that.camera.toggleCamera();
         };
-    }
-};
-
-/**
- *_onVideoDataUpdated
- * ------------------
- * Called when we get a new frame from the camera.
- * Note: This is the main "message loop" callback for the game.
- */
-Game.prototype._onVideoDataUpdated =  function (imageData, canvasContext) {
-    // We hold the data as we may need it in other functions...
-    this.imageData = imageData;
-    this.canvasContext = canvasContext;
-
-    // We check if we are currently targetted on one of the players...
-    var centerColors = VideoCanvas.getCenterColors(imageData, canvasContext);
-    var matchingPlayer = this.playerManager.getMatchingPlayer(centerColors);
-
-    // We update the position of the game items, and convert them
-    // to polar coordinates relative to our current position.
-    var currentPosition = Position.currentPosition();
-    for(var key in this.gameItems) {
-        var gameItem = this.gameItems[key];
-        gameItem.updatePolarPosition(currentPosition);
-    }
-
-    // We check each item for collisions, and then remove any that need removing...
-    var keysToRemove = [];
-    for(var key in this.gameItems) {
-        var gameItem = this.gameItems[key];
-        var removeItem = gameItem.checkCollision(this);
-        if(removeItem) {
-            keysToRemove.push(key);
-        }
-    }
-    for(var i=0; i<keysToRemove.length; ++i) {
-        var key = keysToRemove[i];
-        delete this.gameItems[key];
-    }
-
-    // We draw the crosshairs.
-    // If we have a matching player, we show the center ring in the
-    // player's color...
-    var compassHeadingRadians = this._locationProvider.compassHeadingRadians;
-    var ringColor = matchingPlayer ? matchingPlayer.color : null;
-    this._radarCanvas.showRadar(compassHeadingRadians, this.gameItems, ringColor);
-
-    // We show the position info (lat, long, accuracy)...
-    this._showPositionInfo();
-
-    // Shows the amount of ammo for the current weapon...
-    this._showAmmo();
-
-    // If we are in adding-player mode, we show the camera color on the
-    // add-player button...
-    if(this.addingPlayer) {
-        var centerColor = VideoCanvas.getAverageCenterColor(imageData, canvasContext);
-        var centerColorHex = Utils.colorToString(centerColor);
-        var addUserElement = document.getElementById("add-player");
-        addUserElement.style.background = centerColorHex;
     }
 };
 
