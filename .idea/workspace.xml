@@ -3,11 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="aa79a416-bb47-4522-a29f-2ecd1d216e7c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/Game.js" afterPath="$PROJECT_DIR$/www/js/Game.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/GameItem.js" afterPath="$PROJECT_DIR$/www/js/GameItem.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/GameItem_AmmoBag.js" afterPath="$PROJECT_DIR$/www/js/GameItem_AmmoBag.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/GameItem_Player.js" afterPath="$PROJECT_DIR$/www/js/GameItem_Player.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/GameItem_Weapon.js" afterPath="$PROJECT_DIR$/www/js/GameItem_Weapon.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/SplashScreen.js" afterPath="$PROJECT_DIR$/www/js/SplashScreen.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/RadarCanvas.js" afterPath="$PROJECT_DIR$/www/js/RadarCanvas.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/ThreeDCanvas.js" afterPath="$PROJECT_DIR$/www/js/ThreeDCanvas.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/ThreeDSprite.js" afterPath="$PROJECT_DIR$/www/js/ThreeDSprite.js" />
     </list>
@@ -30,11 +27,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ThreeDCanvas.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ThreeDCanvas.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/ThreeDCanvas.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="48" column="29" lean-forward="false" selection-start-line="48" selection-start-column="29" selection-end-line="48" selection-end-column="29" />
+            <state relative-caret-position="385">
+              <caret line="52" column="38" lean-forward="false" selection-start-line="52" selection-start-column="38" selection-end-line="52" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TextureManager.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/TextureManager.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-173">
+              <caret line="58" column="0" lean-forward="true" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -44,7 +51,7 @@
         <entry file="file://$PROJECT_DIR$/www/js/ThreeDSprite.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="547">
-              <caret line="47" column="29" lean-forward="false" selection-start-line="47" selection-start-column="29" selection-end-line="47" selection-end-column="29" />
+              <caret line="59" column="2" lean-forward="true" selection-start-line="59" selection-start-column="2" selection-end-line="59" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -60,31 +67,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameItem_AmmoBag.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GameItem_AmmoBag.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/js/GameItem_AmmoBag.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameItem_Weapon.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/GameItem_Weapon.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="8" column="28" lean-forward="false" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-72">
-              <caret line="143" column="39" lean-forward="false" selection-start-line="143" selection-start-column="39" selection-end-line="143" selection-end-column="39" />
+            <state relative-caret-position="421">
+              <caret line="27" column="74" lean-forward="false" selection-start-line="27" selection-start-column="74" selection-end-line="27" selection-end-column="74" />
               <folding />
             </state>
           </provider>
@@ -123,8 +110,18 @@
       <file leaf-file-name="Game.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/Game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="88" column="31" lean-forward="false" selection-start-line="88" selection-start-column="31" selection-end-line="88" selection-end-column="31" />
+            <state relative-caret-position="464">
+              <caret line="314" column="33" lean-forward="true" selection-start-line="314" selection-start-column="33" selection-end-line="314" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RadarCanvas.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/RadarCanvas.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="162">
+              <caret line="9" column="39" lean-forward="false" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -154,6 +151,7 @@
       <find>_audio</find>
       <find>load</find>
       <find>_setupAudioManager</find>
+      <find>_canvasElement</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -180,7 +178,6 @@
         <option value="$PROJECT_DIR$/www/js/Utils.js" />
         <option value="$PROJECT_DIR$/www/js/GameItem_Ammo.js" />
         <option value="$PROJECT_DIR$/www/js/AmmoManager.js" />
-        <option value="$PROJECT_DIR$/www/js/RadarCanvas.js" />
         <option value="$PROJECT_DIR$/www/notes.txt" />
         <option value="$PROJECT_DIR$/www/js/AudioManager.js" />
         <option value="$PROJECT_DIR$/www/index.html" />
@@ -188,11 +185,12 @@
         <option value="$PROJECT_DIR$/www/js/GameItem_Player.js" />
         <option value="$PROJECT_DIR$/www/js/GameItem_Weapon.js" />
         <option value="$PROJECT_DIR$/www/js/SplashScreen.js" />
-        <option value="$PROJECT_DIR$/www/js/ThreeDSprite.js" />
         <option value="$PROJECT_DIR$/www/js/GameItem.js" />
-        <option value="$PROJECT_DIR$/www/js/GameItem_AmmoBag.js" />
         <option value="$PROJECT_DIR$/www/js/Game.js" />
+        <option value="$PROJECT_DIR$/www/js/RadarCanvas.js" />
         <option value="$PROJECT_DIR$/www/js/ThreeDCanvas.js" />
+        <option value="$PROJECT_DIR$/www/js/ThreeDSprite.js" />
+        <option value="$PROJECT_DIR$/www/js/GameItem_AmmoBag.js" />
       </list>
     </option>
   </component>
@@ -416,12 +414,12 @@
       <workItem from="1484688651889" duration="1770000" />
       <workItem from="1484861354630" duration="14421000" />
       <workItem from="1484987525747" duration="5503000" />
-      <workItem from="1485034057085" duration="35797000" />
+      <workItem from="1485034057085" duration="36933000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70857000" />
+    <option name="totallyTimeSpent" value="71993000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -463,7 +461,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/www/js/GameItem_AmmoBag.js</url>
-          <line>39</line>
+          <line>48</line>
           <properties />
           <option name="timeStamp" value="18" />
         </line-breakpoint>
@@ -648,18 +646,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/RadarCanvas.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding>
-            <marker date="1485461207787" expanded="true" signature="12595:14020" ph="{...}" />
-            <marker date="1485461207787" expanded="true" signature="14187:14901" ph="{...}" />
-            <marker date="1485461207787" expanded="true" signature="14197:14860" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/notes.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
@@ -696,14 +682,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/TextureManager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="58" column="0" lean-forward="true" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -748,22 +726,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/GameItem_AmmoBag.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/ThreeDSprite.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="547">
-          <caret line="47" column="29" lean-forward="false" selection-start-line="47" selection-start-column="29" selection-end-line="47" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/Position.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1195">
@@ -780,18 +742,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/TextureManager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-173">
+          <caret line="58" column="0" lean-forward="true" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/Game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="88" column="31" lean-forward="false" selection-start-line="88" selection-start-column="31" selection-end-line="88" selection-end-column="31" />
+        <state relative-caret-position="464">
+          <caret line="314" column="33" lean-forward="true" selection-start-line="314" selection-start-column="33" selection-end-line="314" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/RadarCanvas.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="39" lean-forward="false" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/ThreeDCanvas.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="48" column="29" lean-forward="false" selection-start-line="48" selection-start-column="29" selection-end-line="48" selection-end-column="29" />
+        <state relative-caret-position="385">
+          <caret line="52" column="38" lean-forward="false" selection-start-line="52" selection-start-column="38" selection-end-line="52" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/ThreeDSprite.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="547">
+          <caret line="59" column="2" lean-forward="true" selection-start-line="59" selection-start-column="2" selection-end-line="59" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/GameItem_AmmoBag.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="27" column="74" lean-forward="false" selection-start-line="27" selection-start-column="74" selection-end-line="27" selection-end-column="74" />
           <folding />
         </state>
       </provider>

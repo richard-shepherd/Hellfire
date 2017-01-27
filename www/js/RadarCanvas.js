@@ -6,10 +6,8 @@
  *
  * @constructor
  */
-function RadarCanvas(canvasElementID) {
-    // We find the canvas element and its drawing context...
-    this._canvasElement = document.getElementById(canvasElementID);
-    this._canvasContext = this._canvasElement.getContext("2d");
+function RadarCanvas(canvasContext) {
+    this.canvasContext = canvasContext;
 
     // The canvas size...
     this._canvasWidth = 1.0;
@@ -59,7 +57,7 @@ RadarCanvas.prototype._createCanvas = function() {
  */
 RadarCanvas.prototype.showRadar = function(compassHeadingRadians, gameItems, deltaMilliseconds, ringColor) {
     try {
-        var ctx = this._canvasContext;
+        var ctx = this.canvasContext;
 
         // We find the current size of the canvas...
         this._canvasWidth = ctx.canvas.width;
@@ -94,7 +92,7 @@ RadarCanvas.prototype.showRadar = function(compassHeadingRadians, gameItems, del
         // And we show the radar canvas over the video canvas...
         var xOffset = (this._canvasWidth - this._radarSide) / 2.0;
         var yOffset = (this._canvasHeight - this._radarSide) / 2.0;
-        this._canvasContext.drawImage(this._radarCanvas.canvas, xOffset, yOffset);
+        this.canvasContext.drawImage(this._radarCanvas.canvas, xOffset, yOffset);
 
         // We note the radar-line angle for next time...
         this._previousRadarLineAngleRadians = this._radarLineAngleRadians;

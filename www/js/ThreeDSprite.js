@@ -47,3 +47,14 @@ ThreeDSprite.prototype.setPosition = function(x, y) {
     this.sprite.position.x = x;
     this.sprite.position.z = -1.0 * y;
 };
+
+/**
+ * rotate
+ * ------
+ * Rotates the sprite by values (in radians) passed in.
+ */
+ThreeDSprite.prototype.rotate = function(x, y, z) {
+    this.sprite.rotation.x += x;
+    this.sprite.rotation.y += z;
+    this.sprite.rotation.z += y;
+};

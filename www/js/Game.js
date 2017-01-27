@@ -290,7 +290,9 @@ Game.prototype._onGunsightSlideShown = function() {
         this.gameArea = GameArea.createFromWaypoints(this.waypointManager);
 
         // We create the 3D canvas...
-        this.threeDCanvas = new ThreeDCanvas();
+        var canvasElement = document.getElementById(this.options.videoCanvasID);
+        var canvasContext = canvasElement.getContext("2d");
+        this.threeDCanvas = new ThreeDCanvas(canvasContext);
 
         // We add items...
         this._setupGameItems();
@@ -311,7 +313,7 @@ Game.prototype._onGunsightSlideShown = function() {
         this._setupFireButton();
 
         // We set up the radar...
-        this._radarCanvas = new RadarCanvas(this.options.videoCanvasID);
+        this._radarCanvas = new RadarCanvas(canvasContext);
     } catch(ex) {
         Logger.log(ex.message);
     }

@@ -4,7 +4,9 @@
  * Manages a three.js 3D canvas.
  * @constructor
  */
-function ThreeDCanvas() {
+function ThreeDCanvas(canvasContext) {
+    this.canvasContext = canvasContext;
+
     // We create the screen and the camera...
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera( 140, 1.0, 0.1, 1000 );
@@ -46,8 +48,9 @@ ThreeDCanvas.prototype.render = function() {
     this.camera.position.z = -1.0 * currentPosition.y;
     this.camera.rotation.y = -1.0 * LocationProvider.getInstance().compassHeadingRadians;
 
-    // We render the scene...
+    // We render the scene and show it on the canvas...
     this.renderer.render(this.scene, this.camera);
+    this.canvasContext.drawImage(this.renderer.domElement, 0, 0);
 };
 
 /**

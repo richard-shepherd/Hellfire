@@ -15,10 +15,19 @@ function GameItem_AmmoBag(game) {
     // The sprite...
     this.sprite = game.threeDCanvas.createSprite(
         this.position.x, this.position.y,
-        4.0, 2.0,
+        2.0, 1.0,
         TextureManager.TextureType.AMMO_BAG);
 }
 Utils.extend(GameItem, GameItem_AmmoBag); // Derived from GameItem
+
+/**
+ * updatePosition
+ * --------------
+ */
+GameItem_AmmoBag.prototype.updatePosition = function(deltaMilliseconds) {
+    // We do not change the position of the object, but we do rotate it...
+    this.sprite.rotate(0, 0, deltaMilliseconds / 1000.0);
+};
 
 /**
  * checkCollision
