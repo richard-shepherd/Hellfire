@@ -30,7 +30,7 @@ GameItem.prototype.checkCollision = function(game) {
 
     // We have collided with the ammo bag.
     // We add ammo to the player...
-    game.audioManager.playSound(AudioManager.Sounds.AMMO_PICKUP, 20.0);
+    AudioManager.getInstance().playSound(AudioManager.Sounds.AMMO_PICKUP, 20.0);
     game.ammoManager.addAmmoFromBag();
 
     // We return true to remove this ammo bag from the game...

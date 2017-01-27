@@ -17,6 +17,7 @@ function Game(options) {
     // We create the "swiper" which shows the slides...
     this.swiper = null;
     this._createSwiper();
+    this._splashScreen = new SplashScreen(this.swiper);
 
     // The most recent data from the camera...
     this.imageData = null;
@@ -50,11 +51,6 @@ function Game(options) {
 
     // Timing for the main loop...
     this._previousUpdateTime = Date.now();
-
-    // We navigate away from the splash screen...
-    setTimeout(function() {
-        that.swiper.slideTo(Game.Slide.WAYPOINTS);
-    }, 2000);
 }
 
 // An enum for the slides we show...
@@ -147,28 +143,6 @@ Game.prototype._updateGameItems = function(deltaMilliseconds) {
 };
 
 /**
- * _setupAudioManager
- * ------------------
- * Sets up the audio manager.
- */
-Game.prototype._setupAudioManager = function() {
-    // We show that we are loading sounds...
-    this.fireButton.innerHTML = "Loading audio";
-
-    // We set up the audio manager...
-    var that = this;
-    this.audioManager = new AudioManager(function() {
-        // Called when all audio has been loaded...
-        try {
-            that.audioManager.playBackgroundMusic(AudioManager.Sounds.DOOM_MUSIC, 0.5);
-            that.fireButton.innerHTML = "Fire";
-        } catch(ex) {
-            Logger.log(ex.message);
-        }
-    });
-};
-
-/**
  * _setupAddPlayerButton
  * ---------------------
  * Sets up handling of the add-player button.
@@ -209,7 +183,7 @@ Game.prototype._onFireClicked = function() {
         }
 
         // We fire the weapon...
-        this.audioManager.playSound(AudioManager.Sounds.SHOTGUN, 10.0);
+        AudioManager.getInstance().playSound(AudioManager.Sounds.SHOTGUN, 10.0);
         this.ammoManager.addAmmo(ammoType, -1);
     } catch(ex) {
         Logger.log(ex.message);
@@ -301,6 +275,9 @@ Game.prototype._onGunsightSlideShown = function() {
 
         // The game has not been set up yet, so we set it up...
 
+        // We play the music...
+        AudioManager.getInstance().playBackgroundMusic(AudioManager.Sounds.DOOM_MUSIC, 0.5);
+
         // We set up the game area from the waypoints...
         this.gameArea = GameArea.createFromWaypoints(this.waypointManager);
 
@@ -321,9 +298,6 @@ Game.prototype._onGunsightSlideShown = function() {
 
         // We handle the fire button...
         this._setupFireButton();
-
-        // We set up the audio-manager and play the background music...
-        this._setupAudioManager();
 
         // We set up the radar...
         this._radarCanvas = new RadarCanvas(this.options.videoCanvasID);

@@ -56,6 +56,18 @@ TextureManager.prototype.initialize = function(progressCallback) {
 };
 
 /**
+ * getProgress
+ * -----------
+ */
+TextureManager.prototype.getProgress = function() {
+    return {
+        text: "Loading textures",
+        total: this._numTextures,
+        loaded: this._texturesLoaded
+    };
+};
+
+/**
  * getTexture
  * ----------
  * Returns the texture requested.
@@ -78,12 +90,7 @@ TextureManager.prototype._loadTexture = function(textureType, filename) {
         that._textures[textureType] = texture;
         that._texturesLoaded++;
         if(that._progressCallback !== null) {
-            var info = {
-                text: "Loading textures",
-                total: that._numTextures,
-                loaded: that._texturesLoaded
-            };
-            that._progressCallback(info);
+            that._progressCallback(that);
         }
     });
 };

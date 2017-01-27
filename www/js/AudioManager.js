@@ -2,10 +2,12 @@
  * AudioManager
  * ------------
  * Manages a collection of music and audio files and lets you play them.
+ *
+ * This class is a singleton.
  * @constructor
  */
-function AudioManager(onReadyCallback) {
-    this._onReadyCallback = onReadyCallback;
+function AudioManager() {
+    this._progressCallback = null;
 
     // The collection of sounds we can play,
     // keyed by the Sounds enum...
@@ -17,14 +19,6 @@ function AudioManager(onReadyCallback) {
     // The number of sounds we are loading and the number we have loaded...
     this._numSoundsToLoad = 0;
     this._numSoundsLoaded = 0;
-
-    // We load the sounds...
-    this._loadSound(AudioManager.Sounds.DOOM_MUSIC, "audio/doom.ogg");
-    this._loadSound(AudioManager.Sounds.SHOTGUN, "audio/shotgun.ogg");
-    this._loadSound(AudioManager.Sounds.AMMO_PICKUP, "audio/ammo-pickup.ogg");
-
-    // We check whether everything has been loaded...
-    this._checkIsReady();
 }
 
 /**
@@ -39,23 +33,46 @@ AudioManager.Sounds = {
 };
 
 /**
- * _checkIsReady
- * -------------
- * Checks whether all data has been loaded.
+ * The singleton instance.
  */
-AudioManager.prototype._checkIsReady = function () {
-    if(this._numSoundsToLoad === this._numSoundsLoaded) {
-        this._onReadyCallback();
+AudioManager._instance = null;
+
+/**
+ * getInstance
+ * -----------
+ * Returns the singleton instance.
+ */
+AudioManager.getInstance = function() {
+    if(AudioManager._instance === null) {
+        AudioManager._instance = new AudioManager();
     }
+    return AudioManager._instance;
 };
 
 /**
- * ready
- * -----
- * True when all sounds have been loaded.
+ * initialize
+ * ----------
+ * Starts loading audio.
  */
-AudioManager.prototype.ready = function() {
-    return this._numSoundsLoaded === this._numSoundsToLoad;
+AudioManager.prototype.initialize = function(progressCallback) {
+    this._progressCallback = progressCallback;
+
+    // We load the sounds...
+    this._loadSound(AudioManager.Sounds.DOOM_MUSIC, "audio/doom.ogg");
+    this._loadSound(AudioManager.Sounds.SHOTGUN, "audio/shotgun.ogg");
+    this._loadSound(AudioManager.Sounds.AMMO_PICKUP, "audio/ammo-pickup.ogg");
+};
+
+/**
+ * getProgress
+ * -----------
+ */
+AudioManager.prototype.getProgress = function() {
+    return {
+        text: "Loading audio",
+        total: this._numSoundsToLoad,
+        loaded: this._numSoundsLoaded
+    }
 };
 
 /**
@@ -124,7 +141,9 @@ AudioManager.prototype._loadSound = function(sound, path) {
     howl.once("load", function() {
         try {
             that._numSoundsLoaded++;
-            that._checkIsReady();
+            if(that._progressCallback !== null) {
+                that._progressCallback(that);
+            }
         } catch(ex) {
             Logger.log(ex.message);
         }
