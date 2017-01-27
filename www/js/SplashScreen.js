@@ -79,6 +79,6 @@ SplashScreen.prototype._showProgress = function() {
         setTimeout(function() {
             that.swiper.unlockSwipes();
             that.swiper.slideTo(Game.Slide.WAYPOINTS);
-        }, 1000);
+        }, 2000);
     }
 };
