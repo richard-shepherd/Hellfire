@@ -19,6 +19,9 @@ function Game(options) {
     this._createSwiper();
     this._splashScreen = new SplashScreen(this.swiper);
 
+    // The 3D canvas...
+    this.threeDCanvas = null;
+
     // The most recent data from the camera...
     this.imageData = null;
     this.canvasContext = null;
@@ -82,6 +85,9 @@ Game.prototype._onVideoDataUpdated =  function (imageData, canvasContext) {
     // Updates game items, including checking for collisions...
     this._updateGameItems(deltaMilliseconds);
 
+    // We show the 3D canvas...
+    this.threeDCanvas.render();
+
     // We check if we are currently targetted on one of the players...
     var centerColors = VideoCanvas.getCenterColors(imageData, canvasContext);
     var matchingPlayer = this.playerManager.getMatchingPlayer(centerColors);
@@ -124,14 +130,16 @@ Game.prototype._updateGameItems = function(deltaMilliseconds) {
     var currentPosition = Position.currentPosition();
     for(key in this.gameItems) {
         gameItem = this.gameItems[key];
+        gameItem.updatePosition(deltaMilliseconds);
         gameItem.updatePolarPosition(currentPosition);
+        gameItem.updateSprite();
     }
 
     // We check each item for collisions, and then remove any that need removing...
     var keysToRemove = [];
     for(key in this.gameItems) {
         gameItem = this.gameItems[key];
-        var removeItem = gameItem.checkCollision(this);
+        var removeItem = gameItem.checkCollision();
         if(removeItem) {
             keysToRemove.push(key);
         }
@@ -281,6 +289,9 @@ Game.prototype._onGunsightSlideShown = function() {
         // We set up the game area from the waypoints...
         this.gameArea = GameArea.createFromWaypoints(this.waypointManager);
 
+        // We create the 3D canvas...
+        this.threeDCanvas = new ThreeDCanvas();
+
         // We add items...
         this._setupGameItems();
 
@@ -318,7 +329,7 @@ Game.prototype._setupGameItems = function() {
     // We add a number of amm bags...
     var numAmmoBags = 8;
     for(var i=0; i<numAmmoBags; ++i) {
-        var ammoBag = new GameItem_AmmoBag();
+        var ammoBag = new GameItem_AmmoBag(this);
         ammoBag.position = this.gameArea.getRandomPoint();
         this.addGameItem(ammoBag);
     }

@@ -4,13 +4,19 @@
  * Represents an ammo bag.
  * @constructor
  */
-function GameItem_AmmoBag() {
+function GameItem_AmmoBag(game) {
     // We call the base class's constructor...
-    GameItem.call(this);
+    GameItem.call(this, game);
 
     // Radar info...
     this.radarInfo.showAsCircle = false;
     this.radarInfo.label = "Ammo";
+
+    // The sprite...
+    this.sprite = game.threeDCanvas.createSprite(
+        this.position.x, this.position.y,
+        4.0, 2.0,
+        TextureManager.TextureType.AMMO_BAG);
 }
 Utils.extend(GameItem, GameItem_AmmoBag); // Derived from GameItem
 
@@ -22,8 +28,8 @@ Utils.extend(GameItem, GameItem_AmmoBag); // Derived from GameItem
  * Returns true if the item should be removed from the game, false
  * otherwise.
  */
-GameItem.prototype.checkCollision = function(game) {
-    if(this.polarPosition.distanceMeters > game.collisionDistanceMeters) {
+GameItem_AmmoBag.prototype.checkCollision = function() {
+    if(this.polarPosition.distanceMeters > this.game.collisionDistanceMeters) {
         // We have not collided with the ammo bag...
         return false;
     }
@@ -31,7 +37,7 @@ GameItem.prototype.checkCollision = function(game) {
     // We have collided with the ammo bag.
     // We add ammo to the player...
     AudioManager.getInstance().playSound(AudioManager.Sounds.AMMO_PICKUP, 20.0);
-    game.ammoManager.addAmmoFromBag();
+    this.game.ammoManager.addAmmoFromBag();
 
     // We return true to remove this ammo bag from the game...
     return true;

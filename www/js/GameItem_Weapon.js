@@ -5,9 +5,9 @@
  *
  * @constructor
  */
-function GameItem_Weapon() {
+function GameItem_Weapon(game) {
     // We call the base class's constructor...
-    GameItem.call(this);
+    GameItem.call(this, game);
 
     // Radar info...
     this.radarInfo.showAsCircle = false;

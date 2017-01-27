@@ -5,12 +5,18 @@
  * well as items in the environment.
  * @constructor
  */
-function GameItem() {
+function GameItem(game) {
+    // The game object...
+    this.game = game;
+
     // The item's (x, y) position...
     this.position = new Position(0, 1000);
 
     // The item's position in polar coordinates...
     this.polarPosition = new PolarPosition(1000, 0);
+
+    // The item's sprite (if it has one)...
+    this.sprite = null;
 
     // Radar info...
     this.radarInfo = {
@@ -21,6 +27,27 @@ function GameItem() {
         alpha: 0.0
     };
 }
+
+/**
+ * updatePosition
+ * --------------
+ * Can be overridden in derived classes to update the item's position.
+ */
+GameItem.prototype.updatePosition = function(deltaMilliseconds) {
+};
+
+/**
+ * updateSprite
+ * ------------
+ * Updates the sprite's position and orientation from the position
+ * and orientation of the item.
+ */
+GameItem.prototype.updateSprite = function() {
+    if(this.sprite === null) {
+        return;
+    }
+    this.sprite.setPosition(this.position.x, this.position.y);
+};
 
 /**
  * updatePolarPosition
@@ -42,7 +69,7 @@ GameItem.prototype.updatePolarPosition = function(origin) {
  * Returns true if the item should be removed from the game, false
  * otherwise.
  */
-GameItem.prototype.checkCollision = function(game) {
+GameItem.prototype.checkCollision = function() {
     return false;
 };
 
