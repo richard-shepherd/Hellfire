@@ -9,8 +9,8 @@ function ThreeDCanvas(canvasContext) {
 
     // We create the screen and the camera...
     this.scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera( 140, 1.0, 0.1, 1000 );
-    this.camera.position.y = 2.0;
+    this.camera = new THREE.PerspectiveCamera( 120, 1.0, 0.1, 1000 );
+    this.camera.position.y = 4.0;
 
     // The size of the canvas...
     this.width = 300;

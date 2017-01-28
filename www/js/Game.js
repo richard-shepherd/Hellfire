@@ -328,13 +328,18 @@ Game.prototype._setupGameItems = function() {
     // We clear any existing game items...
     this.gameItems = {};
 
-    // We add a number of amm bags...
-    var numAmmoBags = 3;
-    for(var i=0; i<numAmmoBags; ++i) {
-        var ammoBag = new GameItem_AmmoBag(this);
-        ammoBag.position = this.gameArea.getRandomPoint();
-        this.addGameItem(ammoBag);
+    // Adds a number of items in random locations within the game-area...
+    function addItemsInRandomLocations(game, itemType, numItems) {
+        for(var i=0; i<numItems; ++i) {
+            var item = new itemType(game);
+            item.position = game.gameArea.getRandomPoint();
+            game.addGameItem(item);
+        }
     }
+
+    // We add some items...
+    //addItemsInRandomLocations(this, GameItem_AmmoBag, 6);
+    addItemsInRandomLocations(this, GameItem_Monster_Imp, 6);
 };
 
 /**

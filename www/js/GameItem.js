@@ -59,6 +59,56 @@ GameItem.prototype.updatePolarPosition = function(origin) {
 };
 
 /**
+ * moveTowardsPlayer
+ * -----------------
+ * Moves the item towards the player at the speed specified.
+ */
+GameItem.prototype.moveTowardsPlayer = function(metersPerSecond, deltaMilliseconds, minimumDistance) {
+    // We check if the item is already near enough...
+    if(this.polarPosition.distanceMeters < minimumDistance) {
+        return;
+    }
+
+    // We find the direction to move in...
+    var playerPosition = Position.currentPosition();
+    var dx = playerPosition.x - this.position.x;
+    var dy = playerPosition.y - this.position.y;
+    var directionX = Math.sign(dx);
+    var directionY = Math.sign(dy);
+
+    // We move in the desired direction...
+    var deltaSeconds = deltaMilliseconds / 1000.0;
+    var movementX = directionX * metersPerSecond * deltaSeconds;
+    var movementY = directionY * metersPerSecond * deltaSeconds;
+    if(Math.abs(movementX) < Math.abs(dx)) {
+        this.position.x += movementX;
+    }
+    if(Math.abs(movementY) < Math.abs(dy)) {
+        this.position.y += movementY;
+    }
+};
+
+/**
+ * makeSpriteFacePlayer
+ * --------------------
+ * Sets the sprite to face the player.
+ */
+GameItem.prototype.makeSpriteFacePlayer = function() {
+    if(this.sprite === null) {
+        return;
+    }
+
+    var playerPosition = Position.currentPosition();
+    var dx = playerPosition.x - this.position.x;
+    var dy = playerPosition.y - this.position.y;
+    var angle = 0.0;
+    if(dy !== 0.0) {
+        angle = -1.0 * Math.atan(dx/dy);
+    }
+    this.sprite.setRotation(0, 0, angle);
+};
+
+/**
  * checkCollision
  * --------------
  * This can be optionally overridden in derived classes.

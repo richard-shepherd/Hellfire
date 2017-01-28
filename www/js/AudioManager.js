@@ -29,7 +29,8 @@ function AudioManager() {
 AudioManager.Sounds = {
     DOOM_MUSIC : 0,
     SHOTGUN : 1,
-    AMMO_PICKUP: 3
+    AMMO_PICKUP: 3,
+    IMP_ATTACK: 4
 };
 
 /**
@@ -61,6 +62,7 @@ AudioManager.prototype.initialize = function(progressCallback) {
     this._loadSound(AudioManager.Sounds.DOOM_MUSIC, "audio/doom.ogg");
     this._loadSound(AudioManager.Sounds.SHOTGUN, "audio/shotgun.ogg");
     this._loadSound(AudioManager.Sounds.AMMO_PICKUP, "audio/ammo-pickup.ogg");
+    this._loadSound(AudioManager.Sounds.IMP_ATTACK, "audio/imp-attack.ogg");
 };
 
 /**
@@ -106,11 +108,36 @@ AudioManager.prototype.setBackgroundMusicVolume = function(volume) {
  * playSound
  * ---------
  * Plays the requested sound once.
+ * Returns the ID of the sound.
  */
 AudioManager.prototype.playSound = function(sound, volume) {
     var howl = this.sounds[sound];
+    howl.loop(false);
     howl.volume(volume);
-    howl.play();
+    return howl.play();
+};
+
+/**
+ * playLoop
+ * --------
+ * Plays the requested sound in a loop.
+ * Returns the ID of the sound.
+ */
+AudioManager.prototype.playLoop = function(sound, volume) {
+    var howl = this.sounds[sound];
+    howl.loop(true);
+    howl.volume(volume);
+    return howl.play();
+};
+
+/**
+ * stopSound
+ * ---------
+ * Stops the sound.
+ */
+AudioManager.prototype.stopSound = function(sound, id) {
+    var howl = this.sounds[sound];
+    howl.stop(id);
 };
 
 /**
