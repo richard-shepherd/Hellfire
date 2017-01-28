@@ -34,7 +34,7 @@ function ThreeDSprite(threeDCanvas, x, y, width, height, textureType) {
  * Removes this sprite from the scene.
  */
 ThreeDSprite.prototype.dispose = function() {
-    this.threeDCanvas.remove(this.sprite);
+    this.threeDCanvas.scene.remove(this.sprite);
 };
 
 /**

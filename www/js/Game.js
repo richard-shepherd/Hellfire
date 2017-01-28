@@ -329,7 +329,7 @@ Game.prototype._setupGameItems = function() {
     this.gameItems = {};
 
     // We add a number of amm bags...
-    var numAmmoBags = 8;
+    var numAmmoBags = 1;
     for(var i=0; i<numAmmoBags; ++i) {
         var ammoBag = new GameItem_AmmoBag(this);
         ammoBag.position = this.gameArea.getRandomPoint();
