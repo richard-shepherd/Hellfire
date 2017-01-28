@@ -15,7 +15,7 @@ function GameItem_AmmoBag(game) {
     // The sprite...
     this.sprite = game.threeDCanvas.createSprite(
         this.position.x, this.position.y,
-        2.0, 1.0,
+        8.0, 8.0,
         TextureManager.TextureType.AMMO_BAG);
 }
 Utils.extend(GameItem, GameItem_AmmoBag); // Derived from GameItem

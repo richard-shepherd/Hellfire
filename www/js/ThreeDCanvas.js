@@ -10,6 +10,7 @@ function ThreeDCanvas(canvasContext) {
     // We create the screen and the camera...
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera( 140, 1.0, 0.1, 1000 );
+    this.camera.position.y = 2.0;
 
     // The size of the canvas...
     this.width = 300;
@@ -48,7 +49,14 @@ ThreeDCanvas.prototype.render = function() {
     this.camera.position.z = -1.0 * currentPosition.y;
     this.camera.rotation.y = -1.0 * LocationProvider.getInstance().compassHeadingRadians;
 
+    // We set the aspect ratio...
+    var canvas = this.canvasContext.canvas;
+    var width = canvas.width;
+    var height = canvas.height;
+    this.camera.aspect = width / height;
+
     // We render the scene and show it on the canvas...
+    this.renderer.setSize(width, height);
     this.renderer.render(this.scene, this.camera);
     this.canvasContext.drawImage(this.renderer.domElement, 0, 0);
 };
