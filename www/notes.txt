@@ -7,6 +7,18 @@ TO-DOs in order
 
 Shooting
 --------
+- Shooting by looking at the angle to the enemy
+  - Got to be careful when enemies are close
+  - Then angle is just the angle to the enemy *center*
+  - But when they are close you should be able to
+    hit any part... not just the center.
+
+- GameItems (monster etc) should have
+  - getShotSound()
+  - getDeathSound()
+  - Base class returns null.
+  - These are played when the item is shot / dies.
+
 - You shoot using the current weapon
   - Is this e.g. a GameItem_Shotgun?
     - Let's say NO

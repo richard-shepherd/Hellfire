@@ -6,11 +6,17 @@
  * @constructor
  */
 function GameItem(params) {
+    // True if the item has been disposed...
+    
+
     // The game object...
     this.game = params.game;
 
     // True if the item is an enemy...
     this.isEnemy = params.isEnemy;
+
+    // The item's strength (decreases as it is shot / hit)...
+    this.strength = 100.0;
 
     // The item's (x, y) position...
     this.position = new Position(0, 1000);
@@ -30,6 +36,16 @@ function GameItem(params) {
         alpha: 0.0
     };
 }
+
+/**
+ * dispose
+ * -------
+ * Called to clean up the item.
+ * Derived classes should call the base class version after doing their
+ * own dispose.
+ */
+GameItem.prototype.dispose = function() {
+};
 
 /**
  * updatePosition
@@ -126,5 +142,15 @@ GameItem.prototype.checkCollision = function() {
     return false;
 };
 
-
+/**
+ * onShot
+ * ------
+ * Called when the item is shot.
+ * Returns true if the item (monster etc) has died or should be
+ * removed, false otherwise.
+ */
+GameItem.prototype.onShot = function(force) {
+    this.strength -= force;
+    return (this.strength <= 0.0);
+};
 
