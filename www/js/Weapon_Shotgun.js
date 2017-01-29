@@ -27,6 +27,6 @@ Weapon_Shotgun.prototype.fire = function() {
     this.game.ammoManager.addAmmo(ammoType, -1);
 
     // We fire the weapon...
-    this.shootNearestEnemy(0.1, 1000, 0.0);
+    this.shootNearestEnemy(1000, 0.0);
 };
 

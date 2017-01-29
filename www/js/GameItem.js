@@ -12,6 +12,9 @@ function GameItem(params) {
     // The game object...
     this.game = params.game;
 
+    // The key used by the Game's map of game-items...
+    this.key = null;
+
     // True if the item is an enemy...
     this.isEnemy = params.isEnemy;
 
@@ -49,6 +52,9 @@ GameItem.prototype.dispose = function() {
         return;
     }
 
+    // We dispose derived classes...
+    this.derivedDispose();
+
     if(this.sprite !== null) {
         // We remove the sprite...
         this.sprite.dispose();
@@ -56,6 +62,32 @@ GameItem.prototype.dispose = function() {
     }
 
     this.isDisposed = true;
+};
+
+/**
+ * derivedDispose
+ * --------------
+ * Implement this in derived classes.
+ */
+GameItem.prototype.derivedDispose = function() {
+};
+
+/**
+ * setSprite
+ * ---------
+ * Creates and sets up a sprite for this item.
+ */
+GameItem.prototype.setSprite = function(width, height, textureType) {
+    // We add a sprite to the 3D canvas...
+    this.sprite = this.game.threeDCanvas.createSprite(
+        this.position.x, this.position.y,
+        width, height,
+        textureType);
+
+    // And we set a property on it pointing to us.
+    // (This is used when detecting which items have collided
+    // or been shot.)
+    this.sprite.sprite.game__item = this;
 };
 
 /**

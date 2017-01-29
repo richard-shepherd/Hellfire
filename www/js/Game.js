@@ -351,7 +351,7 @@ Game.prototype._setupGameItems = function() {
     }
 
     // We add some items...
-    addItemsInRandomLocations(this, GameItem_AmmoBag, 8);
+    addItemsInRandomLocations(this, GameItem_AmmoBag, 3);
     addItemsInRandomLocations(this, GameItem_Monster_Imp, 8);
 };
 
@@ -361,7 +361,9 @@ Game.prototype._setupGameItems = function() {
  * Adds a game item to our collection, assigning it a unique number.
  */
 Game.prototype.addGameItem = function(gameItem) {
-    this.gameItems[this._nextGameItemNumber] = gameItem;
+    var key = this._nextGameItemNumber;
+    gameItem.key = key;
+    this.gameItems[key] = gameItem;
     this._nextGameItemNumber++;
 };
 
@@ -423,3 +425,11 @@ Game.prototype._showPositionInfo = function() {
     $("#position-num-updates").text(this._locationProvider.numPositionUpdates);
 };
 
+/**
+ * getTargettedGameItems
+ * ---------------------
+ * Returns a list of game-items in the crosshairs.
+ */
+Game.prototype.getTargettedGameItems = function() {
+    return this.threeDCanvas.getTargettedGameItems(this);
+};

@@ -23,6 +23,9 @@ function ThreeDCanvas(canvasContext) {
     // We light the scene...
     this.light = new THREE.AmbientLight( 0xe0e0e0 );
     this.scene.add(this.light);
+
+    // For finding objects in the center of the screen...
+    this._raycaster = new THREE.Raycaster();
 }
 
 /**
@@ -68,4 +71,29 @@ ThreeDCanvas.prototype.render = function() {
  */
 ThreeDCanvas.prototype.createSprite = function(x, y, width, height, textureType) {
     return new ThreeDSprite(this, x, y, width, height, textureType);
+};
+
+/**
+ * getTargettedGameItems
+ * ---------------------
+ * Returns a list of all game-items in the center of the screen.
+ * These are sorted by distance, nearest first.
+ */
+ThreeDCanvas.prototype.getTargettedGameItems = function(game) {
+    // We point the raycaster in the direction the camera is facing...
+    this._raycaster.set(this.camera.getWorldPosition(), this.camera.getWorldDirection());
+
+    // We find which objects it intersects with...
+    var intersects = this._raycaster.intersectObjects(this.scene.children);
+
+    // We find the game-items corresponding to these objects...
+    var gameItems = [];
+    for(var i=0; i<intersects.length; ++i) {
+        var intersect = intersects[i];
+        if(intersect.object.game__item) {
+            gameItems.push(intersect.object.game__item);
+        }
+    }
+
+    return gameItems;
 };
