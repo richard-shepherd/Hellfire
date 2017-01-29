@@ -200,15 +200,9 @@ Game.prototype._setupFireButton = function() {
  */
 Game.prototype._onFireClicked = function() {
     try {
-        var ammoType = AmmoManager.AmmoType.SHOTGUN_CARTRIDGE;
-        if(this.ammoManager.getAmmoCount(ammoType) === 0) {
-            // There is no ammo left...
-            return;
+        if(this.currentWeapon !== null) {
+            this.currentWeapon.fire();
         }
-
-        // We fire the weapon...
-        AudioManager.getInstance().playSound(AudioManager.Sounds.SHOTGUN, 10.0);
-        this.ammoManager.addAmmo(ammoType, -1);
     } catch(ex) {
         Logger.log(ex.message);
     }
@@ -357,8 +351,8 @@ Game.prototype._setupGameItems = function() {
     }
 
     // We add some items...
-    addItemsInRandomLocations(this, GameItem_AmmoBag, 10);
-    //addItemsInRandomLocations(this, GameItem_Monster_Imp, 6);
+    addItemsInRandomLocations(this, GameItem_AmmoBag, 8);
+    addItemsInRandomLocations(this, GameItem_Monster_Imp, 8);
 };
 
 /**

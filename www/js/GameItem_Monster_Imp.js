@@ -28,7 +28,7 @@ Utils.extend(GameItem, GameItem_Monster_Imp); // Derived from GameItem
  */
 GameItem_Monster_Imp.prototype.updatePosition = function(deltaMilliseconds) {
     // We move the imp towards the player, and make it face the player...
-    this.moveTowardsPlayer(3.0, deltaMilliseconds, 2.0);
+    //this.moveTowardsPlayer(3.0, deltaMilliseconds, 2.0);
     this.makeSpriteFacePlayer();
 };
 

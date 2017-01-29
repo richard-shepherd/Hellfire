@@ -22,11 +22,15 @@ Weapon.prototype.shootNearestEnemy = function(spreadRadians, force, forceDecreas
 
     // The nearest enemy item...
     var nearestItem = null;
+    var nearestItemKey = null;
+
 
     // We look through the game-items, finding enemies in front of us
     // within the spread angle specified...
+    var compassHeadingRadians = LocationProvider.getInstance().compassHeadingRadians;
+    var TwoPI = Math.PI * 2.0;
     for(var key in this.game.gameItems) {
-        var gameItem = this.gameItems[key];
+        var gameItem = this.game.gameItems[key];
 
         // Is the item an enemy?
         if(!gameItem.isEnemy) {
@@ -34,7 +38,10 @@ Weapon.prototype.shootNearestEnemy = function(spreadRadians, force, forceDecreas
         }
 
         // Is the item within the spread?
-        var gameItemAngle = gameItem.polarPosition.angleRadians;
+        var gameItemAngle = gameItem.polarPosition.angleRadians - compassHeadingRadians;
+        if(gameItemAngle < 0) {
+            gameItemAngle += TwoPI;
+        }
         if(gameItemAngle < minAngle && gameItemAngle > maxAngle) {
             continue;
         }
@@ -42,9 +49,11 @@ Weapon.prototype.shootNearestEnemy = function(spreadRadians, force, forceDecreas
         // The item is in the right spread range. Is it the nearest one?
         if(nearestItem === null) {
             nearestItem = gameItem;
+            nearestItemKey = key;
         } else {
             if(gameItem.polarPosition.distanceMeters < nearestItem.polarPosition.distanceMeters) {
                 nearestItem = gameItem;
+                nearestItemKey = key;
             }
         }
     }
@@ -59,5 +68,7 @@ Weapon.prototype.shootNearestEnemy = function(spreadRadians, force, forceDecreas
     // We work out the force with which we hit it.
     var shotForce = force - nearestItem.polarPosition.distanceMeters * forceDecreasePerMeter;
     var itemKilled = nearestItem.onShot(shotForce);
-
+    if(itemKilled) {
+        this.game.removeGameItem(nearestItemKey);
+    }
 };
