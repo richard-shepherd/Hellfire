@@ -18,6 +18,7 @@ function SplashScreen(swiper) {
     // We load the various pieces of data...
     this._load(AudioManager.getInstance());
     this._load(TextureManager.getInstance());
+    this._load(new GPSAccuracyObserver());
 
     // We show the initial progress (ie, none)...
     this._showProgress();
@@ -77,6 +78,10 @@ SplashScreen.prototype._showProgress = function() {
     if(loadingComplete) {
         var that = this;
         setTimeout(function() {
+            // We remove our references to the loaders...
+            that._loaderInfos.length = 0;
+
+            // We move to the first screen of the game...
             that.swiper.unlockSwipes();
             that.swiper.slideTo(Game.Slide.WAYPOINTS);
         }, 1000);
