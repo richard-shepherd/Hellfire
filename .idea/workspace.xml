@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa79a416-bb47-4522-a29f-2ecd1d216e7c" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/index.html" afterPath="$PROJECT_DIR$/www/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/Game.js" afterPath="$PROJECT_DIR$/www/js/Game.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/GameItem.js" afterPath="$PROJECT_DIR$/www/js/GameItem.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/GameItem_AmmoBag.js" afterPath="$PROJECT_DIR$/www/js/GameItem_AmmoBag.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/GameItem_Monster_Imp.js" afterPath="$PROJECT_DIR$/www/js/GameItem_Monster_Imp.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/ThreeDCanvas.js" afterPath="$PROJECT_DIR$/www/js/ThreeDCanvas.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/Weapon.js" afterPath="$PROJECT_DIR$/www/js/Weapon.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/Weapon_Shotgun.js" afterPath="$PROJECT_DIR$/www/js/Weapon_Shotgun.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/LocationProvider.js" afterPath="$PROJECT_DIR$/www/js/LocationProvider.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/LocationProvider_Keyboard.js" afterPath="$PROJECT_DIR$/www/js/LocationProvider_Keyboard.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -29,41 +26,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Weapon_Shotgun.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/Weapon_Shotgun.js">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="29" column="4" lean-forward="false" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="4" />
+            <state relative-caret-position="254">
+              <caret line="106" column="98" lean-forward="false" selection-start-line="106" selection-start-column="98" selection-end-line="106" selection-end-column="98" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Weapon.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/Weapon.js">
+      <file leaf-file-name="LocationProvider.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/www/js/LocationProvider.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="79">
-              <caret line="19" column="49" lean-forward="false" selection-start-line="19" selection-start-column="49" selection-end-line="19" selection-end-column="49" />
+            <state relative-caret-position="277">
+              <caret line="46" column="8" lean-forward="false" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ThreeDCanvas.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/ThreeDCanvas.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="151">
-              <caret line="79" column="47" lean-forward="false" selection-start-line="79" selection-start-column="47" selection-end-line="79" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Game.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Game.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/Game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="346" column="42" lean-forward="true" selection-start-line="346" selection-start-column="42" selection-end-line="346" selection-end-column="42" />
+            <state relative-caret-position="428">
+              <caret line="427" column="0" lean-forward="false" selection-start-line="427" selection-start-column="0" selection-end-line="427" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LocationProvider_Keyboard.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/LocationProvider_Keyboard.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="414">
+              <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -173,7 +170,6 @@
         <option value="$PROJECT_DIR$/www/js/PolarPosition.js" />
         <option value="$PROJECT_DIR$/www/js/Position.js" />
         <option value="$PROJECT_DIR$/www/css/index.css" />
-        <option value="$PROJECT_DIR$/www/js/LocationProvider_Keyboard.js" />
         <option value="$PROJECT_DIR$/www/js/GameArea.js" />
         <option value="$PROJECT_DIR$/www/js/Ammo.js" />
         <option value="$PROJECT_DIR$/www/js/Utils.js" />
@@ -184,10 +180,8 @@
         <option value="$PROJECT_DIR$/www/js/RadarCanvas.js" />
         <option value="$PROJECT_DIR$/www/js/ThreeDSprite.js" />
         <option value="$PROJECT_DIR$/www/js/AudioManager.js" />
-        <option value="$PROJECT_DIR$/www/js/LocationProvider.js" />
         <option value="$PROJECT_DIR$/www/js/GameItem_Weapon.js" />
         <option value="$PROJECT_DIR$/www/js/GameItem_Player.js" />
-        <option value="$PROJECT_DIR$/www/index.html" />
         <option value="$PROJECT_DIR$/www/notes.txt" />
         <option value="$PROJECT_DIR$/www/js/GameItem_AmmoBag.js" />
         <option value="$PROJECT_DIR$/www/js/Weapon_Shotgun.js" />
@@ -195,7 +189,10 @@
         <option value="$PROJECT_DIR$/www/js/Weapon.js" />
         <option value="$PROJECT_DIR$/www/js/GameItem.js" />
         <option value="$PROJECT_DIR$/www/js/GameItem_Monster_Imp.js" />
+        <option value="$PROJECT_DIR$/www/js/LocationProvider_Keyboard.js" />
+        <option value="$PROJECT_DIR$/www/index.html" />
         <option value="$PROJECT_DIR$/www/js/Game.js" />
+        <option value="$PROJECT_DIR$/www/js/LocationProvider.js" />
       </list>
     </option>
   </component>
@@ -401,15 +398,15 @@
       <workItem from="1484688651889" duration="1770000" />
       <workItem from="1484861354630" duration="14421000" />
       <workItem from="1484987525747" duration="5503000" />
-      <workItem from="1485034057085" duration="59432000" />
+      <workItem from="1485034057085" duration="60150000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94492000" />
+    <option name="totallyTimeSpent" value="95210000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24851191" sideWeight="0.5450082" order="0" side_tool="false" content_ui="combo" />
@@ -442,7 +439,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/www/js/LocationProvider.js</url>
-          <line>97</line>
+          <line>102</line>
           <properties />
           <option name="timeStamp" value="12" />
         </line-breakpoint>
@@ -553,14 +550,6 @@
     <entry file="file://$PROJECT_DIR$/www/choose_waypoints.html" />
     <entry file="file://$PROJECT_DIR$/www/index2.html" />
     <entry file="file://$PROJECT_DIR$/www/css/index2.css" />
-    <entry file="file://$PROJECT_DIR$/www/js/LocationProvider_Keyboard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1026">
-          <caret line="57" column="35" lean-forward="false" selection-start-line="57" selection-start-column="35" selection-end-line="57" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/VideoCanvas.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -639,22 +628,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="475">
           <caret line="139" column="16" lean-forward="false" selection-start-line="139" selection-start-column="16" selection-end-line="139" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/LocationProvider.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="457">
-          <caret line="41" column="10" lean-forward="false" selection-start-line="41" selection-start-column="10" selection-end-line="41" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="74">
-          <caret line="152" column="30" lean-forward="false" selection-start-line="152" selection-start-column="30" selection-end-line="152" selection-end-column="30" />
           <folding />
         </state>
       </provider>
@@ -779,10 +752,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/LocationProvider_Keyboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="254">
+          <caret line="106" column="98" lean-forward="false" selection-start-line="106" selection-start-column="98" selection-end-line="106" selection-end-column="98" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/Game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="346" column="42" lean-forward="true" selection-start-line="346" selection-start-column="42" selection-end-line="346" selection-end-column="42" />
+        <state relative-caret-position="428">
+          <caret line="427" column="0" lean-forward="false" selection-start-line="427" selection-start-column="0" selection-end-line="427" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/LocationProvider.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="46" column="8" lean-forward="false" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
           <folding />
         </state>
       </provider>

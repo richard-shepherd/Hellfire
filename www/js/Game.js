@@ -423,6 +423,9 @@ Game.prototype._showPositionInfo = function() {
     $("#position-long").text(coords.longitude);
     $("#position-accuracy").text(coords.accuracy);
     $("#position-num-updates").text(this._locationProvider.numPositionUpdates);
+    $("#orientation-alpha").text(this._locationProvider.orientationAlphaRadians);
+    $("#orientation-beta").text(this._locationProvider.orientationBetaRadians);
+    $("#orientation-gamma").text(this._locationProvider.orientationGammaRadians);
 };
 
 /**

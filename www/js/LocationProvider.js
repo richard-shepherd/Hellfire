@@ -21,6 +21,11 @@ function LocationProvider() {
     // The compass heading...
     this.compassHeadingRadians = 0.0;
 
+    // The device orientation...
+    this.orientationAlphaRadians = 0.0;
+    this.orientationBetaRadians = 0.0;
+    this.orientationGammaRadians = 0.0;
+
     // The first valid lat/long we receive. We use this as an origin for other
     // positions which we calculate as (x, y) offsets from it...
     this.originLatitude = null;
@@ -38,8 +43,8 @@ function LocationProvider() {
 LocationProvider._instance = null;
 LocationProvider.getInstance = function() {
     if(LocationProvider._instance == null) {
-        LocationProvider._instance = new LocationProvider_Keyboard();
-        //LocationProvider._instance = new LocationProvider();
+        //LocationProvider._instance = new LocationProvider_Keyboard();
+        LocationProvider._instance = new LocationProvider();
     }
     return LocationProvider._instance;
 };
@@ -49,7 +54,7 @@ LocationProvider.getInstance = function() {
  * ------------------
  * Subscribes to the GPS location.
  */
-LocationProvider.prototype._subscribeLocation =function() {
+LocationProvider.prototype._subscribeLocation = function() {
     if (!navigator.geolocation) {
         Logger.log("GPS not available");
     }
@@ -139,6 +144,11 @@ LocationProvider.compassHeading = function(alpha, beta, gamma) {
     var alphaRad = alpha * (Math.PI / 180);
     var betaRad = beta * (Math.PI / 180);
     var gammaRad = gamma * (Math.PI / 180);
+
+    // We hold the values...
+    this.orientationAlphaRadians = alphaRad;
+    this.orientationBetaRadians = betaRad;
+    this.orientationGammaRadians = gammaRad;
 
     // Calculate equation components
     var cA = Math.cos(alphaRad);
