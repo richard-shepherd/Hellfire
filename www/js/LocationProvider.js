@@ -21,10 +21,8 @@ function LocationProvider() {
     // The compass heading...
     this.compassHeadingRadians = 0.0;
 
-    // The device orientation...
-    this.orientationAlphaRadians = 0.0;
-    this.orientationBetaRadians = 0.0;
-    this.orientationGammaRadians = 0.0;
+    // The device tilt...
+    this.tiltRadians = 0.0;
 
     // The first valid lat/long we receive. We use this as an origin for other
     // positions which we calculate as (x, y) offsets from it...
@@ -43,8 +41,8 @@ function LocationProvider() {
 LocationProvider._instance = null;
 LocationProvider.getInstance = function() {
     if(LocationProvider._instance == null) {
-        //LocationProvider._instance = new LocationProvider_Keyboard();
-        LocationProvider._instance = new LocationProvider();
+        LocationProvider._instance = new LocationProvider_Keyboard();
+        //LocationProvider._instance = new LocationProvider();
     }
     return LocationProvider._instance;
 };
@@ -125,7 +123,7 @@ LocationProvider.prototype._subscribeCompass = function() {
     window.addEventListener('deviceorientationabsolute', function(orientationInfo) {
         try {
             // We store the latest compass heading...
-            that.compassHeadingRadians = LocationProvider.compassHeading(orientationInfo.alpha, orientationInfo.beta, orientationInfo.gamma);
+            that.updateCompassHeading(orientationInfo.alpha, orientationInfo.beta, orientationInfo.gamma);
         } catch(ex) {
             Logger.log(ex.message);
         }
@@ -133,22 +131,19 @@ LocationProvider.prototype._subscribeCompass = function() {
 };
 
 /**
- * compassHeading
+ * updateCompassHeading
  * --------------
- * Static method to convert phone orientation into a compass heading
+ * Converts phone orientation into a compass heading
  * in radians. (When the phone is held upright.)
  */
-LocationProvider.compassHeading = function(alpha, beta, gamma) {
-
+LocationProvider.prototype.updateCompassHeading = function(alpha, beta, gamma) {
     // Convert degrees to radians
     var alphaRad = alpha * (Math.PI / 180);
     var betaRad = beta * (Math.PI / 180);
     var gammaRad = gamma * (Math.PI / 180);
 
-    // We hold the values...
-    this.orientationAlphaRadians = alphaRad;
-    this.orientationBetaRadians = betaRad;
-    this.orientationGammaRadians = gammaRad;
+    // We update the forward / backward tilt of the device...
+    this.tiltRadians = betaRad - Math.PI / 2.0;
 
     // Calculate equation components
     var cA = Math.cos(alphaRad);
@@ -176,5 +171,5 @@ LocationProvider.compassHeading = function(alpha, beta, gamma) {
         compassHeading += 2 * Math.PI;
     }
 
-    return compassHeading;
+    this.compassHeadingRadians = compassHeading;
 };

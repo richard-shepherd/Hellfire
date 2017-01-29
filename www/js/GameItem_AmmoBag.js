@@ -13,11 +13,7 @@ function GameItem_AmmoBag(game) {
     this.radarInfo.label = "Ammo";
 
     // The sprite...
-    this.setSprite(8.0, 8.0, TextureManager.TextureType.AMMO_BAG);
-    // this.sprite = game.threeDCanvas.createSprite(
-    //     this.position.x, this.position.y,
-    //     8.0, 8.0,
-    //     TextureManager.TextureType.AMMO_BAG);
+    this.setSprite(4.0, 2.0, TextureManager.TextureType.AMMO_BAG);
 }
 Utils.extend(GameItem, GameItem_AmmoBag); // Derived from GameItem
 

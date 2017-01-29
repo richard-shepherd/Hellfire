@@ -23,6 +23,7 @@ function ThreeDSprite(threeDCanvas, x, y, width, height, textureType) {
     this.sprite = new THREE.Mesh(plane, material);
     this.sprite.position.x = x;
     this.sprite.position.z = -1.0 * y;
+    this.sprite.position.y = height / 2.0;
 
     // We add the sprite to the scene...
     threeDCanvas.scene.add(this.sprite);

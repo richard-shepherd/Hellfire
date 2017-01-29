@@ -25,9 +25,7 @@ function LocationProvider_Keyboard() {
     this.compassHeadingRadians = 0.0;
 
     // The device orientation...
-    this.orientationAlphaRadians = 0.0;
-    this.orientationBetaRadians = 0.0;
-    this.orientationGammaRadians = 0.0;
+    this.tiltRadians = 0.0;
 
     // The first valid lat/long we receive. We use this as an origin for other
     // positions which we calculate as (x, y) offsets from it...

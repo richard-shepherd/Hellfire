@@ -53,7 +53,7 @@ function Game(options) {
     this.ammoManager = null;
 
     // The distance at which collisions are deemed to happen...
-    this.collisionDistanceMeters = 5.0;
+    this.collisionDistanceMeters = 3.0;
 
     // Timing for the main loop...
     this._previousUpdateTime = Date.now();
@@ -423,9 +423,7 @@ Game.prototype._showPositionInfo = function() {
     $("#position-long").text(coords.longitude);
     $("#position-accuracy").text(coords.accuracy);
     $("#position-num-updates").text(this._locationProvider.numPositionUpdates);
-    $("#orientation-alpha").text(this._locationProvider.orientationAlphaRadians);
-    $("#orientation-beta").text(this._locationProvider.orientationBetaRadians);
-    $("#orientation-gamma").text(this._locationProvider.orientationGammaRadians);
+    $("#orientation-tilt").text(this._locationProvider.tiltRadians);
 };
 
 /**

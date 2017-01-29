@@ -12,7 +12,7 @@ function GameItem_Monster_Imp(game) {
     this.radarInfo.label = "Imp";
 
     // The sprite...
-    this.setSprite(20.0, 20.0, TextureManager.TextureType.IMP);
+    this.setSprite(3.0, 3.0, TextureManager.TextureType.IMP);
 
     // The ID of the imp-attack sound...
     this.impAttackSoundID = null;
@@ -33,7 +33,7 @@ GameItem_Monster_Imp.prototype.derivedDispose = function() {
  */
 GameItem_Monster_Imp.prototype.updatePosition = function(deltaMilliseconds) {
     // We move the imp towards the player, and make it face the player...
-    this.moveTowardsPlayer(3.0, deltaMilliseconds, 2.0);
+    this.moveTowardsPlayer(3.0, deltaMilliseconds, 1.0);
     this.makeSpriteFacePlayer();
 };
 
