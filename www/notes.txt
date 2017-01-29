@@ -5,6 +5,27 @@ TO-DOs in order
 
 
 
+Shooting
+--------
+- You shoot using the current weapon
+  - Is this e.g. a GameItem_Shotgun?
+    - Let's say NO
+      - Because GameItems are things in the world
+      - They are shown as sprites and on the radar
+    - Let's say YES:
+      - They could not be shown on the radar
+      - They could have a "heldByPlayer" flag and not show in that case
+
+- What happens when Fire is pressed?
+  - A: It depends on the weapon.
+    - Some take effect immediately (e.g. shotgun)
+    - Others fire slower, e.g. rocket launcher
+
+- Got to have a chainsaw!!!
+  - You need to move it up and down for it to work.
+
+
+
 
 
 Moving game items
@@ -21,25 +42,10 @@ Moving game items
 
 Splash screen and loaders
 -------------------------
-- We need managers / loaders for:
-  - 3D textures
-  - Sounds
-  - Images
-
-- We want to show the progress of loading these items on the splash screen:
-  - Loading images: 2/3
-  - Loading textures: 5/7
-  - Loading audio: 2/8
-
-- They could all call back with the same callback:
-  - Text "Loading images"
-  - Total items
-  - Items loaded
-
-- They can all have a "ready" flag
-
-- They should all be singletons
-
+- Some should be optional
+  - In particular, the GPS accuracy
+  - We can show a "Skip" button once all the non-optional
+    items have completed.
 
 
 
@@ -60,23 +66,11 @@ Adding items
 
 - They appear at random intervals
 
-- At the start of the game, we create a number of items
-
-- Items should be created in the "game area"
-
-
-- We need a startup class and splash-screen
-  - We pre-load a bunch of things, such as images, textures, sounds
-  - The splash screen should show this.
-  - Only when everything is loaded do we move to the main game screen.
-
 - Ammo, weapons, armour could have a limited life
   - So you have to run to them
   - The time could be configurable
   - The time would be shown on the map and on the radar.
 
-- Do you need the video in the single-player game?
-  - A: No. But it might be good anyway!
 
 
 

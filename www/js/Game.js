@@ -46,6 +46,9 @@ function Game(options) {
     this.gameItems = {};
     this._nextGameItemNumber = 1;
 
+    // The current weapon held by the player...
+    this.currentWeapon = null;
+
     // The amm held by the player...
     this.ammoManager = null;
 
@@ -297,6 +300,9 @@ Game.prototype._onGunsightSlideShown = function() {
         // We add items...
         this._setupGameItems();
 
+        // We give the payer an initial weapon...
+        this.currentWeapon = new Weapon_Shotgun(this);
+
         // We give the player some ammo...
         this.ammoManager = new AmmoManager();
         this.ammoManager.addAmmo(AmmoManager.AmmoType.PISTOL_BULLET, 10);
@@ -338,8 +344,8 @@ Game.prototype._setupGameItems = function() {
     }
 
     // We add some items...
-    //addItemsInRandomLocations(this, GameItem_AmmoBag, 6);
-    addItemsInRandomLocations(this, GameItem_Monster_Imp, 6);
+    addItemsInRandomLocations(this, GameItem_AmmoBag, 10);
+    //addItemsInRandomLocations(this, GameItem_Monster_Imp, 6);
 };
 
 /**

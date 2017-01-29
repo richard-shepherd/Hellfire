@@ -5,9 +5,12 @@
  * well as items in the environment.
  * @constructor
  */
-function GameItem(game) {
+function GameItem(params) {
     // The game object...
-    this.game = game;
+    this.game = params.game;
+
+    // True if the item is an enemy...
+    this.isEnemy = params.isEnemy;
 
     // The item's (x, y) position...
     this.position = new Position(0, 1000);

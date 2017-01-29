@@ -5,7 +5,7 @@
  */
 function GameItem_Monster_Imp(game) {
     // We call the base class's constructor...
-    GameItem.call(this, game);
+    GameItem.call(this, {game: game, isEnemy: true});
 
     // Radar info...
     this.radarInfo.showAsCircle = false;
