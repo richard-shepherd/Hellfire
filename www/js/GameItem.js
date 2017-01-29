@@ -7,7 +7,7 @@
  */
 function GameItem(params) {
     // True if the item has been disposed...
-    
+    this.isDisposed = false;
 
     // The game object...
     this.game = params.game;
@@ -45,6 +45,17 @@ function GameItem(params) {
  * own dispose.
  */
 GameItem.prototype.dispose = function() {
+    if(this.isDisposed) {
+        return;
+    }
+
+    if(this.sprite !== null) {
+        // We remove the sprite...
+        this.sprite.dispose();
+        this.sprite = null;
+    }
+
+    this.isDisposed = true;
 };
 
 /**

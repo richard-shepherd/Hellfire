@@ -149,6 +149,19 @@ Game.prototype._updateGameItems = function(deltaMilliseconds) {
     }
     for(var i=0; i<keysToRemove.length; ++i) {
         key = keysToRemove[i];
+        this.removeGameItem(key);
+    }
+};
+
+/**
+ * removeGameItem
+ * --------------
+ * Disposes and removes the game item whose key is passed in.
+ */
+Game.prototype.removeGameItem = function(key) {
+    if(key in this.gameItems) {
+        var gameItem = this.gameItems[key];
+        gameItem.dispose();
         delete this.gameItems[key];
     }
 };

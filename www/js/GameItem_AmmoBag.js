@@ -48,9 +48,6 @@ GameItem_AmmoBag.prototype.checkCollision = function() {
     AudioManager.getInstance().playSound(AudioManager.Sounds.AMMO_PICKUP, 20.0);
     this.game.ammoManager.addAmmoFromBag();
 
-    // We remove the sprite...
-    this.sprite.dispose();
-
     // We return true to remove this ammo bag from the game...
     return true;
 };
