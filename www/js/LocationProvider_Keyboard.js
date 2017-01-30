@@ -87,3 +87,10 @@ LocationProvider_Keyboard.prototype.updatePosition = function() {
         this.position.coords.longitude -= dlong;
     }
 };
+
+/**
+ * setOrigin
+ * ---------
+ */
+LocationProvider_Keyboard.prototype.setOrigin = function() {
+};

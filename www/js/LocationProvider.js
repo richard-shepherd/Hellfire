@@ -73,8 +73,8 @@ LocationProvider.prototype._subscribeLocation = function() {
             that.numPositionUpdates++;
 
             // If this is the first update we have, we set the origin...
-            if(this.originLatitude == null) {
-                that._setOrigin();
+            if(that.originLatitude == null) {
+                that.setOrigin();
             }
         } catch(ex) {
             Logger.log(ex.message);
@@ -91,12 +91,12 @@ LocationProvider.prototype._subscribeLocation = function() {
 };
 
 /**
- * _setOrigin
+ * setOrigin
  * ----------
  * Sets the origin to the current position and calculates the conversion
  * factors between lat/long and meters.
  */
-LocationProvider.prototype._setOrigin = function() {
+LocationProvider.prototype.setOrigin = function() {
     // We store the origin...
     var coords = this.position.coords;
     this.originLatitude = coords.latitude;

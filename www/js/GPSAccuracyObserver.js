@@ -6,7 +6,7 @@
  */
 function GPSAccuracyObserver() {
     this.progressCallback = null;
-    this.requiredAccuracy = 5.0;
+    this.requiredAccuracy = 20.0;
     this.currentAccuracy = 1000.0;
 }
 
@@ -28,6 +28,10 @@ GPSAccuracyObserver.prototype.initialize = function(progressCallback) {
             // We haven't got the required accuracy yet, so we
             // sample again in a while...
             setTimeout(checkAccuracy, 100);
+        } else {
+            // We have got the required accuracy, so we set the origin
+            // to the current location...
+            LocationProvider.getInstance().setOrigin();
         }
         if(that.progressCallback !== null) {
             that.progressCallback(that);
