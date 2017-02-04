@@ -41,8 +41,8 @@ function LocationProvider() {
 LocationProvider._instance = null;
 LocationProvider.getInstance = function() {
     if(LocationProvider._instance == null) {
-        //LocationProvider._instance = new LocationProvider_Keyboard();
-        LocationProvider._instance = new LocationProvider();
+        LocationProvider._instance = new LocationProvider_Keyboard();
+        //LocationProvider._instance = new LocationProvider();
     }
     return LocationProvider._instance;
 };
@@ -120,7 +120,7 @@ LocationProvider.prototype.setOrigin = function() {
  */
 LocationProvider.prototype._subscribeCompass = function() {
     var that = this;
-    window.addEventListener('deviceorientationabsolute', function(orientationInfo) {
+    window.addEventListener('deviceorientation', function(orientationInfo) {
         try {
             // We store the latest compass heading...
             that.updateCompassHeading(orientationInfo.alpha, orientationInfo.beta, orientationInfo.gamma);

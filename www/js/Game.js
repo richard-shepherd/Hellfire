@@ -8,6 +8,9 @@
 function Game(options) {
     var that = this;
 
+    // Whether we are usin the camera or not...
+    this.useCamera = false;
+
     // We store the options...
     this.options = options;
 
@@ -53,7 +56,7 @@ function Game(options) {
     this.ammoManager = null;
 
     // The distance at which collisions are deemed to happen...
-    this.collisionDistanceMeters = 3.0;
+    this.collisionDistanceMeters = 5.0;
 
     // Timing for the main loop...
     this._previousUpdateTime = Date.now();
@@ -116,6 +119,38 @@ Game.prototype._onVideoDataUpdated =  function (imageData, canvasContext) {
         var addUserElement = document.getElementById("add-player");
         addUserElement.style.background = centerColorHex;
     }
+};
+
+/**
+ * onMessageLoop
+ * -------------
+ * Called each time we render a new frame in the game.
+ */
+Game.prototype.onMessageLoop = function() {
+    // We find the time elapsed since the last iteration.
+    // The timing and movement of various aspects of the game use this.
+    var now = Date.now();
+    var deltaMilliseconds = now - this._previousUpdateTime;
+    this._previousUpdateTime = now;
+
+    // Updates game items, including checking for collisions...
+    this._updateGameItems(deltaMilliseconds);
+
+    // We show the 3D canvas...
+    this.threeDCanvas.render();
+
+    // We draw the crosshairs.
+    // If we have a matching player, we show the center ring in the
+    // player's color...
+    var compassHeadingRadians = this._locationProvider.compassHeadingRadians;
+    var ringColor = null;
+    this._radarCanvas.showRadar(compassHeadingRadians, this.gameItems, deltaMilliseconds, ringColor);
+
+    // We show the position info (lat, long, accuracy)...
+    this._showPositionInfo();
+
+    // Shows the amount of ammo for the current weapon...
+    this._showAmmo();
 };
 
 /**
@@ -317,7 +352,14 @@ Game.prototype._onGunsightSlideShown = function() {
 
         // We set up the camera. This sets up the image-updated callback
         // which is the main "message loop" of the game...
-        this._setupCamera();
+        if(this.useCamera) {
+            this._setupCamera();
+        } else {
+            var that = this;
+            setInterval(function() {
+                that.onMessageLoop();
+            }, 33);
+        }
 
         // We handle the add-player button...
         this._setupAddPlayerButton();
@@ -351,8 +393,8 @@ Game.prototype._setupGameItems = function() {
     }
 
     // We add some items...
-    addItemsInRandomLocations(this, GameItem_AmmoBag, 8);
-    //addItemsInRandomLocations(this, GameItem_Monster_Imp, 8);
+    addItemsInRandomLocations(this, GameItem_AmmoBag, 5);
+    addItemsInRandomLocations(this, GameItem_Monster_Imp, 8);
 };
 
 /**

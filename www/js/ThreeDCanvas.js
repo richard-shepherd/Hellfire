@@ -18,7 +18,7 @@ function ThreeDCanvas(canvasContext) {
     this.height = 300;
 
     // We create a transparent renderer...
-    this.renderer = new THREE.WebGLRenderer({ alpha: true });
+    this.renderer = new THREE.WebGLRenderer({ alpha: false });
     this.renderer.setSize( this.width, this.height );
 
     // We light the scene...

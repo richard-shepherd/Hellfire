@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa79a416-bb47-4522-a29f-2ecd1d216e7c" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/index.html" afterPath="$PROJECT_DIR$/www/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/Game.js" afterPath="$PROJECT_DIR$/www/js/Game.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/GameItem_Monster_Imp.js" afterPath="$PROJECT_DIR$/www/js/GameItem_Monster_Imp.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/LocationProvider.js" afterPath="$PROJECT_DIR$/www/js/LocationProvider.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/ThreeDCanvas.js" afterPath="$PROJECT_DIR$/www/js/ThreeDCanvas.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -26,8 +31,38 @@
       <file leaf-file-name="Game.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/js/Game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="347" column="50" lean-forward="false" selection-start-line="347" selection-start-column="50" selection-end-line="347" selection-end-column="50" />
+            <state relative-caret-position="248">
+              <caret line="139" column="25" lean-forward="true" selection-start-line="139" selection-start-column="25" selection-end-line="139" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RadarCanvas.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/RadarCanvas.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1026">
+              <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VideoCanvas.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/VideoCanvas.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Camera.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/Camera.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1584">
+              <caret line="136" column="83" lean-forward="false" selection-start-line="136" selection-start-column="63" selection-end-line="136" selection-end-column="83" />
               <folding />
             </state>
           </provider>
@@ -36,8 +71,38 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="106" column="89" lean-forward="false" selection-start-line="106" selection-start-column="89" selection-end-line="106" selection-end-column="89" />
+            <state relative-caret-position="306">
+              <caret line="78" column="34" lean-forward="true" selection-start-line="78" selection-start-column="34" selection-end-line="78" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ThreeDCanvas.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/ThreeDCanvas.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="55" column="25" lean-forward="true" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameItem_Monster_Imp.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/GameItem_Monster_Imp.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="421">
+              <caret line="35" column="6" lean-forward="false" selection-start-line="35" selection-start-column="6" selection-end-line="35" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ThreeDSprite.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/js/ThreeDSprite.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="25" column="42" lean-forward="false" selection-start-line="25" selection-start-column="42" selection-end-line="25" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -46,18 +111,8 @@
       <file leaf-file-name="Position.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/Position.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1429">
-              <caret line="88" column="2" lean-forward="true" selection-start-line="88" selection-start-column="2" selection-end-line="88" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GPSAccuracyObserver.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/GPSAccuracyObserver.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="33" column="55" lean-forward="false" selection-start-line="33" selection-start-column="55" selection-end-line="33" selection-end-column="55" />
+            <state relative-caret-position="1584">
+              <caret line="88" column="2" lean-forward="false" selection-start-line="88" selection-start-column="2" selection-end-line="88" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -66,58 +121,8 @@
       <file leaf-file-name="LocationProvider.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/LocationProvider.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="547">
-              <caret line="116" column="20" lean-forward="true" selection-start-line="116" selection-start-column="20" selection-end-line="116" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LocationProvider_Keyboard.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/LocationProvider_Keyboard.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="529">
-              <caret line="92" column="12" lean-forward="false" selection-start-line="92" selection-start-column="12" selection-end-line="92" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SplashScreen.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/SplashScreen.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="19" column="40" lean-forward="false" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameArea.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/GameArea.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="810">
-              <caret line="45" column="4" lean-forward="false" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameItem_AmmoBag.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/GameItem_AmmoBag.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="15" column="20" lean-forward="false" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TextureManager.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/js/TextureManager.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1764">
-              <caret line="98" column="0" lean-forward="true" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
+            <state relative-caret-position="252">
+              <caret line="44" column="10" lean-forward="false" selection-start-line="44" selection-start-column="10" selection-end-line="44" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -148,6 +153,12 @@
       <find>load</find>
       <find>_setupAudioManager</find>
       <find>_canvasElement</find>
+      <find>canvasContext</find>
+      <find>threeDCanvas</find>
+      <find>_onCanvasSampleTimer</find>
+      <find>_onVideoDataUpdated</find>
+      <find>_setupCamera</find>
+      <find>setSize</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -181,16 +192,16 @@
         <option value="$PROJECT_DIR$/www/js/Weapon.js" />
         <option value="$PROJECT_DIR$/www/js/GameItem.js" />
         <option value="$PROJECT_DIR$/www/js/ThreeDSprite.js" />
-        <option value="$PROJECT_DIR$/www/js/ThreeDCanvas.js" />
-        <option value="$PROJECT_DIR$/www/js/GameItem_Monster_Imp.js" />
         <option value="$PROJECT_DIR$/www/js/TextureManager.js" />
         <option value="$PROJECT_DIR$/www/js/GameItem_AmmoBag.js" />
         <option value="$PROJECT_DIR$/www/js/SplashScreen.js" />
         <option value="$PROJECT_DIR$/www/js/GPSAccuracyObserver.js" />
         <option value="$PROJECT_DIR$/www/js/LocationProvider_Keyboard.js" />
-        <option value="$PROJECT_DIR$/www/index.html" />
-        <option value="$PROJECT_DIR$/www/js/LocationProvider.js" />
+        <option value="$PROJECT_DIR$/www/js/GameItem_Monster_Imp.js" />
         <option value="$PROJECT_DIR$/www/js/Game.js" />
+        <option value="$PROJECT_DIR$/www/js/LocationProvider.js" />
+        <option value="$PROJECT_DIR$/www/js/ThreeDCanvas.js" />
+        <option value="$PROJECT_DIR$/www/index.html" />
       </list>
     </option>
   </component>
@@ -225,6 +236,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -289,7 +301,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -397,24 +408,26 @@
       <workItem from="1484861354630" duration="14421000" />
       <workItem from="1484987525747" duration="5503000" />
       <workItem from="1485034057085" duration="66845000" />
-      <workItem from="1485781235472" duration="1368000" />
+      <workItem from="1485781235472" duration="1730000" />
+      <workItem from="1485886938994" duration="801000" />
+      <workItem from="1485888882525" duration="4164000" />
+      <workItem from="1486204246378" duration="1822000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="103273000" />
+    <option name="totallyTimeSpent" value="110422000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24851191" sideWeight="0.53846157" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24851191" sideWeight="0.5450082" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32569557" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24851191" sideWeight="0.46153846" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24851191" sideWeight="0.45499182" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39770868" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -424,6 +437,7 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32569557" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -442,7 +456,7 @@
           <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="32" />
+      <option name="time" value="35" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -540,19 +554,10 @@
     <entry file="file://$PROJECT_DIR$/www/choose_waypoints.html" />
     <entry file="file://$PROJECT_DIR$/www/index2.html" />
     <entry file="file://$PROJECT_DIR$/www/css/index2.css" />
-    <entry file="file://$PROJECT_DIR$/www/js/VideoCanvas.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/css/index.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-224">
           <caret line="12" column="4" lean-forward="false" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -585,7 +590,7 @@
         <state relative-caret-position="194">
           <caret line="1181" column="4" lean-forward="false" selection-start-line="1181" selection-start-column="4" selection-end-line="1181" selection-end-column="4" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -605,26 +610,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/RadarCanvas.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="466" column="26" lean-forward="true" selection-start-line="466" selection-start-column="26" selection-end-line="466" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/PolarPosition.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
           <caret line="22" column="37" lean-forward="false" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/Camera.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-76">
-          <caret line="95" column="0" lean-forward="false" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -669,34 +658,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/GameItem_Monster_Imp.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="421">
-          <caret line="35" column="52" lean-forward="false" selection-start-line="35" selection-start-column="52" selection-end-line="35" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/GameItem.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="547">
           <caret line="97" column="45" lean-forward="true" selection-start-line="97" selection-start-column="45" selection-end-line="97" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/ThreeDSprite.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="25" column="42" lean-forward="false" selection-start-line="25" selection-start-column="42" selection-end-line="25" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/ThreeDCanvas.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -735,7 +700,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/LocationProvider_Keyboard.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
+        <state relative-caret-position="1656">
           <caret line="92" column="12" lean-forward="false" selection-start-line="92" selection-start-column="12" selection-end-line="92" selection-end-column="12" />
           <folding />
         </state>
@@ -743,40 +708,88 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/GPSAccuracyObserver.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
+        <state relative-caret-position="594">
           <caret line="33" column="55" lean-forward="false" selection-start-line="33" selection-start-column="55" selection-end-line="33" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="106" column="89" lean-forward="false" selection-start-line="106" selection-start-column="89" selection-end-line="106" selection-end-column="89" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/LocationProvider.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="547">
-          <caret line="116" column="20" lean-forward="true" selection-start-line="116" selection-start-column="20" selection-end-line="116" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/Position.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1429">
-          <caret line="88" column="2" lean-forward="true" selection-start-line="88" selection-start-column="2" selection-end-line="88" selection-end-column="2" />
+        <state relative-caret-position="1584">
+          <caret line="88" column="2" lean-forward="false" selection-start-line="88" selection-start-column="2" selection-end-line="88" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/ThreeDSprite.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="25" column="42" lean-forward="false" selection-start-line="25" selection-start-column="42" selection-end-line="25" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/VideoCanvas.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/GameItem_Monster_Imp.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="35" column="6" lean-forward="false" selection-start-line="35" selection-start-column="6" selection-end-line="35" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/RadarCanvas.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1026">
+          <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/LocationProvider.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="44" column="10" lean-forward="false" selection-start-line="44" selection-start-column="10" selection-end-line="44" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/ThreeDCanvas.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="55" column="25" lean-forward="true" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/Camera.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1584">
+          <caret line="136" column="83" lean-forward="false" selection-start-line="136" selection-start-column="63" selection-end-line="136" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="78" column="34" lean-forward="true" selection-start-line="78" selection-start-column="34" selection-end-line="78" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/Game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="347" column="50" lean-forward="false" selection-start-line="347" selection-start-column="50" selection-end-line="347" selection-end-column="50" />
+        <state relative-caret-position="248">
+          <caret line="139" column="25" lean-forward="true" selection-start-line="139" selection-start-column="25" selection-end-line="139" selection-end-column="25" />
           <folding />
         </state>
       </provider>
