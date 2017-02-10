@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aa79a416-bb47-4522-a29f-2ecd1d216e7c" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/images/skybox1/skybox_back.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/images/skybox1/skybox_down.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/images/skybox1/skybox_front.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/images/skybox1/skybox_left.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/images/skybox1/skybox_right.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/www/images/skybox1/skybox_up.jpg" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/richard.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/richard.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/TextureManager.js" afterPath="$PROJECT_DIR$/www/js/TextureManager.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/ThreeDCanvas.js" afterPath="$PROJECT_DIR$/www/js/ThreeDCanvas.js" />
-    </list>
+    <list default="true" id="aa79a416-bb47-4522-a29f-2ecd1d216e7c" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -415,16 +405,16 @@
       <workItem from="1485886938994" duration="801000" />
       <workItem from="1485888882525" duration="4164000" />
       <workItem from="1486204246378" duration="1936000" />
-      <workItem from="1486746242471" duration="2771000" />
+      <workItem from="1486746242471" duration="2946000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="113307000" />
+    <option name="totallyTimeSpent" value="113482000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1378" height="744" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24850747" sideWeight="0.53846157" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
