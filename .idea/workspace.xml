@@ -2,9 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa79a416-bb47-4522-a29f-2ecd1d216e7c" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/images/skybox1/skybox_back.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/images/skybox1/skybox_down.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/images/skybox1/skybox_front.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/images/skybox1/skybox_left.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/images/skybox1/skybox_right.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/www/images/skybox1/skybox_up.jpg" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/richard.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/richard.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/TextureManager.js" afterPath="$PROJECT_DIR$/www/js/TextureManager.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/ThreeDCanvas.js" afterPath="$PROJECT_DIR$/www/js/ThreeDCanvas.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -45,11 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TextureManager.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TextureManager.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/TextureManager.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="68" column="83" lean-forward="false" selection-start-line="68" selection-start-column="83" selection-end-line="68" selection-end-column="83" />
+            <state relative-caret-position="162">
+              <caret line="28" column="11" lean-forward="false" selection-start-line="28" selection-start-column="11" selection-end-line="28" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -95,11 +101,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ThreeDCanvas.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ThreeDCanvas.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/js/ThreeDCanvas.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="990">
-              <caret line="55" column="25" lean-forward="false" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
+            <state relative-caret-position="367">
+              <caret line="114" column="13" lean-forward="true" selection-start-line="114" selection-start-column="13" selection-end-line="114" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -196,9 +202,9 @@
         <option value="$PROJECT_DIR$/www/js/GameItem_Monster_Imp.js" />
         <option value="$PROJECT_DIR$/www/js/Game.js" />
         <option value="$PROJECT_DIR$/www/js/LocationProvider.js" />
-        <option value="$PROJECT_DIR$/www/js/ThreeDCanvas.js" />
         <option value="$PROJECT_DIR$/www/index.html" />
         <option value="$PROJECT_DIR$/www/js/TextureManager.js" />
+        <option value="$PROJECT_DIR$/www/js/ThreeDCanvas.js" />
       </list>
     </option>
   </component>
@@ -409,12 +415,12 @@
       <workItem from="1485886938994" duration="801000" />
       <workItem from="1485888882525" duration="4164000" />
       <workItem from="1486204246378" duration="1936000" />
-      <workItem from="1486746242471" duration="209000" />
+      <workItem from="1486746242471" duration="2771000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="110745000" />
+    <option name="totallyTimeSpent" value="113307000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1378" height="744" extended-state="0" />
@@ -613,6 +619,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="79">
           <caret line="19" column="49" lean-forward="false" selection-start-line="19" selection-start-column="49" selection-end-line="19" selection-end-column="49" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -641,6 +648,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="547">
           <caret line="97" column="45" lean-forward="true" selection-start-line="97" selection-start-column="45" selection-end-line="97" selection-end-column="45" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -730,14 +738,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/ThreeDCanvas.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="990">
-          <caret line="55" column="25" lean-forward="false" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/js/Camera.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2448">
@@ -772,8 +772,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/TextureManager.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="68" column="83" lean-forward="false" selection-start-line="68" selection-start-column="83" selection-end-line="68" selection-end-column="83" />
+        <state relative-caret-position="162">
+          <caret line="28" column="11" lean-forward="false" selection-start-line="28" selection-start-column="11" selection-end-line="28" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/ThreeDCanvas.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="367">
+          <caret line="114" column="13" lean-forward="true" selection-start-line="114" selection-start-column="13" selection-end-line="114" selection-end-column="13" />
           <folding />
         </state>
       </provider>

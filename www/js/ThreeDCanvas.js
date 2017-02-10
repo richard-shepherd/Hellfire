@@ -25,6 +25,9 @@ function ThreeDCanvas(canvasContext) {
     this.light = new THREE.AmbientLight( 0xe0e0e0 );
     this.scene.add(this.light);
 
+    // We add the skybox...
+    this.addSkybox();
+
     // For finding objects in the center of the screen...
     this._raycaster = new THREE.Raycaster();
 }
@@ -99,4 +102,21 @@ ThreeDCanvas.prototype.getTargettedGameItems = function(game) {
     }
 
     return gameItems;
+};
+
+/**
+ * addSkybox
+ * ---------
+ */
+ThreeDCanvas.prototype.addSkybox = function() {
+    this.scene.background = new THREE.CubeTextureLoader()
+        .setPath( 'textures/skybox1/' )
+        .load( [
+            '2-west.jpg',  // west
+            '4-east.jpg',  // east
+            '5-up.jpg',
+            '6-down.jpg',
+            '1-south.jpg', // south
+            '3-north.jpg'
+        ] );
 };

@@ -6,6 +6,11 @@
       <w>coords</w>
       <w>dlat</w>
       <w>dlong</w>
+      <w>negx</w>
+      <w>negy</w>
+      <w>negz</w>
+      <w>posx</w>
+      <w>posz</w>
       <w>skybox</w>
       <w>waypoint</w>
       <w>waypoints</w>

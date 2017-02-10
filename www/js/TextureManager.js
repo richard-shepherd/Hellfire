@@ -26,13 +26,7 @@ function TextureManager() {
 TextureManager.TextureType = {
     SHOTGUN: 1,
     AMMO_BAG: 2,
-    IMP : 3,
-    SKYBOX1_UP : 4,
-    SKYBOX1_DOWN : 5,
-    SKYBOX1_LEFT : 6,
-    SKYBOX1_RIGHT : 7,
-    SKYBOX1_BACK : 8,
-    SKYBOX1_FRONT : 9
+    IMP : 3
 };
 
 /**
@@ -58,15 +52,9 @@ TextureManager.getInstance = function() {
  */
 TextureManager.prototype.initialize = function(progressCallback) {
     this._progressCallback = progressCallback;
-    this._loadTexture(TextureManager.TextureType.IMP, "imp.png")
-    this._loadTexture(TextureManager.TextureType.AMMO_BAG, "ammo-bag.png")
-    this._loadTexture(TextureManager.TextureType.SHOTGUN, "shotgun.png")
-    this._loadTexture(TextureManager.TextureType.SKYBOX1_UP, "skybox1/skybox_up.jpg")
-    this._loadTexture(TextureManager.TextureType.SKYBOX1_DOWN, "skybox1/skybox_down.jpg")
-    this._loadTexture(TextureManager.TextureType.SKYBOX1_LEFT, "skybox1/skybox_left.jpg")
-    this._loadTexture(TextureManager.TextureType.SKYBOX1_RIGHT, "skybox1/skybox_right.jpg")
-    this._loadTexture(TextureManager.TextureType.SKYBOX1_FRONT, "skybox1/skybox_front.jpg")
-    this._loadTexture(TextureManager.TextureType.SKYBOX1_BACK, "skybox1/skybox_back.jpg")
+    this._loadTexture(TextureManager.TextureType.IMP, "imp.png");
+    this._loadTexture(TextureManager.TextureType.AMMO_BAG, "ammo-bag.png");
+    this._loadTexture(TextureManager.TextureType.SHOTGUN, "shotgun.png");
 };
 
 /**
