@@ -112,11 +112,11 @@ ThreeDCanvas.prototype.addSkybox = function() {
     this.scene.background = new THREE.CubeTextureLoader()
         .setPath( 'textures/skybox1/' )
         .load( [
-            '2-west.jpg',  // west
-            '4-east.jpg',  // east
+            '2-west.jpg',
+            '4-east.jpg',
             '5-up.jpg',
             '6-down.jpg',
-            '1-south.jpg', // south
+            '1-south.jpg',
             '3-north.jpg'
         ] );
 };
