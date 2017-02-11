@@ -26,7 +26,8 @@ function TextureManager() {
 TextureManager.TextureType = {
     SHOTGUN: 1,
     AMMO_BAG: 2,
-    IMP : 3
+    IMP : 3,
+    FIREBALL: 4
 };
 
 /**
@@ -55,6 +56,7 @@ TextureManager.prototype.initialize = function(progressCallback) {
     this._loadTexture(TextureManager.TextureType.IMP, "imp.png");
     this._loadTexture(TextureManager.TextureType.AMMO_BAG, "ammo-bag.png");
     this._loadTexture(TextureManager.TextureType.SHOTGUN, "shotgun.png");
+    this._loadTexture(TextureManager.TextureType.FIREBALL, "fireball.png");
 };
 
 /**

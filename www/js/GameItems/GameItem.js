@@ -27,8 +27,20 @@ function GameItem(params) {
     // The item's position in polar coordinates...
     this.polarPosition = new PolarPosition(1000, 0);
 
+    // The item's movement vector, in (x, y) m/s...
+    this.previousRandomDirectionChangeTime = null;
+    this.movementVector = null;
+
+    // Lifetime in seconds. Some items have a limited lifetime,
+    // after which they disappear...
+    this.lifetimeSeconds = null;
+
     // The item's sprite (if it has one)...
     this.sprite = null;
+
+    // The time this item was created. (Used for items which have
+    // a limited lifetime)...
+    this.creationTime = Date.now();
 
     // Radar info...
     this.radarInfo = {
@@ -95,7 +107,30 @@ GameItem.prototype.setSprite = function(width, height, textureType) {
  * --------------
  * Can be overridden in derived classes to update the item's position.
  */
-GameItem.prototype.updatePosition = function(deltaMilliseconds) {
+GameItem.prototype.updatePosition = function(deltaTimeInfo) {
+    // We move along the movement vector, if one is set up...
+    this.moveAlongMovementVector(deltaTimeInfo);
+
+    // If there is a sprite, we make it face the player...
+    if(this.sprite !== null) {
+        this.makeSpriteFacePlayer();
+    }
+};
+
+/**
+ * moveAlongMovementVector
+ * -----------------------
+ * Moves the item along its movement vector, if it has one.
+ */
+GameItem.prototype.moveAlongMovementVector = function(deltaTimeInfo) {
+    if(this.movementVector === null) {
+        return;
+    }
+    var deltaSeconds = deltaTimeInfo.deltaSeconds;
+    var dx = this.movementVector.x * deltaSeconds;
+    var dy = this.movementVector.y * deltaSeconds;
+    this.position.x += dx;
+    this.position.y += dy;
 };
 
 /**
@@ -125,7 +160,7 @@ GameItem.prototype.updatePolarPosition = function(origin) {
  * -----------------
  * Moves the item towards the player at the speed specified.
  */
-GameItem.prototype.moveTowardsPlayer = function(metersPerSecond, deltaMilliseconds, minimumDistance) {
+GameItem.prototype.moveTowardsPlayer = function(metersPerSecond, deltaTimeInfo, minimumDistance) {
     // We check if the item is already near enough...
     if(this.polarPosition.distanceMeters < minimumDistance) {
         return;
@@ -139,7 +174,7 @@ GameItem.prototype.moveTowardsPlayer = function(metersPerSecond, deltaMillisecon
     var directionY = Math.sign(dy);
 
     // We move in the desired direction...
-    var deltaSeconds = deltaMilliseconds / 1000.0;
+    var deltaSeconds = deltaTimeInfo.deltaSeconds;
     var movementX = directionX * metersPerSecond * deltaSeconds;
     var movementY = directionY * metersPerSecond * deltaSeconds;
     if(Math.abs(movementX) < Math.abs(dx)) {
@@ -181,7 +216,14 @@ GameItem.prototype.makeSpriteFacePlayer = function() {
  * Returns true if the item should be removed from the game, false
  * otherwise.
  */
-GameItem.prototype.checkCollision = function() {
+GameItem.prototype.checkCollision = function(deltaTimeInfo) {
+    if(this.lifetimeSeconds !== null) {
+        // We check if the item has reached the end of its lifetime...
+        var timeAliveSeconds = (deltaTimeInfo.currentTime - this.creationTime) / 1000.0;
+        if(timeAliveSeconds > this.lifetimeSeconds) {
+            return true;
+        }
+    }
     return false;
 };
 
@@ -195,5 +237,57 @@ GameItem.prototype.checkCollision = function() {
 GameItem.prototype.onShot = function(force) {
     this.strength -= force;
     return (this.strength <= 0.0);
+};
+
+/**
+ * setMovementVectorTowardsPosition
+ * --------------------------------
+ * Sets the movement vector of the object to head towards the position
+ * provided at the speed provided.
+ */
+GameItem.prototype.setMovementVectorTowardsPosition = function(position, metersPerSecond) {
+    // We find the vector to the position...
+    var movementX = position.x - this.position.x;
+    var movementY = position.y - this.position.y;
+
+    // We scale it...
+    var distance = this.position.distanceFrom(position);
+    movementX = movementX / distance * metersPerSecond;
+    movementY = movementY / distance * metersPerSecond;
+
+    // And set our movement vector...
+    this.movementVector = new Position(movementX, movementY);
+};
+
+/**
+ * setRandomMovementDirection
+ * --------------------------
+ * Sets the item to move in a random direction, and changes direction
+ * if a certain time has elapsed.
+ */
+GameItem.prototype.setRandomMovementDirection = function(deltaTimeInfo, metersPerSecond, changeIntervalSeconds) {
+    // We check if we want to change direction...
+    var changeDirection = false;
+    if(this.previousRandomDirectionChangeTime === null) {
+        // We do not have a direction, so we set one...
+        changeDirection = true;
+    } else {
+        // Has enough time elapsed?
+        var elapsed = (deltaTimeInfo.currentTime - this.previousRandomDirectionChangeTime) / 1000.0;
+        if(elapsed >= changeIntervalSeconds) {
+            changeDirection = true;
+        }
+    }
+    if(changeDirection === false) {
+        return;
+    }
+
+    // We want to change direction, so we pick a random point...
+    var x = this.position.x + Utils.randomIntBetween(-10, 10);
+    var y = this.position.y + Utils.randomIntBetween(-10, 10);
+    var aimAt = new Position(x, y);
+    this.setMovementVectorTowardsPosition(aimAt, metersPerSecond);
+
+    this.previousRandomDirectionChangeTime = deltaTimeInfo.currentTime;
 };
 

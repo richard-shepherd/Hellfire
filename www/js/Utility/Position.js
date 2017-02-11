@@ -11,6 +11,15 @@ function Position(x, y) {
 }
 
 /**
+ * clone
+ * -----
+ * Returns a new position as a copy of this one.
+ */
+Position.prototype.clone = function() {
+    return new Position(this.x, this.y);
+};
+
+/**
  * currentPosition
  * ---------------
  * Returns a Position object holding the current GPS position.

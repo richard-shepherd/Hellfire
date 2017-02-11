@@ -55,7 +55,7 @@ RadarCanvas.prototype._createCanvas = function() {
  * ---------
  * Shows the radar.
  */
-RadarCanvas.prototype.showRadar = function(compassHeadingRadians, gameItems, deltaMilliseconds, ringColor) {
+RadarCanvas.prototype.showRadar = function(compassHeadingRadians, gameItems, deltaTimeInfo, ringColor) {
     try {
         var ctx = this.canvasContext;
 
@@ -76,7 +76,7 @@ RadarCanvas.prototype.showRadar = function(compassHeadingRadians, gameItems, del
         this._radarCanvas.ctx.clearRect(0, 0, this._radarSide, this._radarSide);
 
         // We show the sweeping, green radar line...
-        this._drawRadarLine(deltaMilliseconds);
+        this._drawRadarLine(deltaTimeInfo);
 
         // We show the compass...
         this._compassHeadingRadians = compassHeadingRadians;
@@ -533,7 +533,7 @@ RadarCanvas.prototype._drawGrid = function(ringColor) {
  * --------------
  * Draws the sweeping, green radar line.
  */
-RadarCanvas.prototype._drawRadarLine = function(deltaMilliseconds) {
+RadarCanvas.prototype._drawRadarLine = function(deltaTimeInfo) {
     try {
         var sourceCanvas = this._radarSweep.canvas;
         var destCtx = this._radarCanvas.ctx;
@@ -546,7 +546,7 @@ RadarCanvas.prototype._drawRadarLine = function(deltaMilliseconds) {
         destCtx.rotate(-1.0 * this._compassHeadingRadians);
 
         // We update the angle...
-        var offsetRadians = deltaMilliseconds / this._radarSweepTimeMilliseconds * 2.0 * Math.PI;
+        var offsetRadians = deltaTimeInfo.deltaMilliseconds / this._radarSweepTimeMilliseconds * 2.0 * Math.PI;
         this._radarLineAngleRadians += offsetRadians;
         while(this._radarLineAngleRadians > 2.0 * Math.PI) {
             this._radarLineAngleRadians -= 2.0 * Math.PI;

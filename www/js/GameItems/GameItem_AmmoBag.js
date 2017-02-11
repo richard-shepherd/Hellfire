@@ -21,9 +21,9 @@ Utils.extend(GameItem, GameItem_AmmoBag); // Derived from GameItem
  * updatePosition
  * --------------
  */
-GameItem_AmmoBag.prototype.updatePosition = function(deltaMilliseconds) {
+GameItem_AmmoBag.prototype.updatePosition = function(deltaTimeInfo) {
     // We do not change the position of the object, but we do rotate it...
-    this.sprite.rotate(0, 0, deltaMilliseconds / 1000.0);
+    this.sprite.rotate(0, 0, deltaTimeInfo.deltaSeconds);
 };
 
 /**
@@ -34,7 +34,7 @@ GameItem_AmmoBag.prototype.updatePosition = function(deltaMilliseconds) {
  * Returns true if the item should be removed from the game, false
  * otherwise.
  */
-GameItem_AmmoBag.prototype.checkCollision = function() {
+GameItem_AmmoBag.prototype.checkCollision = function(/*deltaTimeInfo*/) {
     if(this.polarPosition.distanceMeters > this.game.collisionDistanceMeters) {
         // We have not collided with the ammo bag...
         return false;

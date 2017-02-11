@@ -31,10 +31,26 @@ GameItem_Monster_Imp.prototype.derivedDispose = function() {
  * updatePosition
  * --------------
  */
-GameItem_Monster_Imp.prototype.updatePosition = function(/*deltaMilliseconds*/) {
+GameItem_Monster_Imp.prototype.updatePosition = function(deltaTimeInfo) {
+    // If the imp is far away from the player, it moves fairly randomly
+    // though with a bias to move towards the player. When it is close,
+    // it heads for the player...
+    var playerPosition = Position.currentPosition();
+    var distanceToPlayer = this.position.distanceFrom(playerPosition);
+    if(distanceToPlayer > 50.0) {
+        // The imp is fairly far away, so it moves randomly...
+        this.setRandomMovementDirection(deltaTimeInfo, 1.0, 10.0);
+        this.moveAlongMovementVector(deltaTimeInfo);
+    } else {
+        // The imp is close to us, so it moves towards us...
+        this.moveTowardsPlayer(3.0, deltaTimeInfo, 1.0);
+    }
+
     // We move the imp towards the player, and make it face the player...
-    //this.moveTowardsPlayer(3.0, deltaMilliseconds, 1.0);
     this.makeSpriteFacePlayer();
+
+    // The imp throws fireballs at the player at random intervals...
+    this.throwFireball();
 };
 
 /**
@@ -42,7 +58,7 @@ GameItem_Monster_Imp.prototype.updatePosition = function(/*deltaMilliseconds*/) 
  * --------------
  * Checks if an imp is next to us.
  */
-GameItem_Monster_Imp.prototype.checkCollision = function() {
+GameItem_Monster_Imp.prototype.checkCollision = function(deltaTimeInfo) {
     if(this.polarPosition.distanceMeters > this.game.collisionDistanceMeters) {
         // We have not collided with the imp...
         this.stopAttackSound();
@@ -50,6 +66,7 @@ GameItem_Monster_Imp.prototype.checkCollision = function() {
     }
 
     // We have collided with the imp. It attacks us!
+    this.game.hitPlayer(10.0 * deltaTimeInfo.deltaSeconds)
     this.playAttackSound();
 
     // We return false (ie, we do not remove the imp from the game)...
@@ -77,4 +94,22 @@ GameItem_Monster_Imp.prototype.stopAttackSound = function() {
         AudioManager.getInstance().stopSound(AudioManager.Sounds.IMP_ATTACK, this.impAttackSoundID);
         this.impAttackSoundID = null;
     }
+};
+
+/**
+ * throwFireball
+ * -------------
+ * The imp throws fireballs at random intervals.
+ */
+GameItem_Monster_Imp.prototype.throwFireball = function() {
+    // We check if we should throw a fireball...
+    if(Math.random() > 0.002) {
+        return;
+    }
+
+    // We create and throw a fireball...
+    var fireball = new GameItem_Fireball(this.game);
+    fireball.position = this.position.clone();
+    fireball.setMovementVectorTowardsPosition(Position.currentPosition(), 5.0);
+    this.game.addGameItem(fireball);
 };

@@ -43,6 +43,10 @@ function Game(options) {
     this.waypointManager = new WaypointManager(this.swiper);
     this.gameArea = null;
 
+    // The current health and armor...
+    this.armor = 20.0;
+    this.health = 100.0;
+
     // The game items - ammo-bags, weapons, monsters, other players.
     // This is a map of game-item-number -> game-item.
     // Each item is assigned a unique number.
@@ -59,7 +63,7 @@ function Game(options) {
     this.collisionDistanceMeters = 3.0;
 
     // Timing for the main loop...
-    this._previousUpdateTime = Date.now();
+    this.deltaTimeInfo = new DeltaTimeInfo();
 }
 
 // An enum for the slides we show...
@@ -72,6 +76,31 @@ Game.Slide = {
 };
 
 /**
+ * hitPlayer
+ * ---------
+ * Hits the player with the damage passed in.
+ */
+Game.prototype.hitPlayer = function(damage) {
+    // We damage armor first...
+    if(this.armor > 0.0) {
+        this.armor -= damage;
+
+        // Did the armor take all the damage?
+        if(this.armor < 0.0) {
+            // The armor did not take all the damage...
+            damage = -1.0 * this.armor;
+            this.armor = 0.0;
+        } else {
+            // The armor took all the damage...
+            damage = 0.0;
+        }
+    }
+
+    // The player's health takes any damage remaining...
+    this.health -= damage;
+};
+
+/**
  *_onVideoDataUpdated
  * ------------------
  * Called when we get a new frame from the camera.
@@ -80,16 +109,14 @@ Game.Slide = {
 Game.prototype._onVideoDataUpdated =  function (imageData, canvasContext) {
     // We find the time elapsed since the last iteration.
     // The timing and movement of various aspects of the game use this.
-    var now = Date.now();
-    var deltaMilliseconds = now - this._previousUpdateTime;
-    this._previousUpdateTime = now;
+    this.deltaTimeInfo.update();
 
     // We hold the data as we may need it in other functions...
     this.imageData = imageData;
     this.canvasContext = canvasContext;
 
     // Updates game items, including checking for collisions...
-    this._updateGameItems(deltaMilliseconds);
+    this._updateGameItems();
 
     // We show the 3D canvas...
     this.threeDCanvas.render();
@@ -103,13 +130,13 @@ Game.prototype._onVideoDataUpdated =  function (imageData, canvasContext) {
     // player's color...
     var compassHeadingRadians = this._locationProvider.compassHeadingRadians;
     var ringColor = matchingPlayer ? matchingPlayer.color : null;
-    this._radarCanvas.showRadar(compassHeadingRadians, this.gameItems, deltaMilliseconds, ringColor);
+    this._radarCanvas.showRadar(compassHeadingRadians, this.gameItems, this.deltaTimeInfo, ringColor);
 
     // We show the position info (lat, long, accuracy)...
     this._showPositionInfo();
 
-    // Shows the amount of ammo for the current weapon...
-    this._showAmmo();
+    // Shows player info (ammo, armor, health...)...
+    this._showPlayerInfo();
 
     // If we are in adding-player mode, we show the camera color on the
     // add-player button...
@@ -127,30 +154,32 @@ Game.prototype._onVideoDataUpdated =  function (imageData, canvasContext) {
  * Called each time we render a new frame in the game.
  */
 Game.prototype.onMessageLoop = function() {
-    // We find the time elapsed since the last iteration.
-    // The timing and movement of various aspects of the game use this.
-    var now = Date.now();
-    var deltaMilliseconds = now - this._previousUpdateTime;
-    this._previousUpdateTime = now;
+    try {
+        // We find the time elapsed since the last iteration.
+        // The timing and movement of various aspects of the game use this.
+        this.deltaTimeInfo.update();
 
-    // Updates game items, including checking for collisions...
-    this._updateGameItems(deltaMilliseconds);
+        // Updates game items, including checking for collisions...
+        this._updateGameItems();
 
-    // We show the 3D canvas...
-    this.threeDCanvas.render();
+        // We show the 3D canvas...
+        this.threeDCanvas.render();
 
-    // We draw the crosshairs.
-    // If we have a matching player, we show the center ring in the
-    // player's color...
-    var compassHeadingRadians = this._locationProvider.compassHeadingRadians;
-    var ringColor = null;
-    this._radarCanvas.showRadar(compassHeadingRadians, this.gameItems, deltaMilliseconds, ringColor);
+        // We draw the crosshairs.
+        // If we have a matching player, we show the center ring in the
+        // player's color...
+        var compassHeadingRadians = this._locationProvider.compassHeadingRadians;
+        var ringColor = null;
+        this._radarCanvas.showRadar(compassHeadingRadians, this.gameItems, this.deltaTimeInfo, ringColor);
 
-    // We show the position info (lat, long, accuracy)...
-    this._showPositionInfo();
+        // We show the position info (lat, long, accuracy)...
+        this._showPositionInfo();
 
-    // Shows the amount of ammo for the current weapon...
-    this._showAmmo();
+        // Shows the amount of ammo for the current weapon...
+        this._showPlayerInfo();
+    } catch(ex) {
+        Logger.log(ex.message);
+    }
 };
 
 /**
@@ -160,7 +189,7 @@ Game.prototype.onMessageLoop = function() {
  * for the radar. Checks for collisions and takes action if they are detected
  * including removing items if necessary.
  */
-Game.prototype._updateGameItems = function(deltaMilliseconds) {
+Game.prototype._updateGameItems = function() {
     var key, gameItem;
 
     // We update the items' positions and convert them
@@ -168,7 +197,7 @@ Game.prototype._updateGameItems = function(deltaMilliseconds) {
     var currentPosition = Position.currentPosition();
     for(key in this.gameItems) {
         gameItem = this.gameItems[key];
-        gameItem.updatePosition(deltaMilliseconds);
+        gameItem.updatePosition(this.deltaTimeInfo);
         gameItem.updatePolarPosition(currentPosition);
         gameItem.updateSprite();
     }
@@ -177,7 +206,7 @@ Game.prototype._updateGameItems = function(deltaMilliseconds) {
     var keysToRemove = [];
     for(key in this.gameItems) {
         gameItem = this.gameItems[key];
-        var removeItem = gameItem.checkCollision();
+        var removeItem = gameItem.checkCollision(this.deltaTimeInfo);
         if(removeItem) {
             keysToRemove.push(key);
         }
@@ -440,13 +469,15 @@ Game.prototype._setupCamera = function() {
 };
 
 /**
- * _showAmmo
- * ---------
- * Shows the amount of ammo for the current weapon.
+ * _showPlayerInfo
+ * ---------------
+ * Shows the info for the player (ammo, armor, health etc).
  */
-Game.prototype._showAmmo = function() {
+Game.prototype._showPlayerInfo = function() {
     var ammoCount = this.ammoManager.getAmmoCount(AmmoManager.AmmoType.SHOTGUN_CARTRIDGE);
     $("#ammo-count").text(ammoCount);
+    $("#armor-value").text(Math.round(this.armor));
+    $("#health-value").text(Math.round(this.health));
 };
 
 /**
