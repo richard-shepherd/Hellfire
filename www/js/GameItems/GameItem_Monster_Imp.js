@@ -31,7 +31,7 @@ GameItem_Monster_Imp.prototype.derivedDispose = function() {
  * updatePosition
  * --------------
  */
-GameItem_Monster_Imp.prototype.updatePosition = function(deltaMilliseconds) {
+GameItem_Monster_Imp.prototype.updatePosition = function(/*deltaMilliseconds*/) {
     // We move the imp towards the player, and make it face the player...
     //this.moveTowardsPlayer(3.0, deltaMilliseconds, 1.0);
     this.makeSpriteFacePlayer();

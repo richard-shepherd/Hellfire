@@ -56,7 +56,7 @@ function Game(options) {
     this.ammoManager = null;
 
     // The distance at which collisions are deemed to happen...
-    this.collisionDistanceMeters = 5.0;
+    this.collisionDistanceMeters = 3.0;
 
     // Timing for the main loop...
     this._previousUpdateTime = Date.now();

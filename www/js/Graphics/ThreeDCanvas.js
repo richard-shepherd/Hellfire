@@ -9,7 +9,7 @@ function ThreeDCanvas(canvasContext) {
 
     // We create the screen and the camera...
     this.scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera( 120, 1.0, 0.1, 1000 );
+    this.camera = new THREE.PerspectiveCamera( 100, 1.0, 0.1, 1000 );
     this.camera.position.y = 2.0;
     this.camera.rotation.order = "YXZ";
 
