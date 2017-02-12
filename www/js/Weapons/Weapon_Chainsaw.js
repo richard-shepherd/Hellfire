@@ -21,8 +21,8 @@ Weapon_Chainsaw.prototype.firePressed = function() {
     // We play the sound...
     this.playSound();
 
-    // // We fire the weapon...
-    // this.shootNearestEnemy(1000, 0.0);
+    // We use the weapon...
+    this.shootNearestEnemy(10, 0.0, 5.0);
 };
 
 /**

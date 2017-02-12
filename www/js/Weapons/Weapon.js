@@ -31,7 +31,7 @@ Weapon.prototype.fireReleased = function() {
  * The enemy is then hit with the force specified, which can be set to decrease
  * with distance if required.
  */
-Weapon.prototype.shootNearestEnemy = function(force, forceDecreasePerMeter) {
+Weapon.prototype.shootNearestEnemy = function(force, forceDecreasePerMeter, maxRangeMeters) {
     // We find items currently in our crosshairs...
     var targettedItems = this.game.getTargettedGameItems();
 
@@ -51,6 +51,12 @@ Weapon.prototype.shootNearestEnemy = function(force, forceDecreasePerMeter) {
     // Did we find an enemy item in the spread range?
     if(nearestItem === null) {
         return;  // No enemy was in sight...
+    }
+
+    // Is the enemy too far away?
+    var enemyDistanceMeters = nearestItem.polarPosition.distanceMeters;
+    if(enemyDistanceMeters > maxRangeMeters) {
+        return;  // Enemy too far away...
     }
 
     // We've got an enemy, so we shoot it.
