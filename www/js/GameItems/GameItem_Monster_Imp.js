@@ -66,7 +66,7 @@ GameItem_Monster_Imp.prototype.checkCollision = function(deltaTimeInfo) {
     }
 
     // We have collided with the imp. It attacks us!
-    this.game.hitPlayer(10.0 * deltaTimeInfo.deltaSeconds)
+    this.game.hitPlayer(10.0 * deltaTimeInfo.deltaSeconds);
     this.playAttackSound();
 
     // We return false (ie, we do not remove the imp from the game)...

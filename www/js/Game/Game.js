@@ -422,8 +422,8 @@ Game.prototype._setupGameItems = function() {
     }
 
     // We add some items...
-    addItemsInRandomLocations(this, GameItem_AmmoBag, 5);
-    addItemsInRandomLocations(this, GameItem_Monster_Imp, 8);
+    //addItemsInRandomLocations(this, GameItem_AmmoBag, 5);
+    addItemsInRandomLocations(this, GameItem_Monster_Imp, 1);
 };
 
 /**

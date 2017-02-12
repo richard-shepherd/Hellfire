@@ -202,7 +202,7 @@ GameItem.prototype.makeSpriteFacePlayer = function() {
     if(dy !== 0.0) {
         angle = -1.0 * Math.atan(dx/dy);
     }
-    this.sprite.setRotation(0, 0, angle);
+    this.sprite.setRotation(null, null, angle);
 };
 
 /**

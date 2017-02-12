@@ -39,6 +39,14 @@ ThreeDSprite.prototype.dispose = function() {
 };
 
 /**
+ * setDistanceFromGround
+ * ---------------------
+ */
+ThreeDSprite.prototype.setDistanceFromGround = function(metersFromGround) {
+    this.sprite.position.y = metersFromGround;
+};
+
+/**
  * setPosition
  * -----------
  */
@@ -55,9 +63,15 @@ ThreeDSprite.prototype.setPosition = function(x, y) {
  * Rotates the sprite by relative values (in radians) passed in.
  */
 ThreeDSprite.prototype.rotate = function(x, y, z) {
-    this.sprite.rotation.x += x;
-    this.sprite.rotation.y += z;
-    this.sprite.rotation.z += y;
+    if(x) {
+        this.sprite.rotation.x += x;
+    }
+    if(y) {
+        this.sprite.rotation.z += y;
+    }
+    if(z) {
+        this.sprite.rotation.y += z;
+    }
 };
 
 /**
@@ -66,7 +80,13 @@ ThreeDSprite.prototype.rotate = function(x, y, z) {
  * Sets the sprite's rotation to the absolute values passed in.
  */
 ThreeDSprite.prototype.setRotation = function(x, y, z) {
-    this.sprite.rotation.x = x;
-    this.sprite.rotation.y = z;
-    this.sprite.rotation.z = y;
+    if(x) {
+        this.sprite.rotation.x = x;
+    }
+    if(y) {
+        this.sprite.rotation.z = y;
+    }
+    if(z) {
+        this.sprite.rotation.y = z;
+    }
 };

@@ -14,8 +14,21 @@ function GameItem_Fireball(game) {
 
     // The sprite...
     this.setSprite(1.0, 1.0, TextureManager.TextureType.FIREBALL);
+    this.sprite.setDistanceFromGround(1.7);
 
     // The fireball dies after a period of time...
     this.lifetimeSeconds = 10.0;
 }
 Utils.extend(GameItem, GameItem_Fireball); // Derived from GameItem
+
+/**
+ * updatePosition
+ * --------------
+ */
+GameItem_Fireball.prototype.updatePosition = function(deltaTimeInfo) {
+    // We move along the movement vector...
+    this.moveAlongMovementVector(deltaTimeInfo);
+    this.makeSpriteFacePlayer();
+    var rotation = deltaTimeInfo.deltaSeconds * 20.0;
+    this.sprite.rotate(null, rotation, null);
+};
