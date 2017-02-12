@@ -11,10 +11,10 @@ function Weapon_Shotgun(game) {
 Utils.extend(Weapon, Weapon_Shotgun); // Derived from Weapon
 
 /**
- * fire
- * ----
+ * firePressed
+ * -----------
  */
-Weapon_Shotgun.prototype.fire = function() {
+Weapon_Shotgun.prototype.firePressed = function() {
     // We check if there is any ammo left...
     var ammoType = AmmoManager.AmmoType.SHOTGUN_CARTRIDGE;
     if(this.game.ammoManager.getAmmoCount(ammoType) === 0) {

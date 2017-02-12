@@ -286,22 +286,55 @@ Game.prototype._setupAddPlayerButton = function() {
  * Sets up handling of the fire button.
  */
 Game.prototype._setupFireButton = function() {
-    var that = this;
-    //this.fireButton = document.getElementById(this.options.fireButtonID);
-    this.canvas.onclick = function() {
-        that._onFireClicked();
-    };
+    try {
+        var that = this;
+
+        var canvas = $("#video-canvas");
+        canvas.on("pointerdown", function(event) {
+            try {
+                that._onFirePressed();
+            } catch(ex) {
+                Logger.log(ex.message);
+            }
+        });
+        canvas.on("pointerup", function(event) {
+            try {
+                that._onFireReleased();
+            } catch(ex) {
+                Logger.log(ex.message);
+            }
+        });
+    } catch(ex) {
+        Logger.log(ex.message);
+    }
 };
 
 /**
- * _onFireClicked
+ * _onFirePressed
  * --------------
- * Called when the fire button is clicked.
+ * Called when the fire button is pressed.
  */
-Game.prototype._onFireClicked = function() {
+Game.prototype._onFirePressed = function() {
     try {
+        Logger.log("Fire pressed");
         if(this.currentWeapon !== null) {
-            this.currentWeapon.fire();
+            this.currentWeapon.firePressed();
+        }
+    } catch(ex) {
+        Logger.log(ex.message);
+    }
+};
+
+/**
+ * _onFireReleased
+ * ---------------
+ * Called when the fire button is released.
+ */
+Game.prototype._onFireReleased = function() {
+    try {
+        Logger.log("Fire released");
+        if(this.currentWeapon !== null) {
+            this.currentWeapon.fireReleased();
         }
     } catch(ex) {
         Logger.log(ex.message);
@@ -460,7 +493,7 @@ Game.prototype._setupGameItems = function() {
     // We add some items...
     addItemsInRandomLocations(this, GameItem_Chainsaw, 5);
     addItemsInRandomLocations(this, GameItem_AmmoBag, 5);
-    addItemsInRandomLocations(this, GameItem_Monster_Imp, 8);
+    //addItemsInRandomLocations(this, GameItem_Monster_Imp, 8);
 };
 
 /**

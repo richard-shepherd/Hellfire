@@ -7,18 +7,54 @@
 function Weapon_Chainsaw(game) {
     // We call the base class's constructor...
     Weapon.call(this, game);
+
+    // The active chainsaw sound...
+    this.soundID = null;
 }
 Utils.extend(Weapon, Weapon_Chainsaw); // Derived from Weapon
 
 /**
- * fire
- * ----
+ * firePressed
+ * -----------
  */
-Weapon_Chainsaw.prototype.fire = function() {
-    // We play the sound and reduce the ammo count...
-    AudioManager.getInstance().playSound(AudioManager.Sounds.CHAINSAW, 10.0);
+Weapon_Chainsaw.prototype.firePressed = function() {
+    // We play the sound...
+    this.playSound();
 
     // // We fire the weapon...
     // this.shootNearestEnemy(1000, 0.0);
 };
+
+/**
+ * fireReleased
+ * ------------
+ */
+Weapon_Chainsaw.prototype.fireReleased = function() {
+    // We stop the sound...
+    this.stopSound();
+};
+
+/**
+ * playSound
+ * ---------
+ * Plays the chainsaw sound, if it is not already playing.
+ */
+Weapon_Chainsaw.prototype.playSound = function() {
+    if(this.soundID === null) {
+        this.soundID = AudioManager.getInstance().playLoop(AudioManager.Sounds.CHAINSAW, 10.0);
+    }
+};
+
+/**
+ * stopSound
+ * ---------
+ * Stops the chainsaw sound, if it is playing.
+ */
+Weapon_Chainsaw.prototype.stopSound = function() {
+    if(this.soundID !== null) {
+        AudioManager.getInstance().stopSound(AudioManager.Sounds.CHAINSAW, this.soundID);
+        this.soundID = null;
+    }
+};
+
 

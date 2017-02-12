@@ -9,6 +9,22 @@ function Weapon(game) {
 }
 
 /**
+ * firePressed
+ * -----------
+ * Can be overridden in derived classes to handle Fire being pressed.
+ */
+Weapon.prototype.firePressed = function() {
+};
+
+/**
+ * fireReleased
+ * ------------
+ * Can be overridden in derived classes to handle Fire being released.
+ */
+Weapon.prototype.fireReleased = function() {
+};
+
+/**
  * shootNearestEnemy
  * -----------------
  * Find the nearest enemy within the angle provided by the spread parameter.

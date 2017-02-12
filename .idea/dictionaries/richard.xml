@@ -9,6 +9,8 @@
       <w>negx</w>
       <w>negy</w>
       <w>negz</w>
+      <w>onmousedown</w>
+      <w>onmouseup</w>
       <w>posx</w>
       <w>posz</w>
       <w>skybox</w>

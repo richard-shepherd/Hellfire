@@ -64,7 +64,7 @@ AudioManager.prototype.initialize = function(progressCallback) {
     this._loadSound(AudioManager.Sounds.SHOTGUN, "audio/shotgun.ogg");
     this._loadSound(AudioManager.Sounds.AMMO_PICKUP, "audio/ammo-pickup.ogg");
     this._loadSound(AudioManager.Sounds.IMP_ATTACK, "audio/imp-attack.ogg");
-    this._loadSound(AudioManager.Sounds.IMP_ATTACK, "audio/chainsaw.ogg");
+    this._loadSound(AudioManager.Sounds.CHAINSAW, "audio/chainsaw.ogg");
 };
 
 /**
