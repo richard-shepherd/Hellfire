@@ -27,7 +27,8 @@ TextureManager.TextureType = {
     SHOTGUN: 1,
     AMMO_BAG: 2,
     IMP : 3,
-    FIREBALL: 4
+    FIREBALL: 4,
+    CHAINSAW: 5
 };
 
 /**
@@ -53,10 +54,11 @@ TextureManager.getInstance = function() {
  */
 TextureManager.prototype.initialize = function(progressCallback) {
     this._progressCallback = progressCallback;
-    this._loadTexture(TextureManager.TextureType.IMP, "imp.png");
-    this._loadTexture(TextureManager.TextureType.AMMO_BAG, "ammo-bag.png");
     this._loadTexture(TextureManager.TextureType.SHOTGUN, "shotgun.png");
+    this._loadTexture(TextureManager.TextureType.AMMO_BAG, "ammo-bag.png");
+    this._loadTexture(TextureManager.TextureType.IMP, "imp.png");
     this._loadTexture(TextureManager.TextureType.FIREBALL, "fireball.png");
+    this._loadTexture(TextureManager.TextureType.CHAINSAW, "chainsaw.png");
 };
 
 /**
