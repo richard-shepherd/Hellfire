@@ -193,8 +193,29 @@ Game.prototype.onMessageLoop = function() {
  * Makes sure the canvas is the right size for the screen.
  */
 Game.prototype._setupCanvasSize = function() {
-    this.canvas.width = this.canvasPanel.width();
-    this.canvas.height = this.canvasPanel.height();
+    var minResolution = 750;
+
+    // We find the canvas size for the current screen layout...
+    var aspect = this.canvasPanel.width() / this.canvasPanel.height();
+    var width = 0.0;
+    var height = 0.0;
+    if(aspect < 1.0) {
+        width = minResolution;
+        height = minResolution / aspect;
+    } else {
+        width = minResolution * aspect;
+        height = minResolution;
+    }
+    width = Math.floor(width);
+    height = Math.floor(height);
+
+    // We update the canvas size if it has changed...
+    if(width !== this.canvas.width) {
+        this.canvas.width = width;
+    }
+    if(height !== this.canvas.height) {
+        this.canvas.height = height;
+    }
 };
 
 /**
@@ -439,7 +460,7 @@ Game.prototype._setupGameItems = function() {
     // We add some items...
     addItemsInRandomLocations(this, GameItem_Chainsaw, 5);
     addItemsInRandomLocations(this, GameItem_AmmoBag, 5);
-    //addItemsInRandomLocations(this, GameItem_Monster_Imp, 8);
+    addItemsInRandomLocations(this, GameItem_Monster_Imp, 8);
 };
 
 /**
