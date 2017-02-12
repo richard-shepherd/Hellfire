@@ -33,17 +33,6 @@ function ThreeDCanvas(canvasContext) {
 }
 
 /**
- * setSize
- * -------
- * Sets the size of the 3D canvas.
- */
-ThreeDCanvas.prototype.setSize = function(width, height) {
-    this.width = width;
-    this.height = height;
-    this.renderer.setSize(width, height);
-};
-
-/**
  * render
  * ------
  * Renders the 3D scene.
@@ -58,14 +47,20 @@ ThreeDCanvas.prototype.render = function() {
     this.camera.rotation.x = locationProvider.tiltRadians;
     this.camera.rotation.y = -1.0 * locationProvider.compassHeadingRadians;
 
-    // We set the aspect ratio...
+    // We check that the size we are rendering to matches the canvas...
     var canvas = this.canvasContext.canvas;
     var width = canvas.width;
     var height = canvas.height;
-    this.camera.aspect = width / height;
+    var rendererSize = this.renderer.getSize();
+    if(rendererSize.width !== width || rendererSize.height !== height) {
+        // We resize the renderer and aspect ration...
+        var aspect = width / height;
+        this.camera.aspect = width / height;
+        this.camera.updateProjectionMatrix();
+        this.renderer.setSize(width, height);
+    }
 
     // We render the scene and show it on the canvas...
-    this.renderer.setSize(width, height);
     this.renderer.render(this.scene, this.camera);
     this.canvasContext.drawImage(this.renderer.domElement, 0, 0);
 };

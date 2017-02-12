@@ -27,7 +27,9 @@ function Game(options) {
 
     // The most recent data from the camera...
     this.imageData = null;
-    this.canvasContext = null;
+    this.canvasPanel = $("#gunsight-canvas-panel");
+    this.canvas = document.getElementById("video-canvas");
+    this.canvasContext = this.canvas.getContext("2d");
 
     // Manages the collection of players...
     this.playerManager = new PlayerManager();
@@ -159,6 +161,9 @@ Game.prototype.onMessageLoop = function() {
         // The timing and movement of various aspects of the game use this.
         this.deltaTimeInfo.update();
 
+        // Updates the graphics canvas size...
+        this._setupCanvasSize();
+
         // Updates game items, including checking for collisions...
         this._updateGameItems();
 
@@ -180,6 +185,16 @@ Game.prototype.onMessageLoop = function() {
     } catch(ex) {
         Logger.log(ex.message);
     }
+};
+
+/**
+ * _setupCanvasSize
+ * ----------------
+ * Makes sure the canvas is the right size for the screen.
+ */
+Game.prototype._setupCanvasSize = function() {
+    this.canvas.width = this.canvasPanel.width();
+    this.canvas.height = this.canvasPanel.height();
 };
 
 /**
@@ -251,8 +266,8 @@ Game.prototype._setupAddPlayerButton = function() {
  */
 Game.prototype._setupFireButton = function() {
     var that = this;
-    this.fireButton = document.getElementById(this.options.fireButtonID);
-    this.fireButton.onclick = function() {
+    //this.fireButton = document.getElementById(this.options.fireButtonID);
+    this.canvas.onclick = function() {
         that._onFireClicked();
     };
 };
@@ -422,8 +437,9 @@ Game.prototype._setupGameItems = function() {
     }
 
     // We add some items...
-    //addItemsInRandomLocations(this, GameItem_AmmoBag, 5);
-    addItemsInRandomLocations(this, GameItem_Monster_Imp, 1);
+    addItemsInRandomLocations(this, GameItem_Chainsaw, 5);
+    addItemsInRandomLocations(this, GameItem_AmmoBag, 5);
+    //addItemsInRandomLocations(this, GameItem_Monster_Imp, 8);
 };
 
 /**

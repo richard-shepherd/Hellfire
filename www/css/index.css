@@ -6,8 +6,10 @@ body {
 }
 
 .swiper-container {
-    min-height: 100vh;
+    height: 100vh;
+    width: 100vw;
 }
+
 
 .slide-content {
     margin: 1vh 2vw;
@@ -42,24 +44,28 @@ body {
 
 #video-canvas {
     width: 100%;
+    height: 100%;
     margin: 0 auto;
 }
 
 #gunsight-top-panel {
-    height: 45vh;
+    height: 92vh;
+    width: 95vw;
 }
 
-#gunsight-bottom-panel {
-    height: 45vh;
-}
+/*#gunsight-bottom-panel {*/
+    /*height: 45vh;*/
+/*}*/
 
 #gunsight-canvas-panel {
     width: 85%;
+    height: 90%;
     float: left;
 }
 
 #gunsight-controls-panel {
     width: 15%;
+    height: 90%;
     float: right;
 }
 
@@ -85,7 +91,7 @@ body {
 
 #waypoints-map {
     width:100vw;
-    height:80vh;
+    height:75vh;
 }
 
 .waypoint-overlay{
@@ -106,8 +112,8 @@ body {
 #waypoints-reset-button-wrapper {
     text-align: center;
     float: left;
-    width: 45vw;
-    height: 10vh;
+    width: 48%;
+    height: 10%;
 }
 #waypoints-reset-button {
     margin-top: 2%;
@@ -128,8 +134,8 @@ body {
 #waypoints-play-button-wrapper {
     text-align: center;
     float: right;
-    width: 45vw;
-    height: 10vh;
+    width: 48%;
+    height: 10%;
 }
 
 #waypoints-play-button {
@@ -153,5 +159,5 @@ body {
     font-size: 2vw;
     overflow-y: scroll;
     overflow-x: hidden;
-    max-height: 80vh;
+    height: 80vh;
 }
