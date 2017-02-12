@@ -408,7 +408,7 @@ Game.prototype._onGunsightSlideShown = function() {
         this._setupGameItems();
 
         // We give the payer an initial weapon...
-        this.currentWeapon = new Weapon_Shotgun(this);
+        this.currentWeapon = new Weapon_Chainsaw(this);
 
         // We give the player some ammo...
         this.ammoManager = new AmmoManager();

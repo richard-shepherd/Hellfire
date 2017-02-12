@@ -5,7 +5,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.webapp",
       "src": "",
       "projectGuid": "b10ae09a-067c-4db1-a8ca-d8a0036114b9",
-      "lastModifiedDate": 1483621678738,
+      "lastModifiedDate": 1486921674487,
       "creationDate": 1483621649935
     },
     "testDirectory": "test",
@@ -39,7 +39,8 @@
           "android-minSdkVersion": "14",
           "android-targetSdkVersion": "23",
           "android-installLocation": "auto",
-          "android-signed": true
+          "android-signed": true,
+          "Fullscreen": true
         },
         "isActive_": true,
         "certificateId_": "",

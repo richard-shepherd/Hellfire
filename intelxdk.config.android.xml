@@ -12,6 +12,7 @@
 <preference name="android-targetSdkVersion" value="23"/>
 <preference name="android-installLocation" value="auto"/>
 <preference name="android-signed" value="true"/>
+<preference name="Fullscreen" value="true"/>
 <intelxdk:crosswalk version="19"/>
 <!--creationInfo:{"src":"","projectTypeName":"com.intel.xdk.projecttype.webapp"}-->
 <preference name="debuggable" value="false"/></widget>

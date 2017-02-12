@@ -23,5 +23,10 @@
         "prefix": "tinyhippos-"
       }
     }
+  },
+  "build-tab": {
+    "selectedTargets": [
+      "WEB_CHROME"
+    ]
   }
 }
