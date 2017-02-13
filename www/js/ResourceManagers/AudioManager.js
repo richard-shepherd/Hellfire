@@ -31,7 +31,9 @@ AudioManager.Sounds = {
     SHOTGUN : 1,
     AMMO_PICKUP: 3,
     IMP_ATTACK: 4,
-    CHAINSAW: 5
+    CHAINSAW: 5,
+    GRUNT: 6,
+    FIREBALL_HIT: 7
 };
 
 /**
@@ -65,6 +67,8 @@ AudioManager.prototype.initialize = function(progressCallback) {
     this._loadSound(AudioManager.Sounds.AMMO_PICKUP, "audio/ammo-pickup.ogg");
     this._loadSound(AudioManager.Sounds.IMP_ATTACK, "audio/imp-attack.ogg");
     this._loadSound(AudioManager.Sounds.CHAINSAW, "audio/chainsaw.ogg");
+    this._loadSound(AudioManager.Sounds.GRUNT, "audio/grunt.ogg");
+    this._loadSound(AudioManager.Sounds.FIREBALL_HIT, "audio/fireball-hit.ogg");
 };
 
 /**

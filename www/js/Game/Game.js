@@ -49,6 +49,9 @@ function Game(options) {
     this.armor = 20.0;
     this.health = 100.0;
 
+    // Last time the player grunted in pain...
+    this.lastGruntTime = Date.now();
+
     // The game items - ammo-bags, weapons, monsters, other players.
     // This is a map of game-item-number -> game-item.
     // Each item is assigned a unique number.
@@ -100,6 +103,12 @@ Game.prototype.hitPlayer = function(damage) {
 
     // The player's health takes any damage remaining...
     this.health -= damage;
+
+    // We grunt when hit...
+    if(this.deltaTimeInfo.currentTime - this.lastGruntTime > 5000 || damage > 19) {
+        AudioManager.getInstance().playSound(AudioManager.Sounds.GRUNT, 10);
+        this.lastGruntTime = this.deltaTimeInfo.currentTime;
+    }
 };
 
 /**
@@ -227,6 +236,11 @@ Game.prototype._setupCanvasSize = function() {
  */
 Game.prototype._updateGameItems = function() {
     var key, gameItem;
+
+    // We fire any continuously firing weapons...
+    if(this.currentWeapon !== null) {
+        this.currentWeapon.onMessageLoop(this.deltaTimeInfo);
+    }
 
     // We update the items' positions and convert them
     // to polar coordinates...
@@ -447,6 +461,7 @@ Game.prototype._onGunsightSlideShown = function() {
         this.ammoManager = new AmmoManager();
         this.ammoManager.addAmmo(AmmoManager.AmmoType.PISTOL_BULLET, 10);
         this.ammoManager.addAmmo(AmmoManager.AmmoType.SHOTGUN_CARTRIDGE, 5);
+        this.ammoManager.addAmmo(AmmoManager.AmmoType.CHAINSAW_FUEL, 15);
 
         // We set up the camera. This sets up the image-updated callback
         // which is the main "message loop" of the game...
@@ -544,7 +559,7 @@ Game.prototype._setupCamera = function() {
  * Shows the info for the player (ammo, armor, health etc).
  */
 Game.prototype._showPlayerInfo = function() {
-    var ammoCount = this.ammoManager.getAmmoCount(AmmoManager.AmmoType.SHOTGUN_CARTRIDGE);
+    var ammoCount = this.ammoManager.getAmmoCount(AmmoManager.AmmoType.CHAINSAW_FUEL);
     $("#ammo-count").text(ammoCount);
     $("#armor-value").text(Math.round(this.armor));
     $("#health-value").text(Math.round(this.health));

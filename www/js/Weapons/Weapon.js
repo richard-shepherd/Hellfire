@@ -25,6 +25,15 @@ Weapon.prototype.fireReleased = function() {
 };
 
 /**
+ * onMessageLoop
+ * -------------
+ * Can be overridden in derived classes to handle ongoing firing, for
+ * weapons like machine guns and the chainsaw.
+ */
+Weapon.prototype.onMessageLoop = function(deltaTimeInfo) {
+};
+
+/**
  * shootNearestEnemy
  * -----------------
  * Find the nearest enemy within the angle provided by the spread parameter.

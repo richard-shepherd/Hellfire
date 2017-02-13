@@ -10,6 +10,9 @@ function Weapon_Chainsaw(game) {
 
     // The active chainsaw sound...
     this.soundID = null;
+
+    // Used to decide when hits are made and fuel is used...
+    this.startTime = null;
 }
 Utils.extend(Weapon, Weapon_Chainsaw); // Derived from Weapon
 
@@ -21,8 +24,8 @@ Weapon_Chainsaw.prototype.firePressed = function() {
     // We play the sound...
     this.playSound();
 
-    // We use the weapon...
-    this.shootNearestEnemy(10, 0.0, 5.0);
+    // We note that we have started the chainsaw...
+    this.startTime = Date.now();
 };
 
 /**
@@ -32,7 +35,51 @@ Weapon_Chainsaw.prototype.firePressed = function() {
 Weapon_Chainsaw.prototype.fireReleased = function() {
     // We stop the sound...
     this.stopSound();
+
+    // We note that the chainsaw is stopped...
+    this.startTime = null;
 };
+
+/**
+ * onMessageLoop
+ * -------------
+ * If Fire is pressed, we use fuel and see if there is an enemy to hit.
+ */
+Weapon.prototype.onMessageLoop = function(deltaTimeInfo) {
+    try {
+        // Is Fire pressed?
+        if(this.startTime === null) {
+            return;
+        }
+
+        // We check if we have ammo (in this case fuel)...
+        var ammoType = AmmoManager.AmmoType.CHAINSAW_FUEL;
+        if(this.game.ammoManager.getAmmoCount(ammoType) <= 0) {
+            // There is no ammo left...
+            this.fireReleased();
+            return;
+        }
+
+        // We only do something every interval...
+        if(deltaTimeInfo.currentTime - this.startTime < 400) {
+            return;
+        }
+        this.startTime = deltaTimeInfo.currentTime;
+
+        // We reduce the fuel...
+        this.game.ammoManager.addAmmo(ammoType, -1);
+
+        // We use the weapon...
+        this.shootNearestEnemy(10, 0.0, 5.0);
+    } catch(ex) {
+        Logger.log(ex.message);
+    }
+
+
+
+
+};
+
 
 /**
  * playSound

@@ -29,22 +29,21 @@ GameItem_Chainsaw.prototype.updatePosition = function(deltaTimeInfo) {
 /**
  * checkCollision
  * --------------
- * Checks if we have come to an ammo bag.
+ * Checks if we have collided with the item.
  *
  * Returns true if the item should be removed from the game, false
  * otherwise.
  */
 GameItem_Chainsaw.prototype.checkCollision = function(/*deltaTimeInfo*/) {
     if(this.polarPosition.distanceMeters > this.game.collisionDistanceMeters) {
-        // We have not collided with the ammo bag...
+        // We have not collided with the item...
         return false;
     }
 
-    // We have collided with the ammo bag.
-    // We add ammo to the player...
+    // We have collided with the item...
     AudioManager.getInstance().playSound(AudioManager.Sounds.AMMO_PICKUP, 20.0);
     this.game.ammoManager.addAmmoFromBag();
 
-    // We return true to remove this ammo bag from the game...
+    // We return true to remove this item from the game...
     return true;
 };

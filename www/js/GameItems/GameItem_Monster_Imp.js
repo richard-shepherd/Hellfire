@@ -110,6 +110,6 @@ GameItem_Monster_Imp.prototype.throwFireball = function() {
     // We create and throw a fireball...
     var fireball = new GameItem_Fireball(this.game);
     fireball.position = this.position.clone();
-    fireball.setMovementVectorTowardsPosition(Position.currentPosition(), 5.0);
+    fireball.setMovementVectorTowardsPosition(Position.currentPosition(), 14.0);
     this.game.addGameItem(fireball);
 };

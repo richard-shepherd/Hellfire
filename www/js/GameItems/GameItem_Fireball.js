@@ -32,3 +32,25 @@ GameItem_Fireball.prototype.updatePosition = function(deltaTimeInfo) {
     var rotation = deltaTimeInfo.deltaSeconds * 20.0;
     this.sprite.rotate(null, rotation, null);
 };
+
+/**
+ * checkCollision
+ * --------------
+ * Checks if we have collided with the item.
+ *
+ * Returns true if the item should be removed from the game, false
+ * otherwise.
+ */
+GameItem_Fireball.prototype.checkCollision = function(/*deltaTimeInfo*/) {
+    if(this.polarPosition.distanceMeters > this.game.collisionDistanceMeters) {
+        // We have not collided with the item...
+        return false;
+    }
+
+    // We have collided with the item...
+    AudioManager.getInstance().playSound(AudioManager.Sounds.FIREBALL_HIT, 30.0);
+    this.game.hitPlayer(20);
+
+    // We return true to remove this item from the game...
+    return true;
+};

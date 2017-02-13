@@ -1,6 +1,9 @@
 TO-DOs in order
 ---------------
 - Need to allow weapons to be fires continuously, e.g. chainsaw, machine gun
+- Switch between available weapons
+- Show ammo for current weapon
+- Have limited chainsaw fuel
 
 
 

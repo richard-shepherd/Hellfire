@@ -9,6 +9,7 @@ function AmmoManager() {
     this.ammo = {};
     this.ammo[AmmoManager.AmmoType.PISTOL_BULLET] = 0;
     this.ammo[AmmoManager.AmmoType.SHOTGUN_CARTRIDGE] = 0;
+    this.ammo[AmmoManager.AmmoType.CHAINSAW_FUEL] = 0;
 }
 
 /**
@@ -18,7 +19,8 @@ function AmmoManager() {
  */
 AmmoManager.AmmoType = {
     PISTOL_BULLET : 0,
-    SHOTGUN_CARTRIDGE: 1
+    SHOTGUN_CARTRIDGE: 1,
+    CHAINSAW_FUEL: 2
 };
 
 /**
@@ -30,6 +32,7 @@ AmmoManager.AmmoType = {
 AmmoManager.prototype.addAmmoFromBag = function() {
     this.addAmmo(AmmoManager.AmmoType.PISTOL_BULLET, Utils.randomIntBetween(5, 10));
     this.addAmmo(AmmoManager.AmmoType.SHOTGUN_CARTRIDGE, Utils.randomIntBetween(3, 6));
+    this.addAmmo(AmmoManager.AmmoType.CHAINSAW_FUEL, Utils.randomIntBetween(10, 20));
 };
 
 /**
