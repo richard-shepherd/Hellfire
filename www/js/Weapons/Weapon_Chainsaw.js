@@ -45,7 +45,7 @@ Weapon_Chainsaw.prototype.fireReleased = function() {
  * -------------
  * If Fire is pressed, we use fuel and see if there is an enemy to hit.
  */
-Weapon.prototype.onMessageLoop = function(deltaTimeInfo) {
+Weapon_Chainsaw.prototype.onMessageLoop = function(deltaTimeInfo) {
     try {
         // Is Fire pressed?
         if(this.startTime === null) {

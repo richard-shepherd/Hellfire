@@ -455,7 +455,7 @@ Game.prototype._onGunsightSlideShown = function() {
         this._setupGameItems();
 
         // We give the payer an initial weapon...
-        this.currentWeapon = new Weapon_Chainsaw(this);
+        this.currentWeapon = new Weapon_Shotgun(this);
 
         // We give the player some ammo...
         this.ammoManager = new AmmoManager();
@@ -506,8 +506,9 @@ Game.prototype._setupGameItems = function() {
     }
 
     // We add some items...
-    addItemsInRandomLocations(this, GameItem_Chainsaw, 5);
-    addItemsInRandomLocations(this, GameItem_AmmoBag, 5);
+    addItemsInRandomLocations(this, GameItem_Chainsaw, 2);
+    addItemsInRandomLocations(this, GameItem_Shotgun, 2);
+    addItemsInRandomLocations(this, GameItem_AmmoBag, 2);
     addItemsInRandomLocations(this, GameItem_Monster_Imp, 8);
 };
 
@@ -559,7 +560,7 @@ Game.prototype._setupCamera = function() {
  * Shows the info for the player (ammo, armor, health etc).
  */
 Game.prototype._showPlayerInfo = function() {
-    var ammoCount = this.ammoManager.getAmmoCount(AmmoManager.AmmoType.CHAINSAW_FUEL);
+    var ammoCount = this.ammoManager.getAmmoCount(AmmoManager.AmmoType.SHOTGUN_CARTRIDGE);
     $("#ammo-count").text(ammoCount);
     $("#armor-value").text(Math.round(this.armor));
     $("#health-value").text(Math.round(this.health));

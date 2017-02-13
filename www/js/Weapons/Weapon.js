@@ -71,8 +71,10 @@ Weapon.prototype.shootNearestEnemy = function(force, forceDecreasePerMeter, maxR
     // We've got an enemy, so we shoot it.
     // We work out the force with which we hit it.
     var shotForce = force - nearestItem.polarPosition.distanceMeters * forceDecreasePerMeter;
-    var itemKilled = nearestItem.onShot(shotForce);
-    if(itemKilled) {
-        this.game.removeGameItem(nearestItem.key);
+    if(shotForce > 0) {
+        var itemKilled = nearestItem.onShot(shotForce);
+        if(itemKilled) {
+            this.game.removeGameItem(nearestItem.key);
+        }
     }
 };

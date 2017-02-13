@@ -7,9 +7,6 @@
 function AmmoManager() {
     // A map of ammo-name to number of pieces we hold...
     this.ammo = {};
-    this.ammo[AmmoManager.AmmoType.PISTOL_BULLET] = 0;
-    this.ammo[AmmoManager.AmmoType.SHOTGUN_CARTRIDGE] = 0;
-    this.ammo[AmmoManager.AmmoType.CHAINSAW_FUEL] = 0;
 }
 
 /**
@@ -41,6 +38,9 @@ AmmoManager.prototype.addAmmoFromBag = function() {
  * Adds some ammo of the type specified.
  */
 AmmoManager.prototype.addAmmo = function(ammoType, amount) {
+    if(!(ammoType in this.ammo)) {
+        this.ammo[ammoType] = 0;
+    }
     var currentAmmo = this.ammo[ammoType];
     this.ammo[ammoType] = currentAmmo + amount;
 };

@@ -27,6 +27,6 @@ Weapon_Shotgun.prototype.firePressed = function() {
     this.game.ammoManager.addAmmo(ammoType, -1);
 
     // We fire the weapon...
-    this.shootNearestEnemy(1000, 0.0, 50.0);
+    this.shootNearestEnemy(60, 1, 60);
 };
 
